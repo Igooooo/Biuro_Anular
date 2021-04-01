@@ -1,0 +1,35 @@
+.sidebar {
+  width: 180px;
+  background:#6495ED;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  .logo {
+    margin: 30px auto;
+    width: 120px;
+    display: block;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      color: #F5F5F5;
+      padding: 10px;
+      border-bottom: 1px solid #F5F5F5;
+    }
+    li:hover {
+      background: #10447d;
+      transition: linear 300ms;
+    }
+
+    li.active {
+      background: #9ACD32;
+    }
+  }
+}

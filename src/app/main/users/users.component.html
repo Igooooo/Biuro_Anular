@@ -1,0 +1,53 @@
+<!-- WSZYSCY UŻYTKOWNICY -->
+
+<div class="container">
+    <p class="data-header">Klienci</p>
+    <div class="col-sm-1" image [routerLink]="['/users/add']"><img src="../../../assets/img/add_user.png" class="logo"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- dodajemy cars && bo  na początku tablica jest pusta (czekamy na API) -->
+            <table *ngIf="users && users.length > 0; else noUsersInfo" class="cs-table table table-striped"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Wiek</th>
+                    <th>PESEL</th>
+                    <th>Miejscowość</th>
+                    <th>Ulica i mieszkanie</th>
+                    <th>Numer telefonu</th>
+                    <th>email</th>
+                    <th>Data dołączenia</th> 
+                    <th>Test</th>   
+                    <th>Usuń</th> 
+                </tr>
+                </thead>
+                <tbody >
+                    <!-- derektywa | let - zmienna | iterujemy dzieki of | cars wskazuje na tablice | ? pczeka az odpowie api--> 
+                    <!-- [routerLink] = ['/cars, car.id']> / daje nam przeniesienie do innej strone/ jest klikalny i uruchamia routing. car.id pobiera dzieki petli let car of cars-->
+                    <tr *ngFor=" let user of users; let i = index" class="row-car" (click)="goToUserDetails(user)" ><!--(click)="goToUserDetails(user)" -->
+                        <td csImportant> {{ user?.id}} </td> <!-- gdy car.isFullyDamaged = true to się to doda klasę -->
+                        <td csImportant> {{ user?.name | uppercase }} </td>
+                        <td> {{ user?.surname }} </td>
+                        <td> {{ user?.age }} </td> 
+                        <td> {{ user?.pesel }} </td>
+                        <td> {{ user?.city }} </td> 
+                        <td> {{ user?.street }} </td> 
+                        <td> {{ user?.phone }} </td> 
+                        <td> {{ user?.email }} </td> 
+                        <td> {{ user?.date | date:'longDate'}} </td>
+                        <td> {{ user?.type }}</td>
+                        <td (click)="removeUser(user, $event)"><img src="../../../assets/img/remove_user.png" class="logo"></td> <!-- (click) = "removeCar(car, $event)" -->
+                    </tr>
+                </tbody>
+            </table>
+
+            <ng-template #noUsersInfo> <!-- ng-templat - derktywa | # to refenecja do drzewa DOM -->
+                <div class="no-cars-info">
+                    <p>Brak użytkowników</p>
+                </div>
+            </ng-template>
+        </div>
+    </div> 
+</div>

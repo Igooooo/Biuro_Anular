@@ -1,0 +1,53 @@
+<!-- <p class="data-header">Edit {{ user.name }}</p> -->
+
+<div class="container justify-content-center">
+    <p class="data-header">Dodaj klienta</p>
+    <form [formGroup] = "userForm"> <!-- dyrektywa + obiekt-->
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Imię</label><br>
+                <input formControlName="name" type="text" class="from-control" placeholder="name">
+                <p *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched ">test</p>
+            </div>
+            <div class="col-sm-4">
+                <label>Surname</label><br>
+                <input formControlName="surname" type="text" class="from-control" placeholder="surname"> 
+            </div>
+            <div class="col-sm-4">
+                <label>Wiek</label><br>
+                <input formControlName="age" type="text" class="from-control" placeholder="age">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>pesel</label><br>
+                <input formControlName="pesel" type="text" class="from-control" placeholder="pesel">   
+            </div>
+            <div class="col-sm-4">
+                <label>Misto</label><br>
+                <input formControlName="city" type="text" class="from-control" placeholder="city">
+            </div>
+            <div class="col-sm-4">
+                <label>Ulica</label><br>
+                <input formControlName="street" type="text" class="from-control" placeholder="street">   
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Telefon</label><br>
+                <input formControlName="phone" type="text" class="from-control" placeholder="phone"> 
+            </div>
+            <div class="col-sm-4">
+                <label>E-Mail</label><br>
+                <input formControlName="email" type="text" class="from-control" placeholder="email">    
+            </div>
+        </div>
+ 
+        <div class="row">
+            <div class="col-sm-12">
+                <button [disabled]="userForm.invalid" (click)="updateUser()" type="submit" class="btn btn-primary float-right">Update car</button> <!-- [disabled]="carForm.invalid" = sprawdza czy wszystkie walidacje przeszły | jak nie to wyłącza przycisk-->
+                <button  (click)="userForm.reset()" type="submit" class="btn btn-primary float-right">Reset From</button> <!-- carForm.reset() dostępna juz w FormBuilderze -->
+            </div>
+        </div>
+    </form>
+</div>

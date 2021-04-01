@@ -1,0 +1,91 @@
+<div class="container justify-content-center">
+    <p class="data-header">Dodaj klienta</p>
+    <form [formGroup] = "userForm" (ngSubmit)="addUser()"> <!-- dyrektywa + obiekt-->
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Imię</label><br>
+                <input formControlName="name" type="text" class="from-control" placeholder="name" value="user.id">
+                <p *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched ">test</p>
+            </div>
+            <div class="col-sm-4">
+                <label>Surname</label><br>
+                <input formControlName="surname" type="text" class="from-control" placeholder="surname"> 
+            </div>
+            <div class="col-sm-4">
+                <label>Wiek</label><br>
+                <input formControlName="age" type="text" class="from-control" placeholder="age">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>pesel</label><br>
+                <input formControlName="pesel" type="text" class="from-control" placeholder="pesel">   
+            </div>
+            <div class="col-sm-4">
+                <label>Misto</label><br>
+                <input formControlName="city" type="text" class="from-control" placeholder="city">
+            </div>
+            <div class="col-sm-4">
+                <label>Ulica</label><br>
+                <input formControlName="street" type="text" class="from-control" placeholder="street">   
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Telefon</label><br>
+                <input formControlName="phone" type="text" class="from-control" placeholder="phone"> 
+            </div>
+            <div class="col-sm-4">
+                <label>E-Mail</label><br>
+                <input formControlName="email" type="text" class="from-control" placeholder="email">    
+            </div>
+            <div class="col-sm-4">
+                <label>Type</label><br>
+                <option *ngFor="let type of ePropertyType | keyvalue" [value] = type.value>
+                    {{ type.value }}
+                </option>         
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12"><br>
+                <button type="submit" class="btn btn-primary float-right" [disabled]="!userForm.valid">Submit</button>
+                <button  (click)="userForm.reset()" type="submit" class="btn btn-primary float-right">Reset From</button>
+            </div>
+        </div>
+    </form>  
+</div>
+  
+
+    
+<p>
+1. Form Status: {{ userForm.status }}
+<br>
+2. Wartość:  {{ userForm.controls.name.value }}
+<br>
+3. Dotyk: -> zmiana przy przejsciu: {{ userForm.controls.name.touched }}
+<br>
+4. Pierwszy raz -> zmiana przy pierwszej literze: {{ userForm.controls.name.dirty}}
+<br>
+{{!userForm.controls['name'].invalid}} i {{ userForm.controls['name'].dirty }} i  {{ userForm.controls['name'].touched }} <br> 
+całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched }}
+</p>
+5. type {{ userForm.controls.type.value }}
+
+
+<!-- 
+<mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+-->
