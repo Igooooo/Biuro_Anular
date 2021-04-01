@@ -27,7 +27,7 @@ import {A11yModule} from '@angular/cdk/a11y';
     CoreModule,
     ReactiveFormsModule,
     FormsModule,
-    //A11yModule,
+    A11yModule,
     //MatButtonModule,
     //MatToolbarModule,
     //MatIconModule,
