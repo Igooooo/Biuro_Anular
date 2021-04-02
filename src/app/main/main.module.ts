@@ -11,12 +11,15 @@ import { RaportsComponent } from './raports/raports.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import {A11yModule} from '@angular/cdk/a11y';
+import { MatInputModule} from '@angular/material/input';
 import { MatToolbarModule  } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule}  from '@angular/material/select';
-import {A11yModule} from '@angular/cdk/a11y';
+//import {HighContrastModeDetector} from './high-contrast-mode';
+
 
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent],
@@ -28,21 +31,23 @@ import {A11yModule} from '@angular/cdk/a11y';
     ReactiveFormsModule,
     FormsModule,
     A11yModule,
-    //MatButtonModule,
-    //MatToolbarModule,
-    //MatIconModule,
-    //MatFormFieldModule,
-    //MatSelectModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   exports: [
     UsersComponent,
-    MenuComponent,    
-    //MatButtonModule,
-    //MatToolbarModule,
-    //MatIconModule,
-    //MatFormFieldModule,
-    //MatSelectModule
-  
+    MenuComponent, 
+    A11yModule,   
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ]
 })
 export class MainModule { }
