@@ -12,8 +12,8 @@ import { UsersService } from '../users.service';
 })
 export class AddUserComponent implements OnInit {
 
-  
-  ePropertyType = Object.values(clientType);
+  typeOfClient_default = clientType.normalny ;
+  typeOfClient = Object.values(clientType);
   /*
   userForm = new FormGroup({
     name: new FormControl(''),
@@ -37,7 +37,7 @@ export class AddUserComponent implements OnInit {
     street: ['',Validators.required],
     phone: ['',Validators.required],
     email: ['',Validators.required],
-    type: ['',Validators.required]
+    type: [this.typeOfClient_default,Validators.required]
   })
 
   constructor(private usersService: UsersService,
@@ -45,8 +45,9 @@ export class AddUserComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    console.log('Enum JSON' + JSON.stringify(this.ePropertyType));
-    console.log('Enum' + this.ePropertyType);
+    console.log('Enum JSON' + JSON.stringify(this.typeOfClient));
+    console.log('Enum' + this.typeOfClient);
+    console.log('domyslny' + this.typeOfClient)
   }
 
   

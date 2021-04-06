@@ -1,6 +1,7 @@
+ 
 <div class="container justify-content-center">
     <p class="data-header">Dodaj klienta</p>
-    <form [formGroup] = "userForm" (ngSubmit)="addUser()"> <!-- dyrektywa + obiekt-->
+    <form [formGroup] = "userForm" (ngSubmit)="addUser()"> 
         <div class="row form-group">
             <div class="col-sm-4">
                 <label>Imię</label><br>
@@ -41,20 +42,23 @@
             </div>
             <div class="col-sm-4">
                 <label>Type</label><br>
-                <option *ngFor="let type of ePropertyType | keyvalue" [value] = type.value>
-                    {{ type.value }}
-                </option>         
+                <select formControlName="type" class="from-control" > 
+                    <option *ngFor="let type of typeOfClient | keyvalue" [value] = type.value [selected] = "type.value">
+                        {{ type.value }}
+                    </option> 
+                </select>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12"><br>
                 <button type="submit" class="btn btn-primary float-right" [disabled]="!userForm.valid">Submit</button>
-                <button  (click)="userForm.reset()" type="submit" class="btn btn-primary float-right">Reset From</button>
+                <button (click)="userForm.reset()" type="reset" class="btn btn-primary float-right">Reset From</button>
             </div>
         </div>
     </form>  
 </div>
   
+
 
     
 <p>
@@ -66,13 +70,15 @@
 <br>
 4. Pierwszy raz -> zmiana przy pierwszej literze: {{ userForm.controls.name.dirty}}
 <br>
-{{!userForm.controls['name'].invalid}} i {{ userForm.controls['name'].dirty }} i  {{ userForm.controls['name'].touched }} <br> 
-całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched }}
-</p>
+{{!userForm.controls['name'].invalid}} i {{ userForm.controls['name'].dirty }} i  {{ userForm.controls['name'].touched }} 
+<br> 
+całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched }} 
+<br>
 5. type {{ userForm.controls.type.value }}
+</p>
 
 
-
+<!--
 <mat-form-field appearance="fill">
     <mat-label>Input</mat-label>
     <input matInput>
@@ -88,18 +94,7 @@ całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dir
     <mat-label>Textarea</mat-label>
     <textarea matInput></textarea>
   </mat-form-field>
-
-<!-- 
-    <br><br>
-<mat-form-field appearance="standard">
-    <mat-label>Standard form field</mat-label>
-    <input matInput placeholder="Placeholder">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-</mat-form-field>
-  <br> <br><br><br>test<br><br>
-  <mat-form-field>
-    <input matInput />
-  </mat-form-field>
-
 -->
+
+      
+      
