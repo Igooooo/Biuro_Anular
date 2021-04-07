@@ -41,8 +41,15 @@
                 <label>E-Mail</label><br>
                 <input formControlName="email" type="text" class="from-control" placeholder="email">    
             </div>
+            <div class="col-sm-4">
+                <label>Type</label><br>
+                <select formControlName="type" class="from-control" > 
+                    <option *ngFor="let type of typeOfClient | keyvalue" [value] = type.value [selected] = "type.value">
+                        {{ type.value }}
+                    </option> 
+                </select>
+            </div>
         </div>
- 
         <div class="row">
             <div class="col-sm-12">
                 <button [disabled]="userForm.invalid" (click)="updateUser()" type="submit" class="btn btn-primary float-right">Update car</button> <!-- [disabled]="carForm.invalid" = sprawdza czy wszystkie walidacje przeszły | jak nie to wyłącza przycisk-->
@@ -51,3 +58,19 @@
         </div>
     </form>
 </div>
+
+<p>
+    1. Form Status: {{ userForm.status }}
+    <br>
+    2. Wartość:  {{ userForm.controls.name.value }}
+    <br>
+    3. Dotyk: -> zmiana przy przejsciu: {{ userForm.controls.name.touched }}
+    <br>
+    4. Pierwszy raz -> zmiana przy pierwszej literze: {{ userForm.controls.name.dirty}}
+    <br>
+    {{!userForm.controls['name'].invalid}} i {{ userForm.controls['name'].dirty }} i  {{ userForm.controls['name'].touched }} 
+    <br> 
+    całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched }} 
+    <br>
+    5. type {{ userForm.controls.type.value }}
+    </p>

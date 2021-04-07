@@ -1,7 +1,7 @@
 <!-- WSZYSCY UŻYTKOWNICY -->
 
 <div class="container">
-    <p class="data-header">Klienci</p>
+    <p class="data-header">Klienci {{users?.length}}</p>
     <div class="col-sm-1" image [routerLink]="['/users/add']"><img src="../../../assets/img/add_user.png" class="logo"></div>
     <div class="row">
         <div class="col-sm-12">
@@ -19,14 +19,14 @@
                     <th>Numer telefonu</th>
                     <th>email</th>
                     <th>Data dołączenia</th> 
-                    <th>Test</th>   
+                    <th>Rodzaj</th>   
                     <th>Usuń</th> 
                 </tr>
                 </thead>
                 <tbody >
                     <!-- derektywa | let - zmienna | iterujemy dzieki of | cars wskazuje na tablice | ? pczeka az odpowie api--> 
                     <!-- [routerLink] = ['/cars, car.id']> / daje nam przeniesienie do innej strone/ jest klikalny i uruchamia routing. car.id pobiera dzieki petli let car of cars-->
-                    <tr *ngFor=" let user of users; let i = index" class="row-car" (click)="goToUserDetails(user)" ><!--(click)="goToUserDetails(user)" -->
+                    <tr *ngFor=" let user of users | slice:limit_show_user_min:limit_show_user_max; let i = index "  class="row-car" (click)="goToUserDetails(user)" >
                         <td csImportant> {{ user?.id}} </td> <!-- gdy car.isFullyDamaged = true to się to doda klasę -->
                         <td csImportant> {{ user?.name | uppercase }} </td>
                         <td> {{ user?.surname }} </td>
@@ -42,8 +42,15 @@
                     </tr>
                 </tbody>
             </table>
-
-            <ng-template #noUsersInfo> <!-- ng-templat - derktywa | # to refenecja do drzewa DOM -->
+            <div class="float-right">
+                <button class="btn btn-primary" (click)="back()">
+                    <img src="../../../assets/img/back.png" width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="back">
+                </button>  
+                <button class="btn btn-primary" (click)="next()">
+                    <img src="../../../assets/img/next.png" width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="next">
+                </button>
+            </div>
+            <ng-template #noUsersInfo>
                 <div class="no-cars-info">
                     <p>Brak użytkowników</p>
                 </div>
