@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { clientType } from 'src/app/shared/enums/clientType';
 import { User } from 'src/app/shared/model/user';
 import { UsersService } from '../users.service';
 
@@ -11,6 +12,7 @@ import { UsersService } from '../users.service';
 })
 export class UserDetailsComponent implements OnInit {
 
+  typeOfClient = Object.values(clientType);
   user: User[] = [];
 
   userForm = this.formBuilder.group({  // metody z FormBuilder (dostępne w Angularze)
@@ -32,7 +34,7 @@ export class UserDetailsComponent implements OnInit {
               private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this. loadCar();
+    this.loadCar();
     //console.log('sprawdzenie' + this.user)
     //console.log('this user'+ JSON.stringify(this.user));
   }
@@ -40,6 +42,7 @@ export class UserDetailsComponent implements OnInit {
   
   updateUser(): void {
     this.usersService.updateCar(this.userForm.value).subscribe();
+    this.router.navigate(['/users']);
     //console.log('Update'+ JSON.stringify(this.userForm.value))
     // console.log('User' + JSON.stringify(this.user));
     //this.router.navigate(['/users']);
