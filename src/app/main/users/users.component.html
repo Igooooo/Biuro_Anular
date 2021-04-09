@@ -2,11 +2,11 @@
 
 <div class="container">
     <p class="data-header">Klienci {{users?.length}}</p>
-    <div class="col-sm-1" image [routerLink]="['/users/add']"><img src="../../../assets/img/add_user.png" class="logo"></div>
+    <div class="col-sm-1 logo" image [routerLink]="['/users/add']"><img src="../../../assets/img/add_user.png"></div>
     <div class="row">
         <div class="col-sm-12">
             <!-- dodajemy cars && bo  na początku tablica jest pusta (czekamy na API) -->
-            <table *ngIf="users && users.length > 0; else noUsersInfo" class="cs-table table table-striped"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+            <table class="cs-table table table-striped" *ngIf="users && users.length > 0; else noUsersInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -26,7 +26,7 @@
                 <tbody >
                     <!-- derektywa | let - zmienna | iterujemy dzieki of | cars wskazuje na tablice | ? pczeka az odpowie api--> 
                     <!-- [routerLink] = ['/cars, car.id']> / daje nam przeniesienie do innej strone/ jest klikalny i uruchamia routing. car.id pobiera dzieki petli let car of cars-->
-                    <tr *ngFor=" let user of users | slice:limit_show_user_min:limit_show_user_max; let i = index "  class="row-car" (click)="goToUserDetails(user)" >
+                    <tr  class="row-car" *ngFor=" let user of users | slice:limit_show_user_min:limit_show_user_max; let i = index" (click)="goToUserDetails(user)" >
                         <td csImportant> {{ user?.id}} </td> <!-- gdy car.isFullyDamaged = true to się to doda klasę -->
                         <td csImportant> {{ user?.name | uppercase }} </td>
                         <td> {{ user?.surname }} </td>
@@ -38,16 +38,16 @@
                         <td> {{ user?.email }} </td> 
                         <td> {{ user?.date | date:'longDate'}} </td>
                         <td> {{ user?.type }}</td>
-                        <td (click)="removeUser(user, $event)"><img src="../../../assets/img/remove_user.png" class="logo"></td> <!-- (click) = "removeCar(car, $event)" -->
+                        <td  class="logo" (click)="removeUser(user, $event)"><img src="../../../assets/img/remove_user.png"></td> <!-- (click) = "removeCar(car, $event)" -->
                     </tr>
                 </tbody>
             </table>
             <div class="float-right">
                 <button class="btn btn-primary" (click)="back()">
-                    <img src="../../../assets/img/back.png" width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="back">
+                    <img class="d-inline-block mr-1 align-bottom" src="../../../assets/img/back.png" width="30" height="30"  alt="back">
                 </button>  
                 <button class="btn btn-primary" (click)="next()">
-                    <img src="../../../assets/img/next.png" width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="next">
+                    <img class="d-inline-block mr-1 align-bottom" src="../../../assets/img/next.png" width="30" height="30"  alt="next">
                 </button>
             </div>
             <ng-template #noUsersInfo>
