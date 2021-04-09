@@ -73,20 +73,8 @@ export class AddUserComponent implements OnInit {
   }
 
   reset() : void {
-    this.userForm.controls.name.patchValue('Igor');
-    console.log('name po resetem ' + this.userForm.controls.name.value);
-    this.createFormUser();
-    console.log('name po resetem ' + this.userForm.controls.name.value);
-    /*
-    console.log('type przed resetem ' + this.userForm.controls.type.value);
-    //this.userForm.reset(this.userFromDefault, {emitEvent: true});
-    //this.cd.markForCheck();
-    this.createFormUser();
-    this.cd.markForCheck();
-    console.log('type po resetem ' + this.userForm.controls.type.value);
-    //this.userForm.controls.type.patchValue(this.typeOfClientDefault);
-    console.log('type po dodaniu nowego typu ' + this.userForm.controls.type.value);
-    // this.cd.detectChanges();
-    */
+    this.userForm.reset({
+        type: this.typeOfClientDefault
+    });
   }
 }
