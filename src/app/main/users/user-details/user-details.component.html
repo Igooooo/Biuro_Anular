@@ -1,68 +1,81 @@
 <!-- <p class="data-header">Edit {{ user.name }}</p> -->
-
+ 
 <div class="container justify-content-center">
     <p class="data-header">Dodaj klienta</p>
-    <form [formGroup] = "userForm"> <!-- dyrektywa + obiekt-->
+    <form [formGroup] = "userForm" > 
         <div class="row form-group">
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Imię</label><br>
-                <input formControlName="name" type="text" class="from-control" placeholder="name">
-                <p *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched ">test</p>
+                <input class="form-control" formControlName="name" type="text" placeholder="name">
+                <p class = "alert-danger" *ngIf="userForm.controls['name'].invalid">Podaj imie!</p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Surname</label><br>
-                <input formControlName="surname" type="text" class="from-control" placeholder="surname"> 
+                <input class="form-control" formControlName="surname" type="text"  placeholder="surname">
+                <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid">Podaj nazwisko!</p> 
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Wiek</label><br>
-                <input formControlName="age" type="text" class="from-control" placeholder="age">
+                <input class="form-control" formControlName="age" type="text"  placeholder="age">
+                <p class = "alert-danger" *ngIf="userForm.controls['age'].invalid">Podaj wiek!</p>
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>pesel</label><br>
-                <input formControlName="pesel" type="text" class="from-control" placeholder="pesel">   
+                <input class="form-control" formControlName="pesel" type="text"  placeholder="pesel"> 
+                <p class = "alert-danger" *ngIf="userForm.controls['pesel'].invalid">Podaj pesel!</p>  
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Misto</label><br>
-                <input formControlName="city" type="text" class="from-control" placeholder="city">
+                <input class="form-control" formControlName="city" type="text"  placeholder="city">
+                <p class = "alert-danger" *ngIf="userForm.controls['city'].invalid">Podaj misto!</p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Ulica</label><br>
-                <input formControlName="street" type="text" class="from-control" placeholder="street">   
+                <input class="form-control" formControlName="street" type="text"  placeholder="street">
+                <p class = "alert-danger" *ngIf="userForm.controls['street'].invalid ">Podaj ulicę!</p>   
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Telefon</label><br>
-                <input formControlName="phone" type="text" class="from-control" placeholder="phone"> 
+                <input class="form-control" formControlName="phone" type="text"  placeholder="phone"> 
+                <p class = "alert-danger" *ngIf="userForm.controls['phone'].invalid">Błędny numer telefonu!</p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>E-Mail</label><br>
-                <input formControlName="email" type="text" class="from-control" placeholder="email">    
+                <input class="form-control" formControlName="email" type="text" placeholder="email">
+                <p class = "alert-danger" *ngIf="userForm.controls['email'].invalid">Błędny e-mail!</p>    
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
-                <select formControlName="type" class="from-control" > 
-                    <option *ngFor="let type of typeOfClient | keyvalue" [value] = type.value [selected] = "type.value">
-                        {{ type.value }}
+                <select class="form-control" formControlName="type"> 
+                    <option  *ngFor="let type of typeOfClient" [value] = type >
+                        {{ type }}
                     </option> 
                 </select>
+                <p class = "alert-danger" *ngIf="userForm.controls['type'].invalid">Uzupełnij!</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <button [disabled]="userForm.invalid" (click)="updateUser()" type="submit" class="btn btn-primary float-right">Update car</button> <!-- [disabled]="carForm.invalid" = sprawdza czy wszystkie walidacje przeszły | jak nie to wyłącza przycisk-->
-                <button  (click)="userForm.reset()" type="submit" class="btn btn-primary float-right">Reset From</button> <!-- carForm.reset() dostępna juz w FormBuilderze -->
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateUser()"[disabled]="!userForm.valid">Update</button>
+                <!-- <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Reset From</button> -->
             </div>
         </div>
-    </form>
+    </form>  
 </div>
 
 <p>
     1. Form Status: {{ userForm.status }}
     <br>
-    2. Wartość:  {{ userForm.controls.name.value }}
+    2. Wartość: 
+    {{ userForm.controls.name.value }}
+    {{ userForm.controls.surname.value }}
+    {{ userForm.controls.age.value }}
+    {{ userForm.controls.pesel.value }}
+    {{ userForm.controls.city.value }}
+    {{ userForm.controls.street.value }}
+    {{ userForm.controls.phone.value }}
+    {{ userForm.controls.email.value }}
+    {{ userForm.controls.type.value }}
     <br>
     3. Dotyk: -> zmiana przy przejsciu: {{ userForm.controls.name.touched }}
     <br>

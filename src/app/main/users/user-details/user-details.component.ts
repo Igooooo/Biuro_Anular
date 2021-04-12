@@ -12,9 +12,22 @@ import { UsersService } from '../users.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  typeOfClient = Object.values(clientType);
+  userForm = new FormGroup({});
   user: User[] = [];
 
+  // Typ klienta
+  typeOfClientDefault = clientType.normalny ;
+  typeOfClient = Object.values(clientType);
+
+  // Walidacja formularza
+  emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  ageRegex = /^\d+/;
+  phoneRegex = /^[+,\d]\d{7,12}$/;
+
+  
+  /*
+  typeOfClient = Object.values(clientType);
+  
   userForm = this.formBuilder.group({  // metody z FormBuilder (dostępne w Angularze)
     id: [''],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]], // [wartosc startowa, walidatory]
@@ -27,6 +40,7 @@ export class UserDetailsComponent implements OnInit {
     email: ['',Validators.required],
     type: ['',Validators.required]
   })
+  */
 
   constructor(private usersService: UsersService,
               private formBuilder: FormBuilder,
@@ -34,11 +48,26 @@ export class UserDetailsComponent implements OnInit {
               private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.createFormUser();
     this.loadCar();
     //console.log('sprawdzenie' + this.user)
     //console.log('this user'+ JSON.stringify(this.user));
   }
-
+  
+  createFormUser() : void {
+    this.userForm = this.formBuilder.group({
+      id: [''],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      age: ['',Validators.compose([Validators.required, Validators.pattern(this.ageRegex)])],
+      pesel: ['',Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
+      city:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
+      street: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
+      phone: ['',Validators.compose([Validators.required, Validators.pattern(this.phoneRegex)])],
+      email: ['',Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])],
+      type: [this.typeOfClientDefault,Validators.required]
+    })
+  }
   
   updateUser(): void {
     this.usersService.updateCar(this.userForm.value).subscribe();
