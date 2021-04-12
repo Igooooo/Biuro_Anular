@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { clientType } from 'src/app/shared/enums/clientType';
 import { User } from '../../shared/model/user';
 import { UsersService } from './users.service';
-
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -16,23 +12,20 @@ export class UsersComponent implements OnInit {
   limit_show_user_min = 0;
   limit_show_user_max = 10;
   users: User[] = [];
-  constructor(private userService: UsersService,
-              private router: Router) { 
-    
-  }
+
+  constructor(private cd: ChangeDetectorRef,
+              private userService: UsersService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.getUsers();
-    console.log("jestem znowu w comp")
-    console.log('Ile' + this.users.length);
-    //console.log('jestem w user comp ' + this.users.values)
+    this.refresh();
+    console.log("jestem w user.componetns")
   }
 
   getUsers(): void {
     this.userService.getUsers().subscribe(
       (users) => {
         this.users = users.data
-        //console.log('user'+ JSON.stringify(this.users));
       }
     );
   }
@@ -42,7 +35,6 @@ export class UsersComponent implements OnInit {
     this.userService.removeUser(user.id).subscribe(() => {
       this.getUsers();
     });
-    //console.log('id:' + user.id)
   }
 
   goToUserDetails(user: User) : void {
@@ -68,6 +60,10 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
+  }  
+
+  refresh() : void {
+    this.getUsers();
+    this.cd.markForCheck();
   }
-  
 }
