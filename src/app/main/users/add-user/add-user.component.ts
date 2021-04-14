@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { clientType } from 'src/app/shared/enums/clientType';
 import { UsersService } from '../users.service';
-
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -23,10 +24,13 @@ export class AddUserComponent implements OnInit {
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
 
+
   constructor(private cd: ChangeDetectorRef,    
               private usersService: UsersService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.createFormUser();
@@ -51,11 +55,16 @@ export class AddUserComponent implements OnInit {
     this.usersService.addUser(this.userForm.value).subscribe();
     console.log('formularz' + this.userForm.value);
     this.router.navigate(['/users']);
+    this.showToasterAddUser();
   }
 
   reset() : void {
     this.userForm.reset({
         type: this.typeOfClientDefault
     });
+  }
+
+  showToasterAddUser() : void {
+    this.toastr.success(this.userForm.controls.name.value + " " + this.userForm.controls.surname.value + " został dodany pomyślnie!");
   }
 }

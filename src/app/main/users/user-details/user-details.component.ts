@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { clientType } from 'src/app/shared/enums/clientType';
 import { User } from 'src/app/shared/model/user';
 import { UsersService } from '../users.service';
@@ -45,7 +46,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(private usersService: UsersService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private route : ActivatedRoute) { }
+              private route : ActivatedRoute,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.createFormUser();
@@ -72,12 +74,11 @@ export class UserDetailsComponent implements OnInit {
   updateUser(): void {
     this.usersService.updateCar(this.userForm.value).subscribe();
     this.router.navigate(['/users']);
+    this.showToasterUpdateUser();
     //console.log('Update'+ JSON.stringify(this.userForm.value))
     // console.log('User' + JSON.stringify(this.user));
     //this.router.navigate(['/users']);
   }
-
-
 
   loadCar() : void {
     // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
@@ -91,6 +92,7 @@ export class UserDetailsComponent implements OnInit {
       }) // przypisanie do zmiennej
   }
 
-  
-
+  showToasterUpdateUser() : void{
+    this.toastr.success(this.userForm.controls.name.value + " " + this.userForm.controls.surname.value + " został zaktualizowany pomyślnie!");
+  }
 }

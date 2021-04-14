@@ -1,7 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../shared/model/user';
 import { UsersService } from './users.service';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,10 +18,12 @@ export class UsersComponent implements OnInit {
 
   constructor(private cd: ChangeDetectorRef,
               private userService: UsersService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,              
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.refresh();
+    this.getUsers();
     console.log("jestem w user.componetns")
   }
 
@@ -35,14 +40,14 @@ export class UsersComponent implements OnInit {
     this.userService.removeUser(user.id).subscribe(() => {
       this.getUsers();
     });
+    this.showToasterRemoveUser();
   }
 
   goToUserDetails(user: User) : void {
     this.router.navigate(['/users', user.id]);
   }
   
-  next(){
-    console.log('Ile2' + this.users.length);
+  next() : void {
     if (this.limit_show_user_min + 10 < this.users.length){
       this.limit_show_user_min=this.limit_show_user_min+10
       this.limit_show_user_max=this.limit_show_user_max+10
@@ -50,9 +55,9 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
-    
   }
-  back(){
+
+  back() : void {
     if (this.limit_show_user_min - 10 >= 0){
       this.limit_show_user_min=this.limit_show_user_min-10
       this.limit_show_user_max=this.limit_show_user_max-10
@@ -65,5 +70,14 @@ export class UsersComponent implements OnInit {
   refresh() : void {
     this.getUsers();
     this.cd.markForCheck();
+    this.showToasterRefreshUser();
+  }
+
+  showToasterRemoveUser() : void {
+    this.toastr.success("Użytkownik został pomyślnie usunięty!");
+  }
+
+  showToasterRefreshUser() : void {
+    this.toastr.success("Lista użytkowników została odświeżona!");
   }
 }
