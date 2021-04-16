@@ -4,6 +4,7 @@ import { User } from '../../shared/model/user';
 import { UsersService } from './users.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog} from '@angular/material/dialog';
+import { DialogRemoveUserComponent } from './dialog-remove-user/dialog-remove-user.component';
 
 @Component({
   selector: 'app-users',
@@ -35,8 +36,16 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  /*
   removeUser(user: User, event: any) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
     event.stopPropagation();
+    this.userService.removeUser(user.id).subscribe(() => {
+      this.getUsers();
+    });
+    this.showToasterRemoveUser();
+  }
+  */
+  removeUser(user: User) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
     this.userService.removeUser(user.id).subscribe(() => {
       this.getUsers();
     });
@@ -79,5 +88,16 @@ export class UsersComponent implements OnInit {
 
   showToasterRefreshUser() : void {
     this.toastr.success("Lista użytkowników została odświeżona!");
+  }
+
+  openDialog(user : User, event: any) : void {
+    event.stopPropagation();
+    this.dialog.open(DialogRemoveUserComponent, {data: {name: user.name, surname: user.surname}}).
+    afterClosed().
+    subscribe(result => {
+      if(result === 'false'){
+        this.removeUser(user);
+      }     
+    });
   }
 }

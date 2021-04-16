@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +24,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    MatDialogModule
   ],
   exports: [
   ],
