@@ -41,7 +41,8 @@
                         <td> {{ user?.email }} </td> 
                         <td> {{ user?.date | date:'longDate'}} </td>
                         <td> {{ user?.type }}</td>
-                        <td  class="logo" image (click)="removeUser(user, $event)"><img src="../../../assets/img/remove-user.png"></td> <!-- (click) = "removeCar(car, $event)" -->
+                        <!-- <td  class="logo" image (click)="removeUser(user, $event)"><img src="../../../assets/img/remove-user.png"></td>  -->
+                        <td  class="logo" image (click)="openDialog(user, $event)"><img src="../../../assets/img/remove-user.png"></td> 
                     </tr>
                 </tbody>
             </table>
@@ -63,3 +64,4 @@
 </div>
   
   
+<!-- <button mat-raised-button color="primary" (click)="openDialog(user, $event)">Open dialog</button> -->

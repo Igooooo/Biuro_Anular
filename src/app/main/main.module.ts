@@ -21,7 +21,7 @@ import { MatSelectModule}  from '@angular/material/select';
 //import {HighContrastModeDetector} from './high-contrast-mode';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS  } from '@angular/material/form-field';
 import { DialogRemoveUserComponent } from './users/dialog-remove-user/dialog-remove-user.component'
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent],
@@ -39,6 +39,7 @@ import { DialogRemoveUserComponent } from './users/dialog-remove-user/dialog-rem
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatDialogModule
   ],
   exports: [
     UsersComponent,
