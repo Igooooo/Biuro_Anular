@@ -5,6 +5,7 @@ import { UsersService } from './users.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog} from '@angular/material/dialog';
 import { DialogRemoveUserComponent } from './dialog-remove-user/dialog-remove-user.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -16,26 +17,49 @@ export class UsersComponent implements OnInit {
   limit_show_user_min = 0;
   limit_show_user_max = 10;
   users: User[] = [];
-
+  userForm = new FormGroup({});
+  
   constructor(private cd: ChangeDetectorRef,
-              private userService: UsersService,
+              private usersService: UsersService,
               private router: Router,
               private toastr: ToastrService,              
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.getUsers();
+    this.createFormUser();
     console.log("jestem w user.componetns")
   }
 
+  createFormUser() : void {
+    this.userForm = this.formBuilder.group({
+      name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      city:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])]
+    })
+  }
+
   getUsers(): void {
-    this.userService.getUsers().subscribe(
+    this.usersService.getUsers().subscribe(
       (users) => {
         this.users = users.data
       }
     );
   }
 
+  loadUserByFilter() : void {
+    if (this.userForm.controls.city.value == ''){
+      this.userForm.controls.city.setValue(`%`);
+    }
+    this.usersService.getUserByFilter(this.userForm.controls.name.value, this.userForm.controls.surname.value, this.userForm.controls.city.value).subscribe(
+      (users) => {
+      this.users = users.data;
+      console.log('users' + users)
+     console.log('Odebrany JSON'+ JSON.stringify(this.users));
+      }) 
+  }
+  
   /*
   removeUser(user: User, event: any) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
     event.stopPropagation();
@@ -45,8 +69,9 @@ export class UsersComponent implements OnInit {
     this.showToasterRemoveUser();
   }
   */
+
   removeUser(user: User) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
-    this.userService.removeUser(user.id).subscribe(() => {
+    this.usersService.removeUser(user.id).subscribe(() => {
       this.getUsers();
     });
     this.showToasterRemoveUser();
@@ -54,6 +79,10 @@ export class UsersComponent implements OnInit {
 
   goToUserDetails(user: User) : void {
     this.router.navigate(['/users', user.id]);
+  }
+
+  reset() : void {
+    this.userForm.reset();
   }
   
   next() : void {
