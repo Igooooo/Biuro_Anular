@@ -51,7 +51,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createFormUser();
-    this.loadCar();
+    this.loadUser();
     //console.log('sprawdzenie' + this.user)
     //console.log('this user'+ JSON.stringify(this.user));
   }
@@ -80,7 +80,7 @@ export class UserDetailsComponent implements OnInit {
     //this.router.navigate(['/users']);
   }
 
-  loadCar() : void {
+  loadUser() : void {
     // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
     const id = +this.route.snapshot.params['id']; 
     this.usersService.getUser(id).subscribe( // przekazujemy id i zostajemy subscriberami

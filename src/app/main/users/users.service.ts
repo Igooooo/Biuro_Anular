@@ -18,7 +18,6 @@ export class UsersService {
     return this.http.get<{success: boolean, data: User[]}>(this.apiURL);
   }
 
-  
   addUser(data: User): Observable<User> {
     console.log('data' + data)
     return this.http.post<User>(this.apiURL, data) ;
@@ -28,7 +27,6 @@ export class UsersService {
     return this.http.delete<User>(this.apiURL+`${id}`)
   }
 
-  
   updateCar(data: User): Observable<User> {
     return this.http.patch<User>(this.apiURL, data)
   }
@@ -36,7 +34,17 @@ export class UsersService {
   getUser(id: number) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
     return this.http.get<{success: boolean, data: User[]}>(this.apiURL+`${id}`) //samo formatuje na JSON
   }
-  
 
+  
+  getUserByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
+    console.log('serwis' + name, city, surname)
+    return this.http.get<{success: boolean, data: User[]}>(this.apiURL+'/data/'+`${name}`+'&'+`${surname}`+'&'+`${city}`) //samo formatuje na JSON
+  }
+
+/*
+  getUserByFilter(name: string, surname: string, city: string) : Observable<dUser> { // id - pojedyńczy samochód
+    console.log('serwis' + name, city, surname)
+    return this.http.get<User>(this.apiURL+`${name}`+`${surname}`+`${city}`) //samo formatuje na JSON
+  */
 }
 
