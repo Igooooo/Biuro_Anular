@@ -39,20 +39,20 @@
             <!-- dodajemy cars && bo  na początku tablica jest pusta (czekamy na API) -->
             <table class="cs-table table table-striped" *ngIf="users && users.length > 0; else noUsersInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>Wiek</th>
-                    <th>PESEL</th>
-                    <th>Miejscowość</th>
-                    <th>Ulica i mieszkanie</th>
-                    <th>Numer telefonu</th>
-                    <th>email</th>
-                    <th>Data dołączenia</th> 
-                    <th>Rodzaj</th>   
-                    <th>Usuń</th> 
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Wiek</th>
+                        <th>PESEL</th>
+                        <th>Miejscowość</th>
+                        <th>Ulica i mieszkanie</th>
+                        <th>Numer telefonu</th>
+                        <th>email</th>
+                        <th>Data dołączenia</th> 
+                        <th>Rodzaj</th>   
+                        <th>Usuń</th> 
+                    </tr>
                 </thead>
                 <tbody >
                     <!-- derektywa | let - zmienna | iterujemy dzieki of | cars wskazuje na tablice | ? pczeka az odpowie api--> 
@@ -74,13 +74,9 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="float-right">
-                <button class="btn btn-primary" (click)="back()">
-                    <img class="d-inline-block mr-1 align-bottom" src="../../../assets/img/back.png" width="30" height="30"  alt="back">
-                </button>  
-                <button class="btn btn-primary" (click)="next()">
-                    <img class="d-inline-block mr-1 align-bottom" src="../../../assets/img/next.png" width="30" height="30"  alt="next">
-                </button>
+            <div class="row form-group" *ngIf="users && users.length > 0">
+                <button class="col-sm-1 btn btn-primary bi bi-arrow-left" (click)="back()"></button>  
+                <button class="col-sm-1 btn btn-primary bi bi-arrow-right" (click)="next()"></button>
             </div>
             <ng-template #noUsersInfo>
                 <div class="no-cars-info">

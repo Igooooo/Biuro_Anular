@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { MainModule } from './main/main.module';
 import { UsersService } from './main/users/users.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+//import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    //ToastrModule.forRoot(),
   ],
   exports: [
   ],

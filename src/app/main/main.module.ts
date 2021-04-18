@@ -18,10 +18,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule}  from '@angular/material/select';
-//import {HighContrastModeDetector} from './high-contrast-mode';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS  } from '@angular/material/form-field';
 import { DialogRemoveUserComponent } from './users/dialog-remove-user/dialog-remove-user.component'
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent],
@@ -39,7 +39,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     UsersComponent,
