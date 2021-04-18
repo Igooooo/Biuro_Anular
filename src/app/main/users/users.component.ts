@@ -93,6 +93,7 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
+    console.log('next');
   }
 
   back() : void {
@@ -103,6 +104,7 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
+    console.log('back');
   }  
 
   refresh() : void {
