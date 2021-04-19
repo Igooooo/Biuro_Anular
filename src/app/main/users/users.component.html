@@ -1,6 +1,6 @@
 <!-- WSZYSCY UŻYTKOWNICY -->
 <div class="container justify-content-center">
-    <p class="data-header">Szukaj Klienta</p>
+    <p class="data-header bi bi-search"> Szukaj Klienta:</p>
     <form [formGroup] = "userForm"> 
         <div class="row form-group">
             <div class="col-lg-4 col-md-6 col-sm-12">
@@ -23,6 +23,7 @@
             <div class="col-lg-12"><br>
                 <button class="btn btn-primary float-right"  (click)="loadUserByFilter()"[disabled]="!userForm.valid">Szukaj</button><!-- type="submit" value="Submit" -->
                 <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Reset From</button>
+                
             </div>
         </div>
     </form>  
@@ -31,8 +32,10 @@
 <div class="container">
     <p class="data-header">Klienci: {{users?.length }}</p>
     <div class="row form-group">
-        <div class="col-lg-1 logo" [routerLink]="['/users/add']"><img src="../../../assets/img/add-user.png"></div>
-        <div class="col-lg-1 logo" (click)="refresh()"><img src="../../../assets/img/refresh.png"></div>
+        <!-- <div class="col-lg-1 logo" [routerLink]="['/users/add']"><img src="../../../assets/img/add-user.png"></div>
+        <div class="col-lg-1 logo" (click)="refresh()"><img src="../../../assets/img/refresh.png"></div> -->
+        <span class="icon bi bi-person-plus-fill" [routerLink]="['/users/add']"></span>
+        <span class="icon bi bi-arrow-repeat" (click)="refresh()"></span>
     </div>
     <div class="row form-group">
         <div class="col-sm-12">
@@ -57,7 +60,7 @@
                 <tbody >
                     <!-- derektywa | let - zmienna | iterujemy dzieki of | cars wskazuje na tablice | ? pczeka az odpowie api--> 
                     <!-- [routerLink] = ['/cars, car.id']> / daje nam przeniesienie do innej strone/ jest klikalny i uruchamia routing. car.id pobiera dzieki petli let car of cars-->
-                    <tr  class="row-car" *ngFor=" let user of users | slice:limit_show_user_min:limit_show_user_max; let i = index" (click)="goToUserDetails(user)" >
+                    <tr  class="form-group" *ngFor=" let user of users | slice:limit_show_user_min:limit_show_user_max; let i = index" (click)="goToUserDetails(user)" >
                         <td csImportant> {{ user?.id}} </td> <!-- gdy car.isFullyDamaged = true to się to doda klasę -->
                         <td csImportant> {{ user?.name | uppercase }} </td>
                         <td> {{ user?.surname }} </td>
@@ -70,7 +73,7 @@
                         <td> {{ user?.date | date:'longDate'}} </td>
                         <td> {{ user?.type }}</td>
                         <!-- <td  class="logo" image (click)="removeUser(user, $event)"><img src="../../../assets/img/remove-user.png"></td>  -->
-                        <td  class="logo" image (click)="openDialog(user, $event)"><img src="../../../assets/img/remove-user.png"></td> 
+                        <td class="icon bi bi-person-dash" (click)="openDialog(user, $event)"></td> <!-- <img src="../../../assets/img/remove-user.png"> -->
                     </tr>
                 </tbody>
             </table>
