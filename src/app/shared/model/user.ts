@@ -2,7 +2,6 @@ export interface User {
     id: number;
     name: string;
     surname: string;
-    age: number;
     pesel: string;
     city: string;
     street: string;

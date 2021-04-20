@@ -14,11 +14,6 @@
                 <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid && userForm.controls['surname'].dirty && userForm.controls['surname'].touched">Podaj nazwisko!</p> 
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Wiek</label><br>
-                <input class="form-control" formControlName="age" type="text"  placeholder="age">
-                <p class = "alert-danger" *ngIf="userForm.controls['age'].invalid && userForm.controls['age'].dirty && userForm.controls['age'].touched">Podaj wiek!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>pesel</label><br>
                 <input class="form-control" formControlName="pesel" type="text"  placeholder="pesel"> 
                 <p class = "alert-danger" *ngIf="userForm.controls['pesel'].invalid && userForm.controls['pesel'].dirty && userForm.controls['pesel'].touched">Podaj pesel!</p>  
@@ -43,6 +38,13 @@
                 <input class="form-control" formControlName="email" type="text" placeholder="email">
                 <p class = "alert-danger" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].dirty && userForm.controls['email'].touched">Błędny e-mail!</p>    
             </div>
+            <!-- 
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Hasło</label><br>
+                <input class="form-control" formControlName="password" type="password" placeholder="password">
+                <p class = "alert-danger" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].dirty && userForm.controls['password'].touched">Błędny e-mail!</p>    
+            </div>
+            -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
                 <select class="form-control" formControlName="type"> 

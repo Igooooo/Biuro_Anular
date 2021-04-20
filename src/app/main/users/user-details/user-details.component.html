@@ -15,11 +15,6 @@
                 <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid">Podaj nazwisko!</p> 
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Wiek</label><br>
-                <input class="form-control" formControlName="age" type="text"  placeholder="age">
-                <p class = "alert-danger" *ngIf="userForm.controls['age'].invalid">Podaj wiek!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>pesel</label><br>
                 <input class="form-control" formControlName="pesel" type="text"  placeholder="pesel"> 
                 <p class = "alert-danger" *ngIf="userForm.controls['pesel'].invalid">Podaj pesel!</p>  
@@ -47,7 +42,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
                 <select class="form-control" formControlName="type"> 
-                    <option  *ngFor="let type of typeOfClient" [value] = type >
+                    <option *ngFor="let type of typeOfClient" [value] = type >
                         {{ type }}
                     </option> 
                 </select>
@@ -69,7 +64,6 @@
     2. Wartość: 
     {{ userForm.controls.name.value }}
     {{ userForm.controls.surname.value }}
-    {{ userForm.controls.age.value }}
     {{ userForm.controls.pesel.value }}
     {{ userForm.controls.city.value }}
     {{ userForm.controls.street.value }}

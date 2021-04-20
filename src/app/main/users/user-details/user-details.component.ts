@@ -33,7 +33,6 @@ export class UserDetailsComponent implements OnInit {
     id: [''],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]], // [wartosc startowa, walidatory]
     surname: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(7)]],
-    age: ['',Validators.required],
     pesel: ['',Validators.required],
     city: ['',Validators.required],
     street: ['',Validators.required],
@@ -61,7 +60,6 @@ export class UserDetailsComponent implements OnInit {
       id: [''],
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
       surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
-      age: ['',Validators.compose([Validators.required, Validators.pattern(this.ageRegex)])],
       pesel: ['',Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
       city:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       street: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
