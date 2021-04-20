@@ -8,6 +8,7 @@ export interface User {
     phone: number;
     email: string;
     date?: string;
+    password?: string;
     type: string;
 }
 
