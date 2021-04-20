@@ -5,18 +5,13 @@
         <div class="row form-group">
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Imię</label><br>
-                <input class="form-control" formControlName="name" type="text" placeholder="name">
+                <input class="form-control" formControlName="name" type="text" placeholder="imię">
                 <p class = "alert-danger" *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched">Podaj imie!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Surname</label><br>
-                <input class="form-control" formControlName="surname" type="text"  placeholder="surname">
+                <input class="form-control" formControlName="surname" type="text"  placeholder="nazwisko">
                 <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid && userForm.controls['surname'].dirty && userForm.controls['surname'].touched">Podaj nazwisko!</p> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Wiek</label><br>
-                <input class="form-control" formControlName="age" type="text"  placeholder="age">
-                <p class = "alert-danger" *ngIf="userForm.controls['age'].invalid && userForm.controls['age'].dirty && userForm.controls['age'].touched">Podaj wiek!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>pesel</label><br>
@@ -25,24 +20,50 @@
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Misto</label><br>
-                <input class="form-control" formControlName="city" type="text"  placeholder="city">
+                <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
                 <p class = "alert-danger" *ngIf="userForm.controls['city'].invalid && userForm.controls['city'].dirty && userForm.controls['city'].touched">Podaj misto!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Ulica</label><br>
-                <input class="form-control" formControlName="street" type="text"  placeholder="street">
+                <input class="form-control" formControlName="street" type="text"  placeholder="ulica">
                 <p class = "alert-danger" *ngIf="userForm.controls['street'].invalid && userForm.controls['street'].dirty && userForm.controls['street'].touched">Podaj ulicę!</p>   
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Telefon</label><br>
-                <input class="form-control" formControlName="phone" type="text"  placeholder="phone"> 
+                <input class="form-control" formControlName="phone" type="text"  placeholder="telefon"> 
                 <p class = "alert-danger" *ngIf="userForm.controls['phone'].invalid && userForm.controls['phone'].dirty && userForm.controls['phone'].touched">Błędny numer telefonu!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>E-Mail</label><br>
-                <input class="form-control" formControlName="email" type="text" placeholder="email">
+                <input class="form-control" formControlName="email" type="text" placeholder="e-mail">
                 <p class = "alert-danger" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].dirty && userForm.controls['email'].touched">Błędny e-mail!</p>    
             </div>
+
+
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Hasło</label><br>
+                <div class="input-group">
+                    <input class="form-control" formControlName="password"  [type]="fieldTextType ? 'text' : 'password'" placeholder="hasło"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-eye-slash': !fieldTextType,
+                              'fa-eye': fieldTextType
+                            }"
+                            (click)="toggleFieldTextType()"
+                          ></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class = "alert-danger" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].dirty && userForm.controls['password'].touched">Wprowadź odpowiednie hasło!</p>
+            </div>
+
+
+
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
                 <select class="form-control" formControlName="type"> 

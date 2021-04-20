@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { clientType } from 'src/app/shared/enums/clientType';
 import { UsersService } from '../users.service';
 import {MatDialog} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -21,7 +22,7 @@ export class AddUserComponent implements OnInit {
 
   // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  ageRegex = /^\d+/;
+  passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
 
 
@@ -36,18 +37,27 @@ export class AddUserComponent implements OnInit {
     this.createFormUser();
   }
 
+ 
+fieldTextType?: boolean;
+
+
+
+toggleFieldTextType() {
+  this.fieldTextType = !this.fieldTextType;
+}
+
   createFormUser() : void {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
       surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
-      age: ['',Validators.compose([Validators.required, Validators.pattern(this.ageRegex)])],
       pesel: ['',Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
       city:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       street: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       phone: ['',Validators.compose([Validators.required, Validators.pattern(this.phoneRegex)])],
       email: ['',Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])],
+      password: ['',Validators.compose([Validators.required, Validators.pattern(this.passwordRegex)])],
       type: [this.typeOfClientDefault,Validators.required]
-    })
+  });
     this.cd.markForCheck();
   }
 
