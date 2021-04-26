@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -9,16 +9,28 @@ import { FormGroup } from '@angular/forms';
 })
 export class MenuComponent implements OnInit {
 
+  
   message: string = 'Nie jesteś zalogowany!'
   constructor( private http: HttpClient) { }
 
+
+  createAuthrorizationHeader(): HttpHeaders {
+    let headers = new HttpHeaders();
+    const token :any = localStorage.getItem('token');
+    headers = headers.set('x-access-token', token);
+    return headers
+  }
+
+
   ngOnInit(): void {
-    this.http.get('http://localhost:8080/api/getUsers').subscribe(
+    let headers = this.createAuthrorizationHeader();
+    console.log('headers ' + JSON.stringify(headers));
+    this.http.get('http://localhost:8080/api/getUsers' , { headers: headers }).subscribe(
       res => {
-        console.log(res);
+        console.log(JSON.stringify(res));
       },
       err => {
-        console.log('błąd' + err);
+        console.log('błąd ' + JSON.stringify(err));
       }
     );
   }
