@@ -9,22 +9,14 @@ import { AppService } from 'src/app/app.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private myService: AppService,
-    private _router: Router) { 
-      /*
-      this.myService.getUserName()
-      .subscribe(
-        data => this.username= data.toString(),
-        error => this._router.navigate(['/main/login'])
-      )
-      */
+  constructor(private _router: Router) { 
     }
 
   ngOnInit(): void {
   }
 
   logout(){
-    //localStorage.removeItem('token');
+    localStorage.removeItem('token');
     console.log('Wylogowanie');
     this._router.navigate(['/login']);
   }

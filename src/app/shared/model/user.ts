@@ -10,5 +10,6 @@ export interface User {
     date?: string;
     password?: string;
     type: string;
+    token?: string
 }
 
