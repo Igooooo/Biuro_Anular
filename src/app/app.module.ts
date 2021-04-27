@@ -10,6 +10,9 @@ import { UsersService } from './main/users/users.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MainService } from './main/main.service';
+import { AppService } from './app.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -22,12 +25,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     CoreModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
     //ToastrModule.forRoot(),
   ],
   exports: [
   ],
-  providers: [UsersService],
+  providers: [UsersService, MainService, AppService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

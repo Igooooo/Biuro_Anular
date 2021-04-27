@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class UsersComponent implements OnInit {
   
+  error :boolean = false;
   limit_show_user_min = 0;
   limit_show_user_max = 10;
   users: User[] = [];
@@ -44,37 +45,30 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers().subscribe(
       (users) => {
         this.users = users.data
+      }, err => {
+        this.error = true;
+        console.log('błąd w userach ' + JSON.stringify(err));
       }
     );
   }
 
   loadUserByFilter() : void {
-    if (this.userForm.controls.city.value == ''){
-      this.userForm.controls.city.setValue(`%`);
-    }
     this.usersService.getUserByFilter(this.userForm.controls.name.value, this.userForm.controls.surname.value, this.userForm.controls.city.value).subscribe(
       (users) => {
       this.users = users.data;
-      console.log('users' + users)
-     console.log('Odebrany JSON'+ JSON.stringify(this.users));
+      }, err => {
+        console.log('err ' + JSON.stringify(err));
       }) 
   }
   
-  /*
-  removeUser(user: User, event: any) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
-    event.stopPropagation();
-    this.userService.removeUser(user.id).subscribe(() => {
-      this.getUsers();
-    });
-    this.showToasterRemoveUser();
-  }
-  */
-
   removeUser(user: User) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
     this.usersService.removeUser(user.id).subscribe(() => {
       this.getUsers();
-    });
-    this.showToasterRemoveUser();
+      this.showToasterRemoveUser();
+    }, err => {
+      console.log('err ' + JSON.stringify(err));
+      this.showToasterRemoveUserError();
+    }); 
   }
 
   goToUserDetails(user: User) : void {
@@ -93,7 +87,6 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
-    console.log('next');
   }
 
   back() : void {
@@ -104,7 +97,6 @@ export class UsersComponent implements OnInit {
       this.limit_show_user_min=this.limit_show_user_min
       this.limit_show_user_max=this.limit_show_user_max
     }
-    console.log('back');
   }  
 
   refresh() : void {
@@ -115,6 +107,10 @@ export class UsersComponent implements OnInit {
 
   showToasterRemoveUser() : void {
     this.toastr.success("Użytkownik został pomyślnie usunięty!");
+  }
+
+  showToasterRemoveUserError() : void {
+    this.toastr.error("Użytkownik nie został usunięty!");
   }
 
   showToasterRefreshUser() : void {

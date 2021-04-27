@@ -22,9 +22,10 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS  } from '@angular/material/form-field';
 import { DialogRemoveUserComponent } from './users/dialog-remove-user/dialog-remove-user.component'
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent],
+  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent],
   imports: [
     CommonModule,
     RouterModule,
