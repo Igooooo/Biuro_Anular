@@ -9,30 +9,10 @@ import { FormGroup } from '@angular/forms';
 })
 export class MenuComponent implements OnInit {
 
-  
-  message: string = 'Nie jesteś zalogowany!'
-  constructor( private http: HttpClient) { }
-
-
-  createAuthrorizationHeader(): HttpHeaders {
-    let headers = new HttpHeaders();
-    const token :any = localStorage.getItem('token');
-    headers = headers.set('x-access-token', token);
-    return headers
-  }
-
+  constructor() { }
 
   ngOnInit(): void {
-    let headers = this.createAuthrorizationHeader();
-    console.log('headers ' + JSON.stringify(headers));
-    this.http.get('http://localhost:8080/api/getUsers' , { headers: headers }).subscribe(
-      res => {
-        console.log(JSON.stringify(res));
-      },
-      err => {
-        console.log('błąd ' + JSON.stringify(err));
-      }
-    );
+    
   }
 
 }

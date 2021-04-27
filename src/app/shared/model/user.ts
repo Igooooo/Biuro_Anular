@@ -5,9 +5,9 @@ export interface User {
     pesel: string;
     city: string;
     street: string;
-    phone: number;
+    phone: string;
     email: string;
-    date?: string;
+    createdAt?: string;
     password?: string;
     type: string;
     token?: string

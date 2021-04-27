@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MainService } from './main/main.service';
 import { AppService } from './app.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AppService } from './app.service';
   ],
   exports: [
   ],
-  providers: [UsersService, MainService, AppService],
+  providers: [UsersService, MainService, AppService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

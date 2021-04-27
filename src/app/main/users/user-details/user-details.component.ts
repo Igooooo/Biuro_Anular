@@ -25,23 +25,6 @@ export class UserDetailsComponent implements OnInit {
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
 
-  
-  /*
-  typeOfClient = Object.values(clientType);
-  
-  userForm = this.formBuilder.group({  // metody z FormBuilder (dostępne w Angularze)
-    id: [''],
-    name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]], // [wartosc startowa, walidatory]
-    surname: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(7)]],
-    pesel: ['',Validators.required],
-    city: ['',Validators.required],
-    street: ['',Validators.required],
-    phone: ['',Validators.required],
-    email: ['',Validators.required],
-    type: ['',Validators.required]
-  })
-  */
-
   constructor(private usersService: UsersService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -51,8 +34,6 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.createFormUser();
     this.loadUser();
-    //console.log('sprawdzenie' + this.user)
-    //console.log('this user'+ JSON.stringify(this.user));
   }
   
   createFormUser() : void {
@@ -70,12 +51,13 @@ export class UserDetailsComponent implements OnInit {
   }
   
   updateUser(): void {
-    this.usersService.updateCar(this.userForm.value).subscribe();
+    this.usersService.updateUser(this.userForm.value).subscribe(
+      err => {
+        console.log('err' + err);
+      }
+    );
     this.router.navigate(['/users']);
     this.showToasterUpdateUser();
-    //console.log('Update'+ JSON.stringify(this.userForm.value))
-    // console.log('User' + JSON.stringify(this.user));
-    //this.router.navigate(['/users']);
   }
 
   loadUser() : void {
@@ -83,11 +65,13 @@ export class UserDetailsComponent implements OnInit {
     const id = +this.route.snapshot.params['id']; 
     this.usersService.getUser(id).subscribe( // przekazujemy id i zostajemy subscriberami
       (user) => {
-      //console.log('user'+ JSON.stringify(user.data));
+      console.log('user'+ JSON.stringify(user.data));
       this.user = user.data;
-      this.userForm.patchValue(this.user[0]);
-     // console.log('Odebrany JSON'+ JSON.stringify(this.user));
-      }) // przypisanie do zmiennej
+      this.userForm.patchValue(this.user);
+      console.log('Odebrany JSON'+ JSON.stringify(this.user));
+      }, err => {
+        console.log('err' + err);
+      }) 
   }
 
   showToasterUpdateUser() : void{

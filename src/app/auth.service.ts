@@ -14,6 +14,4 @@ export class AuthService {
   loginUser(login: Login) {
     return this.http.post<any>(this.login_url, login)
   }
-
-
 }

@@ -37,10 +37,7 @@ export class AddUserComponent implements OnInit {
     this.createFormUser();
   }
 
- 
 fieldTextType?: boolean;
-
-
 
 toggleFieldTextType() {
   this.fieldTextType = !this.fieldTextType;
@@ -62,10 +59,14 @@ toggleFieldTextType() {
   }
 
   addUser() : void {
-    this.usersService.addUser(this.userForm.value).subscribe();
-    console.log('formularz' + this.userForm.value);
-    this.router.navigate(['/users']);
-    this.showToasterAddUser();
+    this.usersService.addUser(this.userForm.value).subscribe(() => {
+      console.log('formularz' + this.userForm.value);
+      this.router.navigate(['/users']);
+      this.showToasterAddUser();
+    }, err => {   
+        this.showToasterAddUserError(err.error.message);
+      }
+    );
   }
 
   reset() : void {
@@ -76,5 +77,11 @@ toggleFieldTextType() {
 
   showToasterAddUser() : void {
     this.toastr.success(this.userForm.controls.name.value + " " + this.userForm.controls.surname.value + " został dodany pomyślnie!");
+  }
+
+  showToasterAddUserError(err : string) : void {
+    let lenghtErr = err.length;
+    let text = err.substr(0,lenghtErr-1);
+    this.toastr.error(text);
   }
 }
