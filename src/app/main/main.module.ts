@@ -23,9 +23,17 @@ import { DialogRemoveUserComponent } from './users/dialog-remove-user/dialog-rem
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { DialogRemoveProductComponent } from './products/dialog-remove-product/dialog-remove-product.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ClientsComponent } from './clients/clients.component';
+import { ClientDetailsComponent } from './clients/client-details/client-details.component';
+import { DialogRemoveClientComponent } from './clients/dialog-remove-client/dialog-remove-client.component';
+import { AddClientComponent } from './clients/add-client/add-client.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 @NgModule({
-  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent],
+  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent],
   imports: [
     CommonModule,
     RouterModule,

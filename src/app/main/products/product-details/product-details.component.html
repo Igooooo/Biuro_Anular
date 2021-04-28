@@ -1,0 +1,39 @@
+<!-- <p class="data-header">Edit {{ product.name }}</p> -->
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Edytuj produkt: <strong> {{ productForm.controls.name.value }} </strong></p>
+    <form [formGroup] = "productForm" > 
+        <div class="row form-group">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ilość</label><br>
+                <input class="form-control" formControlName="volume" type="text"  placeholder="volume"> 
+                <p class = "alert-danger" *ngIf="productForm.controls['volume'].invalid">Podaj ilość!</p>  
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Dostawca</label><br>
+                <input class="form-control" formControlName="provider" type="text"  placeholder="provider">
+                <p class = "alert-danger" *ngIf="productForm.controls['provider'].invalid">Podaj dostawcę!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne</label><br>
+                <input class="form-control" formControlName="other" type="text"  placeholder="other">
+                <p class = "alert-danger" *ngIf="productForm.controls['other'].invalid ">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Type</label><br>
+                <select class="form-control" formControlName="type"> 
+                    <option *ngFor="let type of typeOfProduct" [value] = type >
+                        {{ type }}
+                    </option> 
+                </select>
+                <p class = "alert-danger" *ngIf="productForm.controls['type'].invalid">Uzupełnij!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateProduct()"[disabled]="!productForm.valid">Update</button>
+            </div>
+        </div>
+    </form>  
+</div>
+

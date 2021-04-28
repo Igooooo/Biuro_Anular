@@ -1,48 +1,38 @@
 <!-- <p class="data-header">Edit {{ user.name }}</p> -->
  
 <div class="container justify-content-center">
-    <p class="data-header">Dodaj klienta</p>
+    <p class="data-header">Edytuj użytkownika: <strong>{{ userForm.controls.name.value }}  {{ userForm.controls.surname.value }} </strong> </p>
     <form [formGroup] = "userForm" > 
         <div class="row form-group">
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Imię</label><br>
-                <input class="form-control" formControlName="name" type="text" placeholder="name">
-                <p class = "alert-danger" *ngIf="userForm.controls['name'].invalid">Podaj imie!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Surname</label><br>
-                <input class="form-control" formControlName="surname" type="text"  placeholder="surname">
-                <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid">Podaj nazwisko!</p> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>pesel</label><br>
+                <label>PESEL</label><br>
                 <input class="form-control" formControlName="pesel" type="text"  placeholder="pesel"> 
                 <p class = "alert-danger" *ngIf="userForm.controls['pesel'].invalid">Podaj pesel!</p>  
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Misto</label><br>
-                <input class="form-control" formControlName="city" type="text"  placeholder="city">
+                <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
                 <p class = "alert-danger" *ngIf="userForm.controls['city'].invalid">Podaj misto!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Ulica</label><br>
-                <input class="form-control" formControlName="street" type="text"  placeholder="street">
+                <input class="form-control" formControlName="street" type="text"  placeholder="ulica">
                 <p class = "alert-danger" *ngIf="userForm.controls['street'].invalid ">Podaj ulicę!</p>   
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Telefon</label><br>
-                <input class="form-control" formControlName="phone" type="text"  placeholder="phone"> 
+                <input class="form-control" formControlName="phone" type="text"  placeholder="telefon"> 
                 <p class = "alert-danger" *ngIf="userForm.controls['phone'].invalid">Błędny numer telefonu!</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>E-Mail</label><br>
-                <input class="form-control" formControlName="email" type="text" placeholder="email">
+                <input class="form-control" formControlName="email" type="text" placeholder="e-mail">
                 <p class = "alert-danger" *ngIf="userForm.controls['email'].invalid">Błędny e-mail!</p>    
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
                 <select class="form-control" formControlName="type"> 
-                    <option *ngFor="let type of typeOfClient" [value] = type >
+                    <option *ngFor="let type of typeOfUser" [value] = type >
                         {{ type }}
                     </option> 
                 </select>

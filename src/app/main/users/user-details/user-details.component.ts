@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { clientType } from 'src/app/shared/enums/clientType';
+import { userType } from 'src/app/shared/enums/userType';
 import { User } from 'src/app/shared/model/user';
 import { UsersService } from '../users.service';
 
@@ -17,8 +17,8 @@ export class UserDetailsComponent implements OnInit {
   user: User[] = [];
 
   // Typ klienta
-  typeOfClientDefault = clientType.normalny ;
-  typeOfClient = Object.values(clientType);
+  typeOfUserDefault = userType.pracownik ;
+  typeOfUser = Object.values(userType);
 
   // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -46,7 +46,7 @@ export class UserDetailsComponent implements OnInit {
       street: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       phone: ['',Validators.compose([Validators.required, Validators.pattern(this.phoneRegex)])],
       email: ['',Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])],
-      type: [this.typeOfClientDefault,Validators.required]
+      type: [this.typeOfUserDefault,Validators.required]
     })
   }
   
