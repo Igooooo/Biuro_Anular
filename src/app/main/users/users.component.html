@@ -2,7 +2,7 @@
 <!-- WSZYSCY UŻYTKOWNICY -->
 <div *ngIf = !error>
     <div class="container justify-content-center">
-        <p class="data-header bi bi-search"> Szukaj Klienta:</p>
+        <p class="data-header bi bi-search"> Szukaj użytkownika:</p>
         <form [formGroup] = "userForm"> 
             <div class="row form-group">
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -39,7 +39,7 @@
         </div>
         <div class="row form-group">
             <div class="col-sm-12">
-                <table class="cs-table table table-striped" *ngIf="users && users.length > 0; else noUsersInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+                <table class="cs-table table table-striped " *ngIf="users && users.length > 0; else noUsersInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
                     <thead>
                         <tr>
                             <th>ID</th>

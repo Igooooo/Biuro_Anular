@@ -10,18 +10,18 @@ import { AppService } from 'src/app/app.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _router: Router,
+  constructor(private router: Router,
               private toastr: ToastrService ) { 
     }
 
   ngOnInit(): void {
+    console.log('Jestem w header');
   }
 
   logout(){
     localStorage.removeItem('token');
-    console.log('Wylogowanie');
-    this._router.navigate(['login']);
     this.showToasterLogoutUser();
+    this.router.navigate(['/login']);
   }
 
   showToasterLogoutUser() : void {
