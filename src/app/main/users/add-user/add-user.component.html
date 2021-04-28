@@ -1,6 +1,6 @@
  
 <div class="container justify-content-center">
-    <p class="data-header">Dodaj klienta</p>
+    <p class="data-header">Dodaj użytkownika</p>
     <form [formGroup] = "userForm" > 
         <div class="row form-group">
             <div class="col-lg-4 col-md-6 col-sm-12">
@@ -63,7 +63,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Type</label><br>
                 <select class="form-control" formControlName="type"> 
-                    <option  *ngFor="let type of typeOfClient" [value] = type >
+                    <option  *ngFor="let type of typeOfUser" [value] = type >
                         {{ type }}
                     </option> 
                 </select>

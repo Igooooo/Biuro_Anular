@@ -1,0 +1,77 @@
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Dodaj produkt</p>
+    <form [formGroup] = "productForm" > 
+        <div class="row form-group">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Nazwa</label><br>
+                <input class="form-control" formControlName="name" type="text" placeholder="imię">
+                <p class = "alert-danger" *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].dirty && productForm.controls['name'].touched">Podaj nazwę!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ilość</label><br>
+                <input class="form-control" formControlName="volume" type="text"  placeholder="ilość"> 
+                <p class = "alert-danger" *ngIf="productForm.controls['volume'].invalid && productForm.controls['volume'].dirty && productForm.controls['volume'].touched">Podaj ilość!</p>  
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Dostawca</label><br>
+                <input class="form-control" formControlName="provider" type="text"  placeholder="dostawca">
+                <p class = "alert-danger" *ngIf="productForm.controls['provider'].invalid && productForm.controls['provider'].dirty && productForm.controls['provider'].touched">Podaj dostawcę!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne</label><br>
+                <input class="form-control" formControlName="other" type="text"  placeholder="inne">
+                <p class = "alert-danger" *ngIf="productForm.controls['other'].invalid && productForm.controls['other'].dirty && productForm.controls['other'].touched">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Type</label><br>
+                <select class="form-control" formControlName="type"> 
+                    <option  *ngFor="let type of typeOfProduct" [value] = type >
+                        {{ type }}
+                    </option> 
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="addProduct()"[disabled]="!productForm.valid">Submit</button>
+                <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Reset From</button>
+            </div>
+        </div>
+    </form>  
+</div>
+  
+
+
+    
+<p>
+-------------------------------<br>
+1. Form Status: {{ productForm.status }}
+<br>
+<!--
+walidacja name: {{!productForm.controls['name'].invalid}} i {{ productForm.controls['name'].dirty }} i  {{ productForm.controls['name'].touched }} 
+<br> 
+całość name: {{ !productForm.controls['name'].invalid && productForm.controls['name'].dirty && productForm.controls['name'].touched }} 
+<br>
+-->
+walidacja type: invalid: {{!productForm.controls['type'].invalid}} i dirty: {{ productForm.controls['type'].dirty }} i  touched: {{ productForm.controls['type'].touched }} 
+<br> 
+całość type: {{ !productForm.controls['type'].invalid && productForm.controls['type'].dirty && productForm.controls['type'].touched }} 
+--<br>
+2. Wartość pola:  
+<!--  name: {{ productForm.controls.name.value }} -->
+<br>
+Rodzaj / typ klienta: {{ productForm.controls.type.value }}
+<br>
+--<br>
+<!-- 
+3. Wypełnianie formularza <br>
+touched 1 raz name: -> zmiana przy przejsciu: {{ productForm.controls.name.touched }}
+<br>
+ dirty 1 raz name-> zmiana przy pierwszej literze: {{ productForm.controls.name.dirty}}
+<br>
+-->
+-------------------------------
+</p>
+
+

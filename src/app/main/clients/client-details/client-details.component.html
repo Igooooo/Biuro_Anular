@@ -1,0 +1,59 @@
+<!-- <p class="data-header">Edit {{ client.name }}</p> -->
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Edytuj klienta: <strong>{{ clientForm.controls.name.value }}  {{ clientForm.controls.surname.value }} </strong> </p>
+    <form [formGroup] = "clientForm" > 
+        <div class="row form-group">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Telefon</label><br>
+                <input class="form-control" formControlName="phone" type="text"  placeholder="telefon"> 
+                <p class = "alert-danger" *ngIf="clientForm.controls['phone'].invalid">Podaj numer telefonu!</p>  
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>E-Mail</label><br>
+                <input class="form-control" formControlName="email" type="text"  placeholder="e-mail">
+                <p class = "alert-danger" *ngIf="clientForm.controls['email'].invalid">Podaj e-mail!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Miasto</label><br>
+                <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
+                <p class = "alert-danger" *ngIf="clientForm.controls['city'].invalid ">Podaj miasto!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ulica</label><br>
+                <input class="form-control" formControlName="street" type="text"  placeholder="ulica">
+                <p class = "alert-danger" *ngIf="clientForm.controls['street'].invalid ">Podaj ulicę!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>PESEl lub NIP</label><br>
+                <input class="form-control" formControlName="peselOrNIP" type="text"  placeholder="PESEL lub NIP"> 
+                <p class = "alert-danger" *ngIf="clientForm.controls['peselOrNIP'].invalid">Błędny numer PESEL lub NIP!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Dokument</label><br>
+                <input class="form-control" formControlName="documentID" type="text" placeholder="dokument">
+                <p class = "alert-danger" *ngIf="clientForm.controls['documentID'].invalid">Błędny dokument!</p>    
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne</label><br>
+                <input class="form-control" formControlName="other" type="text" placeholder="inne">
+                <p class = "alert-danger" *ngIf="clientForm.controls['other'].invalid">Uzupełnij!</p>    
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Type</label><br>
+                <select class="form-control" formControlName="type"> 
+                    <option *ngFor="let type of typeOfClient" [value] = type >
+                        {{ type }}
+                    </option> 
+                </select>
+                <p class = "alert-danger" *ngIf="clientForm.controls['type'].invalid">Uzupełnij!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateClient()"[disabled]="!clientForm.valid">Update</button>
+            </div>
+        </div>
+    </form>  
+</div>
+

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { clientType } from 'src/app/shared/enums/clientType';
+import { userType } from 'src/app/shared/enums/userType';
 import { UsersService } from '../users.service';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -17,8 +17,8 @@ export class AddUserComponent implements OnInit {
   userForm = new FormGroup({});
   
   // Typ klienta
-  typeOfClientDefault = clientType.normalny ;
-  typeOfClient = Object.values(clientType);
+  typeOfUserDefault = userType.pracownik ;
+  typeOfUser = Object.values(userType);
 
   // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -53,7 +53,7 @@ toggleFieldTextType() {
       phone: ['',Validators.compose([Validators.required, Validators.pattern(this.phoneRegex)])],
       email: ['',Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])],
       password: ['',Validators.compose([Validators.required, Validators.pattern(this.passwordRegex)])],
-      type: [this.typeOfClientDefault,Validators.required]
+      type: [this.typeOfUserDefault,Validators.required]
   });
     this.cd.markForCheck();
   }
@@ -71,7 +71,7 @@ toggleFieldTextType() {
 
   reset() : void {
     this.userForm.reset({
-        type: this.typeOfClientDefault
+        type: this.typeOfUserDefault
     });
   }
 

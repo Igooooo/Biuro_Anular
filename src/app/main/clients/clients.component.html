@@ -1,0 +1,94 @@
+
+<!-- WSZYSCY UŻYTKOWNICY -->
+<div *ngIf = !error>
+    <div class="container justify-content-center">
+        <p class="data-header bi bi-search"> Szukaj Klienta:</p>
+        <form [formGroup] = "clientForm"> 
+            <div class="row form-group">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label>Imię</label><br>
+                    <input class="form-control" formControlName="name" type="text" placeholder="imię">
+                    <p class = "alert-danger" *ngIf="clientForm.controls['name'].invalid && clientForm.controls['name'].dirty && clientForm.controls['name'].touched">Podaj imie!</p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label>Nazwisko</label><br>
+                    <input class="form-control" formControlName="surname" type="text"  placeholder="nazwisko">
+                    <p class = "alert-danger" *ngIf="clientForm.controls['surname'].invalid && clientForm.controls['surname'].dirty && clientForm.controls['surname'].touched">Podaj nazwisko!</p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label>Miasto</label><br>
+                    <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
+                    <p class = "alert-danger" *ngIf="clientForm.controls['surname'].invalid && clientForm.controls['surname'].dirty && clientForm.controls['surname'].touched">Podaj miasto!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12"><br>
+                    <button class="btn btn-primary float-right"  (click)="loadClientByFilter()"[disabled]="!clientForm.valid">Szukaj</button><!-- type="submit" value="Submit" -->
+                    <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Reset From</button>
+                    
+                </div>
+            </div>
+        </form>  
+    </div>
+
+    <div class="container">
+        <p class="data-header">Klienci: {{clients?.length }}</p>
+        <div class="row form-group">
+            <span class="icon bi bi-person-plus-fill" [routerLink]="['/client/add']"></span>
+            <span class="icon bi bi-arrow-repeat" (click)="refresh()"></span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <table class="cs-table table table-striped" *ngIf="clients && clients.length > 0; else noClientsInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Telefon</th>
+                            <th>E-Mail</th>
+                            <th>Miasto</th>
+                            <th>Ulica</th>
+                            <th>Rodzaj</th>
+                            <th>PESEL lub NIP</th>
+                            <th>Dokument</th>
+                            <th>Inne</th> 
+                            <th>Data dołączenia</th>   
+                            <th>Usuń</th> 
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr  class="form-group" *ngFor=" let client of clients | slice:limit_show_client_min:limit_show_client_max; let i = index" (click)="goToClientDetails(client)" >
+                            <td csImportant> {{ client?.id}} </td> 
+                            <td csImportant> {{ client?.name | uppercase }} </td>
+                            <td> {{ client?.surname }} </td>
+                            <td> {{ client?.phone }} </td>
+                            <td> {{ client?.email }} </td> 
+                            <td> {{ client?.city }} </td> 
+                            <td> {{ client?.street }} </td> 
+                            <td> {{ client?.type }} </td> 
+                            <td> {{ client?.peselOrNIP }}</td>
+                            <td> {{ client?.documentID }} </td> 
+                            <td> {{ client?.other }} </td> 
+                            <td> {{ client?.createdAt | date:'longDate'}} </td>
+                            <td class="icon bi bi-person-dash" (click)="openDialog(client, $event)"></td> <!-- <img src="../../../assets/img/remove-client.png"> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row form-group" *ngIf="clients && clients.length > 0">
+                    <button class="col-sm-1 btn btn-primary bi bi-arrow-left" (click)="back()"></button>  
+                    <button class="col-sm-1 btn btn-primary bi bi-arrow-right" (click)="next()"></button>
+                </div>
+                <ng-template #noClientsInfo>
+                    <div class="no-cars-info">
+                        <p>Brak użytkowników</p>
+                    </div>
+                </ng-template>
+            </div>
+        </div> 
+    </div>
+</div>  
+<div class="container justify-content-center" *ngIf = error>
+    Zaloguj się!
+</div>
+  
