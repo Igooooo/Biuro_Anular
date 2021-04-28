@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() : void {
-    console.log('jestem w login');
     this.auth.loginUser(this.loginForm.getRawValue()).subscribe(
       res => {
         console.log('res ' + JSON.stringify(res));

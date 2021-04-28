@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MainService } from './main/main.service';
 import { AppService } from './app.service';
 import { AuthService } from './auth.service';
+import { ProductService } from './main/products/product.service';
+import { ClientService } from './main/clients/client.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { AuthService } from './auth.service';
   ],
   exports: [
   ],
-  providers: [UsersService, MainService, AppService, AuthService],
+  providers: [UsersService, MainService, AppService, AuthService, ProductService, ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
