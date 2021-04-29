@@ -14,7 +14,7 @@ import { UsersService } from '../users.service';
 export class UserDetailsComponent implements OnInit {
 
   userForm = new FormGroup({});
-  user: User[] = [];
+  user?: User;
 
   // Typ klienta
   typeOfUserDefault = userType.pracownik ;
@@ -65,10 +65,10 @@ export class UserDetailsComponent implements OnInit {
     const id = +this.route.snapshot.params['id']; 
     this.usersService.getUser(id).subscribe( // przekazujemy id i zostajemy subscriberami
       (user) => {
-      console.log('user'+ JSON.stringify(user.data));
+      //console.log('user'+ JSON.stringify(user.data));
       this.user = user.data;
       this.userForm.patchValue(this.user);
-      console.log('Odebrany JSON'+ JSON.stringify(this.user));
+      //console.log('Odebrany JSON'+ JSON.stringify(this.user));
       }, err => {
         console.log('err' + err);
       }) 

@@ -47,11 +47,17 @@ export class UsersService {
     return this.http.put<User>(this.URL+'updateUserById', data , { headers: headers })
   }
 
-  getUser(id: number) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
+  getUser(id: number) : Observable<{success: boolean, data: User}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: User[]}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: User}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
   }
 
+  /* stary z tablica jako User[]
+  getUser2(id: number) : Observable<{success: boolean, data: User}> { // id - pojedyńczy samochód
+    let headers = this.createAuthrorizationHeader();
+    return this.http.get<{success: boolean, data: User}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+  }
+*/
   // raczej nie zadziała
   getUserByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
