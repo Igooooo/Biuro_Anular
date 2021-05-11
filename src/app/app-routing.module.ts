@@ -10,6 +10,8 @@ import { AddProductComponent } from './main/products/add-product/add-product.com
 import { ProductDetailsComponent } from './main/products/product-details/product-details.component';
 import { ProductsComponent } from './main/products/products.component';
 import { RaportsComponent } from './main/raports/raports.component';
+import { AddSaleComponent } from './main/sales/add-sale/add-sale.component';
+import { SaleDetailsComponent } from './main/sales/sale-details/sale-details.component';
 import { SalesComponent } from './main/sales/sales.component';
 import { UserSettingsComponent } from './main/user-settings/user-settings.component';
 import { AddUserComponent } from './main/users/add-user/add-user.component';
@@ -34,6 +36,8 @@ const routes: Routes = [
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'raports', component: RaportsComponent},
   {path: 'sales', component: SalesComponent},
+  {path: 'sale/add', component: AddSaleComponent},
+  {path: 'sale/:id', component: SaleDetailsComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,54 @@
+<!-- <p class="data-header">Edit {{ sale.name }}</p> -->
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Edytuj sprzedaż: <strong> {{ saleForm.controls.id.value }} </strong></p>
+    <form [formGroup] = "saleForm" > 
+        <div class="row form-group">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Produkt</label><br>
+                <input class="form-control" formControlName="product_id" type="text"  placeholder="Produkt"> 
+                <p class = "alert-danger" *ngIf="saleForm.controls['product_id'].invalid">Podaj produkt!</p>  
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Klient</label><br>
+                <input class="form-control" formControlName="client_id" type="text"  placeholder="Klient">
+                <p class = "alert-danger" *ngIf="saleForm.controls['client_id'].invalid">Podaj klienta!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Cena</label><br>
+                <input class="form-control" formControlName="price" type="text"  placeholder="Cena">
+                <p class = "alert-danger" *ngIf="saleForm.controls['price'].invalid">Podaj cene!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ilość</label><br>
+                <input class="form-control" formControlName="volumen" type="text"  placeholder="Ilość">
+                <p class = "alert-danger" *ngIf="saleForm.controls['volumen'].invalid">Podaj ilość!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 1</label><br>
+                <input class="form-control" formControlName="other_1" type="text"  placeholder="other">
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_1'].invalid ">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 2</label><br>
+                <input class="form-control" formControlName="other_2" type="text"  placeholder="other">
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_2'].invalid ">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Czy zapłacone</label><br>
+                <select class="form-control" formControlName="isPay"> 
+                    <option *ngFor="let type of isPay" [value] = isPay >
+                        {{ type }}
+                    </option> 
+                </select>
+                <p class = "alert-danger" *ngIf="saleForm.controls['isPay'].invalid">Uzupełnij!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateSale()"[disabled]="!saleForm.valid">Update</button>
+            </div>
+        </div>
+    </form>  
+</div>
+

@@ -48,13 +48,13 @@ export class ProductDetailsComponent implements OnInit {
   }
   
   updateProduct(): void {
-    this.productsService.updateProduct(this.productForm.value).subscribe(
-      err => {
-        console.log('err' + err);
+    this.productsService.updateProduct(this.productForm.value).subscribe(() => {
+      this.router.navigate(['/products']);
+      this.showToasterUpdateProduct();
+    }, err => {   
+      this.showToasterUpdateProductError();
       }
     );
-    this.router.navigate(['/products']);
-    this.showToasterUpdateProduct();
   }
 
   loadProduct() : void {
@@ -73,5 +73,9 @@ export class ProductDetailsComponent implements OnInit {
 
   showToasterUpdateProduct() : void{
     this.toastr.success(this.productForm.controls.name.value + " został zaktualizowany pomyślnie!");
+  }
+
+  showToasterUpdateProductError() : void {
+    this.toastr.error(this.productForm.controls.name.value + " nie został zaktualizowany pomyślnie!");
   }
 }

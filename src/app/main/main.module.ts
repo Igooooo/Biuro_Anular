@@ -31,9 +31,14 @@ import { ClientDetailsComponent } from './clients/client-details/client-details.
 import { DialogRemoveClientComponent } from './clients/dialog-remove-client/dialog-remove-client.component';
 import { AddClientComponent } from './clients/add-client/add-client.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { AddSaleComponent } from './sales/add-sale/add-sale.component';
+import { DialogRemoveSaleComponent } from './sales/dialog-remove-sale/dialog-remove-sale.component';
+import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
+import { DialogSearchClientSaleComponent } from './sales/dialog-search-client-sale/dialog-search-client-sale.component';
+import { DialogSearchProductSaleComponent } from './sales/dialog-search-product-sale/dialog-search-product-sale.component';
 
 @NgModule({
-  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent],
+  declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent, AddSaleComponent, DialogRemoveSaleComponent, SaleDetailsComponent, DialogSearchClientSaleComponent, DialogSearchProductSaleComponent],
   imports: [
     CommonModule,
     RouterModule,
