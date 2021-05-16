@@ -45,7 +45,7 @@ toggleFieldTextType() {
 
   createFormProduct() : void {
     this.productForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       volume: ['',Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(11)])],
       provider:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       other: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],

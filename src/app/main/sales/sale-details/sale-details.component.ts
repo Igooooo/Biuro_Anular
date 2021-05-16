@@ -58,7 +58,6 @@ export class SaleDetailsComponent implements OnInit {
     );
   }
 
-
   loadSale() : void {
     // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
     const id = +this.route.snapshot.params['id']; 

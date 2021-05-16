@@ -29,8 +29,8 @@ export class SalesService {
   }
 
   addSale(data: Sale): Observable<Sale> {
-    console.log('data' + data)
-    return this.http.post<Sale>(this.URL+ 'addSale', data) ;
+    let headers = this.createAuthrorizationHeader();
+    return this.http.post<Sale>(this.URL+ 'addSale', data, { headers: headers }) ;
   }
   
   removeSale(id: number): Observable<Sale> {
@@ -48,9 +48,8 @@ export class SalesService {
     return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
   }
 
-  // raczej nie zadziała
-  getSaleByFilter(name: string) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
+  getSaleByFilter(client_id: number) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByNameParam/'+`${name}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${client_id}` , { headers: headers }) //samo formatuje na JSON
   }
 }

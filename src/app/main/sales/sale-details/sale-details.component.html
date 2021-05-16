@@ -37,7 +37,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Czy zapłacone</label><br>
                 <select class="form-control" formControlName="isPay"> 
-                    <option *ngFor="let type of isPay" [value] = isPay >
+                    <option *ngFor="let type of isPay" [value] = type >
                         {{ type }}
                     </option> 
                 </select>

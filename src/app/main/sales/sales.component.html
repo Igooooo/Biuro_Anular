@@ -6,8 +6,8 @@
         <form [formGroup] = "saleForm"> 
             <div class="row form-group">
                 <div class="col-lg-3">
-                    <input class="form-control" formControlName="id" type="text"  placeholder="id sprzedaży">
-                    <p class = "alert-danger" *ngIf="saleForm.controls['id'].invalid && saleForm.controls['id'].dirty && saleForm.controls['id'].touched">Podaj id!</p>
+                    <input class="form-control" formControlName="client_id" type="text"  placeholder="id klienta">
+                    <p class = "alert-danger" *ngIf="saleForm.controls['client_id'].invalid && saleForm.controls['client_id'].dirty && saleForm.controls['id'].touched">Podaj id klienta!</p>
                 </div>
                 <div class="col-lg-12"><br>
                     <button class="btn btn-primary float-left"  (click)="loadSaleByFilter()"[disabled]="!saleForm.valid">Szukaj</button><!-- type="submit" value="Submit" -->
@@ -20,7 +20,7 @@
     <div class="container">
         <p class="data-header">Sprzedaż: {{sales?.length }}</p>
         <div class="row form-group">
-            <span class="icon bi bi-bag-plus-fill" [routerLink]="['/sales/add']"></span>
+            <span class="icon bi bi-bag-plus-fill" [routerLink]="['/sale/add']"></span>
             <span class="icon bi bi-arrow-repeat" (click)="refresh()"></span>
         </div>
         <div class="row form-group">

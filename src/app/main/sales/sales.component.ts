@@ -34,7 +34,7 @@ export class SalesComponent implements OnInit {
 
   createFormSale() : void {
     this.saleForm = this.formBuilder.group({
-      id: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      client_id: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
     })
   }
 
@@ -50,7 +50,7 @@ export class SalesComponent implements OnInit {
   }
 
   loadSaleByFilter() : void {
-    this.saleService.getSaleByFilter(this.saleForm.controls.name.value).subscribe(
+    this.saleService.getSaleByFilter(this.saleForm.controls.client_id.value).subscribe(
       (sales) => {
       this.sales = sales.data;
       }, err => {
