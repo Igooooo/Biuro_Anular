@@ -1,0 +1,59 @@
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Dodaj sprzedaż</p>
+    <form [formGroup] = "saleForm" > 
+        <div class="row form-group">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Produkt</label><br>
+                <button class="icon bi bi-bag-plus-fill" (click)="openDialogProduct($event)"></button> {{this?.productIdFromDiag}} {{this?.productNameFromDiag}}
+                <!--
+                <input class="form-control" formControlName="productId" type="text" placeholder="produkt"> -->
+                <p class = "alert-danger" *ngIf="saleForm.controls['productId'].invalid && saleForm.controls['productId'].dirty && saleForm.controls['productId'].touched">Wybierz produkt!</p> 
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Klient</label><br>
+                <button class="icon bi bi-person-plus-fill" (click)="openDialogClient($event)"></button> {{this?.clientIdFromDiag}} {{this?.clientNameFromDiag}} {{this?.clientSurnameFromDiag}} 
+                <!-- <input class="form-control" formControlName="clientId" type="text"  placeholder="klient"> -->
+                <p class = "alert-danger" *ngIf="saleForm.controls['clientId'].invalid && saleForm.controls['clientId'].dirty && saleForm.controls['clientId'].touched">Wybierz Klienta!</p> 
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Cena</label><br>
+                <input class="form-control" formControlName="price" type="text"  placeholder="cena"> 
+                <p class = "alert-danger" *ngIf="saleForm.controls['price'].invalid && saleForm.controls['price'].dirty && saleForm.controls['price'].touched">Podaj cenę</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ilość</label><br>
+                <input class="form-control" formControlName="volumen" type="text" placeholder="ilość">
+                <p class = "alert-danger" *ngIf="saleForm.controls['volumen'].invalid && saleForm.controls['volumen'].dirty && saleForm.controls['volumen'].touched">Podaj ilość!</p>    
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 1</label><br>
+                <input class="form-control" formControlName="other_1" type="text"  placeholder="inne"> 
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_1'].invalid && saleForm.controls['other_1'].dirty && saleForm.controls['other_1'].touched">Wypełnij pole!</p>  
+            </div>   
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 2</label><br>
+                <input class="form-control" formControlName="other_2" type="text"  placeholder="inne"> 
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_2'].invalid && saleForm.controls['other_2'].dirty && saleForm.controls['other_2'].touched">Wypełnij pole!</p>  
+            </div>  
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Czy opłacone</label><br>
+                <select class="form-control" formControlName="isPay"> 
+                    <option  *ngFor="let type of typeOfSale" [value] = type >
+                        {{ type }}
+                    </option> 
+                </select>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="addSale()"[disabled]="!saleForm.valid">Submit</button>
+                <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Reset From</button>
+            </div>
+        </div>
+    </form>  
+</div>
+  
+
+
+    

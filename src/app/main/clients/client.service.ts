@@ -29,8 +29,8 @@ export class ClientService {
   }
 
   addClient(data: Client): Observable<Client> {
-    console.log('data' + data)
-    return this.http.post<Client>(this.URL+ 'addClient', data) ;
+    let headers = this.createAuthrorizationHeader();
+    return this.http.post<Client>(this.URL+ 'addClient', data, { headers: headers } ) ;
   }
   
   removeClient(id: number): Observable<Client> {

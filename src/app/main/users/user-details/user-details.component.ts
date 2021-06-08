@@ -51,14 +51,15 @@ export class UserDetailsComponent implements OnInit {
   }
   
   updateUser(): void {
-    this.usersService.updateUser(this.userForm.value).subscribe(
-      err => {
-        console.log('err' + err);
+    this.usersService.updateUser(this.userForm.value).subscribe(() => {
+      this.router.navigate(['/users']);
+      this.showToasterUpdateUser();
+    }, err => {   
+      this.showToasterUpdateUserError();
       }
     );
-    this.router.navigate(['/users']);
-    this.showToasterUpdateUser();
   }
+
 
   loadUser() : void {
     // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
@@ -76,5 +77,9 @@ export class UserDetailsComponent implements OnInit {
 
   showToasterUpdateUser() : void{
     this.toastr.success(this.userForm.controls.name.value + " " + this.userForm.controls.surname.value + " został zaktualizowany pomyślnie!");
+  }
+
+  showToasterUpdateUserError() : void {
+    this.toastr.success(this.userForm.controls.name.value + " " + this.userForm.controls.surname.value + " nie został zaktualizowany pomyślnie!");
   }
 }

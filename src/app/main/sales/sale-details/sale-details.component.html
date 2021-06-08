@@ -1,0 +1,44 @@
+<!-- <p class="data-header">Edit {{ sale.name }}</p> -->
+ 
+<div class="container justify-content-center">
+    <p class="data-header">Edytuj sprzedaż: <strong> Produkt: </strong> {{sale?.product?.name }}  <strong> Klient: </strong> {{ sale?.client?.name }} {{ sale?.client?.surname }}</p>
+    <form [formGroup] = "saleForm" > 
+        <div class="row form-group">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Cena</label><br>
+                <input class="form-control" formControlName="price" type="text"  placeholder="Cena">
+                <p class = "alert-danger" *ngIf="saleForm.controls['price'].invalid">Podaj cene!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Ilość</label><br>
+                <input class="form-control" formControlName="volumen" type="text"  placeholder="Ilość">
+                <p class = "alert-danger" *ngIf="saleForm.controls['volumen'].invalid">Podaj ilość!</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 1</label><br>
+                <input class="form-control" formControlName="other_1" type="text"  placeholder="other">
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_1'].invalid ">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Inne 2</label><br>
+                <input class="form-control" formControlName="other_2" type="text"  placeholder="other">
+                <p class = "alert-danger" *ngIf="saleForm.controls['other_2'].invalid ">Podaj inne!</p>   
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label>Czy zapłacone</label><br>
+                <select class="form-control" formControlName="isPay"> 
+                    <option *ngFor="let type of isPay" [value] = type >
+                        {{ type }}
+                    </option> 
+                </select>
+                <p class = "alert-danger" *ngIf="saleForm.controls['isPay'].invalid">Uzupełnij!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><br>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateSale()"[disabled]="!saleForm.valid">Update</button>
+            </div>
+        </div>
+    </form>  
+</div>
+

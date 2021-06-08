@@ -1,1 +1,74 @@
-<p>sales works!</p>
+
+<!-- WSZYSCY UŻYTKOWNICY -->
+<div *ngIf = !error>
+    <div class="container justify-content-center">
+        <p class="data-header bi bi-search"> Szukaj sprzedaży:</p>
+        <form [formGroup] = "saleForm"> 
+            <div class="row form-group">
+                <div class="col-lg-3">
+                    <input class="form-control" formControlName="clientId" type="text"  placeholder="id klienta">
+                    <p class = "alert-danger" *ngIf="saleForm.controls['clientId'].invalid && saleForm.controls['clientId'].dirty && saleForm.controls['id'].touched">Podaj id klienta!</p>
+                </div>
+                <div class="col-lg-12"><br>
+                    <button class="btn btn-primary float-left"  (click)="loadSaleByFilter()"[disabled]="!saleForm.valid">Szukaj</button><!-- type="submit" value="Submit" -->
+                    <button class="btn btn-primary float-left" value="Reset" (click)="reset()">Reset From</button> 
+                </div>
+            </div>
+        </form>  
+    </div>
+
+    <div class="container">
+        <p class="data-header">Sprzedaż: {{sales?.length }}</p>
+        <div class="row form-group">
+            <span class="icon bi bi-bag-plus-fill" [routerLink]="['/sale/add']"></span>
+            <span class="icon bi bi-arrow-repeat" (click)="refresh()"></span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <table class="cs-table table table-striped" *ngIf="sales && sales.length > 0; else noSalesInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Produkt</th>
+                            <th>Klient</th>
+                            <th>Cena</th>
+                            <th>Czy opłacone</th>
+                            <th>Ilość</th>
+                            <th>Inne</th>
+                            <th>Inne</th>
+                            <th>Data dodania</th>  
+                            <th>Usuń</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  class="form-group" *ngFor=" let sale of sales | slice:limit_show_sale_min:limit_show_sale_max; let i = index" (click)="goToSaleDetails(sale)">  
+                            <td csImportant> {{ sale?.id}} </td> 
+                            <td csImportant> {{  sale?.product?.name  }} </td>
+                            <td> {{ sale?.client?.name }} {{ sale?.client?.surname }}</td>
+                            <td> {{ sale?.price }} </td>
+                            <td> {{ sale?.isPay }} </td> 
+                            <td> {{ sale?.volumen }} </td> 
+                            <td> {{ sale?.other_1 }} </td> 
+                            <td> {{ sale?.other_2 }} </td> 
+                            <td> {{ sale?.createdAt | date:'longDate'}} </td>
+                            <td class="icon bi bi-bag-dash" (click)="openDialog(sale, $event)"></td> <!-- <img src="../../../assets/img/remove-sale.png"> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row form-group" *ngIf="sales && sales.length > 0">
+                    <button class="col-sm-1 btn btn-primary bi bi-arrow-left" (click)="back()"></button>  
+                    <button class="col-sm-1 btn btn-primary bi bi-arrow-right" (click)="next()"></button>
+                </div>
+                <ng-template #noSalesInfo>
+                    <div class="no-cars-info">
+                        <p>Brak sprzedaży</p>
+                    </div>
+                </ng-template>
+            </div>
+        </div> 
+    </div>
+</div>  
+<div class="container justify-content-center" *ngIf = error>
+    Zaloguj się!
+</div>
+  

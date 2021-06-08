@@ -28,8 +28,8 @@ export class ProductService {
   }
 
   addProduct(data: Product): Observable<Product> {
-    console.log('data' + data)
-    return this.http.post<Product>(this.URL+ 'addProduct', data) ;
+    let headers = this.createAuthrorizationHeader();
+    return this.http.post<Product>(this.URL+ 'addProduct', data, { headers: headers }) ;
   }
   
   removeProduct(id: number): Observable<Product> {

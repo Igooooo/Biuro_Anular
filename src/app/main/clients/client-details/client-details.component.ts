@@ -54,14 +54,15 @@ export class ClientDetailsComponent implements OnInit {
   }
   
   updateClient(): void {
-    this.clientService.updateClient(this.clientForm.value).subscribe(
-      err => {
-        console.log('err' + err);
+    this.clientService.updateClient(this.clientForm.value).subscribe(() => {
+      this.router.navigate(['/clients']);
+      this.showToasterUpdateClient();
+    }, err => {   
+      this.showToasterUpdateClientError();
       }
     );
-    this.router.navigate(['/clients']);
-    this.showToasterUpdateClient();
   }
+
 
   loadClient() : void {
     // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
@@ -79,5 +80,9 @@ export class ClientDetailsComponent implements OnInit {
 
   showToasterUpdateClient() : void{
     this.toastr.success(this.clientForm.controls.name.value + " " + this.clientForm.controls.surname.value + " został zaktualizowany pomyślnie!");
+  }
+
+  showToasterUpdateClientError() : void {
+    this.toastr.error(this.clientForm.controls.name.value + " " + this.clientForm.controls.surname.value + " nie został zaktualizowany pomyślnie!");
   }
 }
