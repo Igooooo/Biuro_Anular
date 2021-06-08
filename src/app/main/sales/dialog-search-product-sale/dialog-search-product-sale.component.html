@@ -1,1 +1,31 @@
-<p>dialog-search-product-sale works!</p>
+<h2 mat-dialog-title>Wybierz produkt</h2>
+<mat-dialog-content>Czy chcesz wybrac produkt?</mat-dialog-content>
+<mat-dialog-actions class="row form-group">
+    <div class="col-sm-12">
+        <table class="cs-table table table-striped" *ngIf="products && products.length > 0; else noProductsInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Typ</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr class="form-group"  mat-button  [mat-dialog-close]=product *ngFor=" let product of products | slice:limit_show_min:limit_show_max; let i = index"> 
+                    <td csImportant> {{ product?.id}} </td> 
+                    <td csImportant> {{ product?.name | uppercase }} </td>
+                    <td> {{ product?.type }} </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row form-group" *ngIf="products && products.length > 0">
+            <button class="col-sm-1 btn btn-primary bi bi-arrow-left" (click)="back()"></button>  
+            <button class="col-sm-1 btn btn-primary bi bi-arrow-right" (click)="next()"></button>
+        </div>
+        <ng-template #noProductsInfo>
+            <div class="no-cars-info">
+                <p>Brak użytkowników</p>
+            </div>
+        </ng-template>
+    </div>   
+</mat-dialog-actions>

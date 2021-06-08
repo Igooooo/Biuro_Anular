@@ -1,1 +1,33 @@
-<p>dialog-search-client-sale works!</p>
+<h2 mat-dialog-title>Wybierz użytkownika</h2>
+<mat-dialog-content>Czy chcesz dodoać klienta?</mat-dialog-content>
+<mat-dialog-actions class="row form-group">
+        <div class="col-sm-12">
+            <table class="cs-table table table-striped" *ngIf="clients && clients.length > 0; else noClientsInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>PESEL lub NIP</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr class="form-group"  mat-button  [mat-dialog-close]=client *ngFor=" let client of clients | slice:limit_show_min:limit_show_max; let i = index"> 
+                        <td csImportant> {{ client?.id}} </td> 
+                        <td csImportant> {{ client?.name | uppercase }} </td>
+                        <td> {{ client?.surname }} </td>
+                        <td> {{ client?.peselOrNIP }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row form-group" *ngIf="clients && clients.length > 0">
+                <button class="col-sm-1 btn btn-primary bi bi-arrow-left" (click)="back()"></button>  
+                <button class="col-sm-1 btn btn-primary bi bi-arrow-right" (click)="next()"></button>
+            </div>
+            <ng-template #noClientsInfo>
+                <div class="no-cars-info">
+                    <p>Brak użytkowników</p>
+                </div>
+            </ng-template>
+        </div> 
+</mat-dialog-actions>

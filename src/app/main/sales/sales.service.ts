@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sale } from 'src/app/shared/model/sale';
+import { Product } from 'src/app/shared/model/product';
+import { Client } from 'src/app/shared/model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -52,4 +54,27 @@ export class SalesService {
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${client_id}` , { headers: headers }) //samo formatuje na JSON
   }
+
+  // Kliencie i produkty
+  getClients(): Observable<{success: boolean, data: Client[]}> {
+    let headers = this.createAuthrorizationHeader();
+    return this.http.get<{success: boolean, data: Client[]}>(this.URL +'getClients' , { headers: headers });
+  }
+  
+  getClientById(id: number) : Observable<{success: boolean, data: Client[]}> { 
+    let headers = this.createAuthrorizationHeader();
+    return this.http.get<{success: boolean, data: Client[]}>(this.URL+'getClientByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+  }
+
+
+  getProducts(): Observable<{success: boolean, data: Product[]}> {
+    let headers = this.createAuthrorizationHeader();
+    return this.http.get<{success: boolean, data: Product[]}>(this.URL +'getproducts' , { headers: headers });
+  }
+
+  getProductById(id: number) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
+    let headers = this.createAuthrorizationHeader();
+    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+  }
+
 }
