@@ -1,19 +1,9 @@
 <!-- <p class="data-header">Edit {{ sale.name }}</p> -->
  
 <div class="container justify-content-center">
-    <p class="data-header">Edytuj sprzedaż: <strong> {{ saleForm.controls.id.value }} </strong></p>
+    <p class="data-header">Edytuj sprzedaż: <strong> Produkt {{saleForm.controls.product_id.value }} i Klient {{saleForm.controls.client_id.value }}</strong></p>
     <form [formGroup] = "saleForm" > 
         <div class="row form-group">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Produkt</label><br>
-                <input class="form-control" formControlName="product_id" type="text"  placeholder="Produkt"> 
-                <p class = "alert-danger" *ngIf="saleForm.controls['product_id'].invalid">Podaj produkt!</p>  
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Klient</label><br>
-                <input class="form-control" formControlName="client_id" type="text"  placeholder="Klient">
-                <p class = "alert-danger" *ngIf="saleForm.controls['client_id'].invalid">Podaj klienta!</p>
-            </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Cena</label><br>
                 <input class="form-control" formControlName="price" type="text"  placeholder="Cena">

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Client } from 'src/app/shared/model/client';
+import { Product } from 'src/app/shared/model/product';
 import { Sale } from 'src/app/shared/model/sale';
 import { DialogRemoveSaleComponent } from './dialog-remove-sale/dialog-remove-sale.component';
 import { SalesService } from './sales.service';
@@ -18,6 +20,8 @@ export class SalesComponent implements OnInit {
   limit_show_sale_min = 0;
   limit_show_sale_max = 10;
   sales: Sale[] = [];
+  product: Product[] = [];
+  client: Client[] = [];
   saleForm = new FormGroup({});
   
   constructor(private cd: ChangeDetectorRef,
@@ -124,5 +128,4 @@ export class SalesComponent implements OnInit {
       }     
     });
   }
-
 }

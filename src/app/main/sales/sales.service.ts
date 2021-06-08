@@ -55,26 +55,13 @@ export class SalesService {
     return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${client_id}` , { headers: headers }) //samo formatuje na JSON
   }
 
-  // Kliencie i produkty
   getClients(): Observable<{success: boolean, data: Client[]}> {
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: Client[]}>(this.URL +'getClients' , { headers: headers });
   }
   
-  getClientById(id: number) : Observable<{success: boolean, data: Client[]}> { 
-    let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Client[]}>(this.URL+'getClientByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
-  }
-
-
   getProducts(): Observable<{success: boolean, data: Product[]}> {
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: Product[]}>(this.URL +'getproducts' , { headers: headers });
   }
-
-  getProductById(id: number) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
-    let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
-  }
-
 }
