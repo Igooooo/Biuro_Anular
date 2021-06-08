@@ -45,14 +45,14 @@ export class SalesService {
     return this.http.put<Sale>(this.URL+'updateSaleById', data , { headers: headers })
   }
 
-  getSale(id: number) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
+  getSale(id: number) : Observable<{success: boolean, data: Sale}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Sale}>(this.URL+'getSaleByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
   }
 
-  getSaleByFilter(client_id: number) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
+  getSaleByFilter(clientId: number) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${client_id}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${clientId}` , { headers: headers }) //samo formatuje na JSON
   }
 
   getClients(): Observable<{success: boolean, data: Client[]}> {

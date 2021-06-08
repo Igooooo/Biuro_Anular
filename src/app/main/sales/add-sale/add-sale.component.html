@@ -7,14 +7,14 @@
                 <label>Produkt</label><br>
                 <button class="icon bi bi-bag-plus-fill" (click)="openDialogProduct($event)"></button> {{this?.productIdFromDiag}} {{this?.productNameFromDiag}}
                 <!--
-                <input class="form-control" formControlName="product_id" type="text" placeholder="produkt"> -->
-                <p class = "alert-danger" *ngIf="saleForm.controls['product_id'].invalid && saleForm.controls['product_id'].dirty && saleForm.controls['product_id'].touched">Wybierz produkt!</p> 
+                <input class="form-control" formControlName="productId" type="text" placeholder="produkt"> -->
+                <p class = "alert-danger" *ngIf="saleForm.controls['productId'].invalid && saleForm.controls['productId'].dirty && saleForm.controls['productId'].touched">Wybierz produkt!</p> 
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <label>Klient</label><br>
                 <button class="icon bi bi-person-plus-fill" (click)="openDialogClient($event)"></button> {{this?.clientIdFromDiag}} {{this?.clientNameFromDiag}} {{this?.clientSurnameFromDiag}} 
-                <!-- <input class="form-control" formControlName="client_id" type="text"  placeholder="klient"> -->
-                <p class = "alert-danger" *ngIf="saleForm.controls['client_id'].invalid && saleForm.controls['client_id'].dirty && saleForm.controls['client_id'].touched">Wybierz Klienta!</p> 
+                <!-- <input class="form-control" formControlName="clientId" type="text"  placeholder="klient"> -->
+                <p class = "alert-danger" *ngIf="saleForm.controls['clientId'].invalid && saleForm.controls['clientId'].dirty && saleForm.controls['clientId'].touched">Wybierz Klienta!</p> 
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label>Cena</label><br>

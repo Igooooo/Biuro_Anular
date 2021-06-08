@@ -51,13 +51,13 @@ toggleFieldTextType() {
 
   createFormSale() : void {
     this.saleForm = this.formBuilder.group({
-      product_id: ['', Validators.required],
-      client_id: ['', Validators.required],
       price: ['',Validators.required],
       volumen: ['',Validators.required],
       isPay: [this.typeOfPayDefault,Validators.required],
       other_1: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(250)])],
-      other_2: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(250)])]         
+      other_2: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(250)])],
+      productId: ['', Validators.required],
+      clientId: ['', Validators.required],         
   });
     this.cd.markForCheck();
   }
@@ -108,7 +108,7 @@ toggleFieldTextType() {
       this.clientIdFromDiag = result.id;
       this.clientNameFromDiag = result.name;
       this.clientSurnameFromDiag = result.surname;
-      this.saleForm.controls['client_id'].setValue(this.clientIdFromDiag)
+      this.saleForm.controls['clientId'].setValue(this.clientIdFromDiag)
     });
     console.log('ID: ' + this.clientIdFromDiag)
   }
@@ -123,7 +123,7 @@ toggleFieldTextType() {
     subscribe(result => {
       this.productIdFromDiag = result.id;
       this.productNameFromDiag = result.name
-      this.saleForm.controls['product_id'].setValue(this.productIdFromDiag)
+      this.saleForm.controls['productId'].setValue(this.productIdFromDiag)
     });
   }
 }

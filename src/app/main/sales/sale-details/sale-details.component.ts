@@ -14,7 +14,7 @@ import { SalesService } from '../sales.service';
 export class SaleDetailsComponent implements OnInit {
 
   saleForm = new FormGroup({});
-  sale: Sale[] = [];
+  sale?: Sale;
   isPayDefault = isPay.tak ;
   isPay = Object.values(isPay);
 
@@ -37,8 +37,8 @@ export class SaleDetailsComponent implements OnInit {
   createFormSale() : void {
     this.saleForm = this.formBuilder.group({
       id: [''],
-      product_id: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
-      client_id: ['',Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
+      productId: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      clientId: ['',Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       price:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       isPay: [this.isPayDefault,Validators.required],
       volumen: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
@@ -63,10 +63,9 @@ export class SaleDetailsComponent implements OnInit {
     const id = +this.route.snapshot.params['id']; 
     this.saleService.getSale(id).subscribe( // przekazujemy id i zostajemy subscriberami
       (sale) => {
-      console.log('sale'+ JSON.stringify(sale.data));
       this.sale = sale.data;
       this.saleForm.patchValue(this.sale);
-      console.log('Odebrany JSON'+ JSON.stringify(this.sale));
+      console.log('Odebrany JSON'+ JSON.stringify(this.sale.id));
       }, err => {
         console.log('err' + err);
       }) 

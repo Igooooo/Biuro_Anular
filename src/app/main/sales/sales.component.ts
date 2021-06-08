@@ -38,7 +38,7 @@ export class SalesComponent implements OnInit {
 
   createFormSale() : void {
     this.saleForm = this.formBuilder.group({
-      client_id: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
+      clientId: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
     })
   }
 
@@ -46,6 +46,8 @@ export class SalesComponent implements OnInit {
     this.saleService.getSales().subscribe(
       (sales) => {
         this.sales = sales.data
+        this.sales[0].product.name
+        console.log(JSON.stringify(this.sales[0].product.name))
       }, err => {
         this.error = true;
         console.log('błąd w saleach ' + JSON.stringify(err));
@@ -54,7 +56,7 @@ export class SalesComponent implements OnInit {
   }
 
   loadSaleByFilter() : void {
-    this.saleService.getSaleByFilter(this.saleForm.controls.client_id.value).subscribe(
+    this.saleService.getSaleByFilter(this.saleForm.controls.clientId.value).subscribe(
       (sales) => {
       this.sales = sales.data;
       }, err => {

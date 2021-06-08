@@ -1,7 +1,7 @@
 <!-- <p class="data-header">Edit {{ sale.name }}</p> -->
  
 <div class="container justify-content-center">
-    <p class="data-header">Edytuj sprzedaż: <strong> Produkt {{saleForm.controls.product_id.value }} i Klient {{saleForm.controls.client_id.value }}</strong></p>
+    <p class="data-header">Edytuj sprzedaż: <strong> Produkt: </strong> {{sale?.product?.name }}  <strong> Klient: </strong> {{ sale?.client?.name }} {{ sale?.client?.surname }}</p>
     <form [formGroup] = "saleForm" > 
         <div class="row form-group">
             <div class="col-lg-4 col-md-6 col-sm-12">

@@ -6,8 +6,8 @@
         <form [formGroup] = "saleForm"> 
             <div class="row form-group">
                 <div class="col-lg-3">
-                    <input class="form-control" formControlName="client_id" type="text"  placeholder="id klienta">
-                    <p class = "alert-danger" *ngIf="saleForm.controls['client_id'].invalid && saleForm.controls['client_id'].dirty && saleForm.controls['id'].touched">Podaj id klienta!</p>
+                    <input class="form-control" formControlName="clientId" type="text"  placeholder="id klienta">
+                    <p class = "alert-danger" *ngIf="saleForm.controls['clientId'].invalid && saleForm.controls['clientId'].dirty && saleForm.controls['id'].touched">Podaj id klienta!</p>
                 </div>
                 <div class="col-lg-12"><br>
                     <button class="btn btn-primary float-left"  (click)="loadSaleByFilter()"[disabled]="!saleForm.valid">Szukaj</button><!-- type="submit" value="Submit" -->
@@ -40,11 +40,11 @@
                             <th>Usuń</th> 
                         </tr>
                     </thead>
-                    <tbody >
-                        <tr  class="form-group" *ngFor=" let sale of sales | slice:limit_show_sale_min:limit_show_sale_max; let i = index" (click)="goToSaleDetails(sale)" >
+                    <tbody>
+                        <tr  class="form-group" *ngFor=" let sale of sales | slice:limit_show_sale_min:limit_show_sale_max; let i = index" (click)="goToSaleDetails(sale)">  
                             <td csImportant> {{ sale?.id}} </td> 
-                            <td csImportant> {{ sale?.product_id }} </td>
-                            <td> {{ sale?.client_id }} </td>
+                            <td csImportant> {{  sale?.product?.name  }} </td>
+                            <td> {{ sale?.client?.name }} {{ sale?.client?.surname }}</td>
                             <td> {{ sale?.price }} </td>
                             <td> {{ sale?.isPay }} </td> 
                             <td> {{ sale?.volumen }} </td> 
