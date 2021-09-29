@@ -41,32 +41,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12"><br>
-                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateUser()"[disabled]="!userForm.valid">Update</button>
+                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateUser()"[disabled]="!userForm.valid">Aktualizuj</button>
             </div>
         </div>
     </form>  
 </div>
-
-<p>
-    1. Form Status: {{ userForm.status }}
-    <br>
-    2. Wartość: 
-    {{ userForm.controls.name.value }}
-    {{ userForm.controls.surname.value }}
-    {{ userForm.controls.pesel.value }}
-    {{ userForm.controls.city.value }}
-    {{ userForm.controls.street.value }}
-    {{ userForm.controls.phone.value }}
-    {{ userForm.controls.email.value }}
-    {{ userForm.controls.type.value }}
-    <br>
-    3. Dotyk: -> zmiana przy przejsciu: {{ userForm.controls.name.touched }}
-    <br>
-    4. Pierwszy raz -> zmiana przy pierwszej literze: {{ userForm.controls.name.dirty}}
-    <br>
-    {{!userForm.controls['name'].invalid}} i {{ userForm.controls['name'].dirty }} i  {{ userForm.controls['name'].touched }} 
-    <br> 
-    całość {{ !userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched }} 
-    <br>
-    5. type {{ userForm.controls.type.value }}
-    </p>
