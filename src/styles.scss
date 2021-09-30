@@ -12,3 +12,48 @@
 .background, html { 
     //background-image: url(./assets/img/sand.jpg);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 20px;
+    width: 100%;
+  }
+  
+  .main-div {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  mat-card-title, mat-card-subtitle {
+    text-align: center;
+  }
+  
+  mat-form-field {
+    width: 100px;
+  }
+  
+  .actions-button, .applyFilter {
+    justify-content: center;
+    text-align: center;
+  }
+
+
+.form-field {
+  margin-right: 10px;
+}
+
+.button {
+  text-align: center;
+  
+}
+
+.container .form-field {
+  width: 350px;
+}
+

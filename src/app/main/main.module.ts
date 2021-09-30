@@ -36,7 +36,10 @@ import { DialogRemoveSaleComponent } from './sales/dialog-remove-sale/dialog-rem
 import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
 import { DialogSearchClientSaleComponent } from './sales/dialog-search-client-sale/dialog-search-client-sale.component';
 import { DialogSearchProductSaleComponent } from './sales/dialog-search-product-sale/dialog-search-product-sale.component';
-
+import { MatTableModule } from '@angular/material/table' 
+import { MatCardModule } from '@angular/material/card'
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatPaginatorModule} from '@angular/material/paginator'
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent, AddSaleComponent, DialogRemoveSaleComponent, SaleDetailsComponent, DialogSearchClientSaleComponent, DialogSearchProductSaleComponent],
   imports: [
@@ -54,6 +57,10 @@ import { DialogSearchProductSaleComponent } from './sales/dialog-search-product-
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
+    MatTableModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatPaginatorModule,
     ToastrModule.forRoot(),
   ],
   exports: [

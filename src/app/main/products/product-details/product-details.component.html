@@ -1,39 +1,34 @@
-<!-- <p class="data-header">Edit {{ product.name }}</p> -->
- 
-<div class="container justify-content-center">
-    <p class="data-header">Edytuj produkt: <strong> {{ productForm.controls.name.value }} </strong></p>
-    <form [formGroup] = "productForm" > 
-        <div class="row form-group">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Ilość</label><br>
-                <input class="form-control" formControlName="volume" type="text"  placeholder="volume"> 
-                <p class = "alert-danger" *ngIf="productForm.controls['volume'].invalid">Podaj ilość!</p>  
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Dostawca</label><br>
-                <input class="form-control" formControlName="provider" type="text"  placeholder="provider">
-                <p class = "alert-danger" *ngIf="productForm.controls['provider'].invalid">Podaj dostawcę!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Inne</label><br>
-                <input class="form-control" formControlName="other" type="text"  placeholder="other">
-                <p class = "alert-danger" *ngIf="productForm.controls['other'].invalid ">Podaj inne!</p>   
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Type</label><br>
-                <select class="form-control" formControlName="type"> 
-                    <option *ngFor="let type of typeOfProduct" [value] = type >
+<div class="container">
+    <p class="data-header">Dodaj produkt</p>
+    <div class="form-container">
+        <form [formGroup]="productForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ilość</mat-label>
+                <input matInput formControlName="volume" required>
+                <mat-error *ngIf="productForm.controls['volume'].invalid && productForm.controls.volume.touched && productForm.controls.volume.invalid">Podaj ilość!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Dostawca</mat-label>
+                <input matInput formControlName="provider" required>
+                <mat-error *ngIf="productForm.controls['provider'].invalid && productForm.controls.provider.touched && productForm.controls.provider.invalid">Podaj dostawcę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Inne</mat-label>
+                <input matInput formControlName="other" required>
+                <mat-error *ngIf="productForm.controls['other'].invalid && productForm.controls.other.touched && productForm.controls.other.invalid">Wypełnij pole!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="type"> 
+                    <mat-option  *ngFor="let type of typeOfProduct" [value] = type >
                         {{ type }}
-                    </option> 
-                </select>
-                <p class = "alert-danger" *ngIf="productForm.controls['type'].invalid">Uzupełnij!</p>
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="productForm.controls['type'].invalid && productForm.controls.type.touched && productForm.controls.type.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="updateProduct()"[disabled]="!productForm.valid">Aktualizuj</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12"><br>
-                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateProduct()"[disabled]="!productForm.valid">Aktualizuj</button>
-            </div>
-        </div>
-    </form>  
+        </form>
+    </div>
 </div>
-

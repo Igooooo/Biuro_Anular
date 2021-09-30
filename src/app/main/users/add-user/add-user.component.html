@@ -1,83 +1,63 @@
- 
-<div class="container justify-content-center">
+<div class="container">
     <p class="data-header">Dodaj użytkownika</p>
-    <form [formGroup] = "userForm" > 
-        <div class="row form-group">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Imię</label><br>
-                <input class="form-control" formControlName="name" type="text" placeholder="imię">
-                <p class = "alert-danger" *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].dirty && userForm.controls['name'].touched">Podaj imie!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Surname</label><br>
-                <input class="form-control" formControlName="surname" type="text"  placeholder="nazwisko">
-                <p class = "alert-danger" *ngIf="userForm.controls['surname'].invalid && userForm.controls['surname'].dirty && userForm.controls['surname'].touched">Podaj nazwisko!</p> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>pesel</label><br>
-                <input class="form-control" formControlName="pesel" type="text"  placeholder="pesel"> 
-                <p class = "alert-danger" *ngIf="userForm.controls['pesel'].invalid && userForm.controls['pesel'].dirty && userForm.controls['pesel'].touched">Podaj pesel!</p>  
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Misto</label><br>
-                <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
-                <p class = "alert-danger" *ngIf="userForm.controls['city'].invalid && userForm.controls['city'].dirty && userForm.controls['city'].touched">Podaj misto!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Ulica</label><br>
-                <input class="form-control" formControlName="street" type="text"  placeholder="ulica">
-                <p class = "alert-danger" *ngIf="userForm.controls['street'].invalid && userForm.controls['street'].dirty && userForm.controls['street'].touched">Podaj ulicę!</p>   
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Telefon</label><br>
-                <input class="form-control" formControlName="phone" type="text"  placeholder="telefon"> 
-                <p class = "alert-danger" *ngIf="userForm.controls['phone'].invalid && userForm.controls['phone'].dirty && userForm.controls['phone'].touched">Błędny numer telefonu!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>E-Mail</label><br>
-                <input class="form-control" formControlName="email" type="text" placeholder="e-mail">
-                <p class = "alert-danger" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].dirty && userForm.controls['email'].touched">Błędny e-mail!</p>    
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Hasło</label><br>
-                <div class="input-group">
-                    <input class="form-control" formControlName="password"  [type]="fieldTextType ? 'text' : 'password'" placeholder="hasło"/>
-                    <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i
-                            class="fa"
-                            [ngClass]="{
-                              'fa-eye-slash': !fieldTextType,
-                              'fa-eye': fieldTextType
-                            }"
-                            (click)="toggleFieldTextType()"
-                          ></i>
-                        </span>
-                    </div>
-                </div>
-                <p class = "alert-danger" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].dirty && userForm.controls['password'].touched">Wprowadź odpowiednie hasło!</p>
-            </div>
-
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Type</label><br>
-                <select class="form-control" formControlName="type"> 
-                    <option  *ngFor="let type of typeOfUser" [value] = type >
+    <div class="form-container">
+        <form [formGroup]="userForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Imię</mat-label>
+                <input matInput formControlName="name" required>
+                <mat-error *ngIf="userForm.controls['name'].invalid &&  userForm.controls.name.touched && userForm.controls.name.invalid">Podaj imie!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput formControlName="surname" required>
+                <mat-error *ngIf="userForm.controls['surname'].invalid && userForm.controls.surname.touched && userForm.controls.surname.invalid">Podaj nazwisko!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>PESEL</mat-label>
+                <input matInput formControlName="pesel" required>
+                <mat-error *ngIf="userForm.controls['pesel'].invalid && userForm.controls.pesel.touched && userForm.controls.pesel.invalid">Podaj pesel!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Miasto</mat-label>
+                <input matInput formControlName="city" required>
+                <mat-error *ngIf="userForm.controls['city'].invalid && userForm.controls.city.touched && userForm.controls.city.invalid">Podaj miasto!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="street" required>
+                <mat-error *ngIf="userForm.controls['street'].invalid && userForm.controls.street.touched && userForm.controls.street.invalid">Podaj ulicę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Numer telefonu</mat-label>
+                <input matInput formControlName="phone" required>
+                <mat-error *ngIf="userForm.controls['phone'].invalid && userForm.controls.phone.touched && userForm.controls.phone.invalid">Podaj numer telefonu!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls.email.touched && userForm.controls.email.invalid">Błędny e-mail!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Hasło</mat-label>
+                <input matInput formControlName="password" type="password" matInput [type]="hide ? 'password' : 'text'">
+                <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </span>
+                <mat-error *ngIf="userForm.controls['password'].invalid && userForm.controls.password.touched && userForm.controls.password.invalid">Wprowadź odpowiednie hasło!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="type"> 
+                    <mat-option  *ngFor="let type of typeOfUser" [value] = type >
                         {{ type }}
-                    </option> 
-                </select>
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="userForm.controls['type'].invalid && userForm.controls.type.touched && userForm.controls.type.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button type="reset">Resetuj</button>
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="addUser()"[disabled]="!userForm.valid">Dodaj</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12"><br>
-                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="addUser()"[disabled]="!userForm.valid">Potwierdz</button>
-                <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Resetuj</button>
-            </div>
-        </div>
-    </form>  
+        </form>
+    </div>
 </div>
-  
-
-
- 

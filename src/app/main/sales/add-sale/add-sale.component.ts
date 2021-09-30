@@ -110,7 +110,6 @@ toggleFieldTextType() {
       this.clientSurnameFromDiag = result.surname;
       this.saleForm.controls['clientId'].setValue(this.clientIdFromDiag)
     });
-    console.log('ID: ' + this.clientIdFromDiag)
   }
 
   openDialogProduct(event: any) : void {

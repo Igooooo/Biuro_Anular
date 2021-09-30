@@ -1,4 +1,4 @@
-<!-- <p class="data-header">Edit {{ user.name }}</p> -->
+<!-- 
  
 <div class="container justify-content-center">
     <p class="data-header">Edytuj użytkownika: <strong>{{ userForm.controls.name.value }}  {{ userForm.controls.surname.value }} </strong> </p>
@@ -45,4 +45,50 @@
             </div>
         </div>
     </form>  
+</div>
+-->
+
+<div class="container">
+    <p class="data-header">Edytuj użytkownika: <strong>{{ userForm.controls.name.value }}  {{ userForm.controls.surname.value }} </strong> </p>
+    <div class="form-container">
+        <form [formGroup]="userForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>PESEL</mat-label>
+                <input matInput formControlName="pesel" required>
+                <mat-error *ngIf="userForm.controls['pesel'].invalid && userForm.controls.pesel.touched && userForm.controls.pesel.invalid">Podaj pesel!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Miasto</mat-label>
+                <input matInput formControlName="city" required>
+                <mat-error *ngIf="userForm.controls['city'].invalid && userForm.controls.city.touched && userForm.controls.city.invalid">Podaj miasto!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="street" required>
+                <mat-error *ngIf="userForm.controls['street'].invalid && userForm.controls.street.touched && userForm.controls.street.invalid">Podaj ulicę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Numer telefonu</mat-label>
+                <input matInput formControlName="phone" required>
+                <mat-error *ngIf="userForm.controls['phone'].invalid && userForm.controls.phone.touched && userForm.controls.phone.invalid">Podaj numer telefonu!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls.email.touched && userForm.controls.email.invalid">Błędny e-mail!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="type"> 
+                    <mat-option  *ngFor="let type of typeOfUser" [value] = type >
+                        {{ type }}
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="userForm.controls['type'].invalid && userForm.controls.type.touched && userForm.controls.type.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="updateUser()"[disabled]="!userForm.valid">Aktualizuj</button>
+            </div>
+        </form>
+    </div>
 </div>

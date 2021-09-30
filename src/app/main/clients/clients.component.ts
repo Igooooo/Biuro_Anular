@@ -1,8 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { Client } from 'src/app/shared/model/client';
 import { ClientService } from './client.service';
 import { DialogRemoveClientComponent } from './dialog-remove-client/dialog-remove-client.component';
@@ -19,7 +22,25 @@ export class ClientsComponent implements OnInit {
   limit_show_client_max = 10;
   clients: Client[] = [];
   clientForm = new FormGroup({});
-  
+
+
+  dataSource?: any;
+  displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
+  changes = new Subject<void>();
+  // get refereence to paginator
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  // For internationalization, the `$localize` function from
+  // the `@angular/localize` package can be used.
+  /*
+  firstPageLabel = $localize`Pierwsza strona`;
+  itemsPerPageLabel = $localize`Ilość:`;
+  lastPageLabel = $localize`Last page`;
+  // You can set labels to an arbitrary string too, or dynamically compute
+  // it through other third-party internationalization libraries.
+  nextPageLabel = 'Next page';
+  previousPageLabel = 'Previous page';
+  */
+ 
   constructor(private cd: ChangeDetectorRef,
               private clientService: ClientService,
               private router: Router,
@@ -45,6 +66,8 @@ export class ClientsComponent implements OnInit {
     this.clientService.getClients().subscribe(
       (clients) => {
         this.clients = clients.data
+        this.dataSource = new MatTableDataSource(clients.data);
+        this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true;
         console.log('błąd w Kliencie ' + JSON.stringify(err));
@@ -78,26 +101,6 @@ export class ClientsComponent implements OnInit {
   reset() : void {
     this.clientForm.reset();
   }
-  
-  next() : void {
-    if (this.limit_show_client_min + 10 < this.clients.length){
-      this.limit_show_client_min=this.limit_show_client_min+10
-      this.limit_show_client_max=this.limit_show_client_max+10
-    } else {
-      this.limit_show_client_min=this.limit_show_client_min
-      this.limit_show_client_max=this.limit_show_client_max
-    }
-  }
-
-  back() : void {
-    if (this.limit_show_client_min - 10 >= 0){
-      this.limit_show_client_min=this.limit_show_client_min-10
-      this.limit_show_client_max=this.limit_show_client_max-10
-    } else {
-      this.limit_show_client_min=this.limit_show_client_min
-      this.limit_show_client_max=this.limit_show_client_max
-    }
-  }  
 
   refresh() : void {
     this.getClients();
@@ -126,5 +129,11 @@ export class ClientsComponent implements OnInit {
         this.removeClient(client);
       }     
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue.trim().toLowerCase())
   }
 }

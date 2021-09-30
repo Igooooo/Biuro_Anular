@@ -1,5 +1,44 @@
-<!-- <p class="data-header">Edit {{ sale.name }}</p> -->
- 
+<div class="container">
+    <p class="data-header">Dodaj użytkownika</p>
+    <div class="form-container">
+        <form [formGroup]="saleForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Cena</mat-label>
+                <input matInput formControlName="price" required>
+                <mat-error *ngIf="saleForm.controls['price'].invalid && saleForm.controls.price.touched && saleForm.controls.price.invalid">Podaj cene!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ilość</mat-label>
+                <input matInput formControlName="volumen" required>
+                <mat-error *ngIf="saleForm.controls['volumen'].invalid && saleForm.controls.volumen.touched && saleForm.controls.volumen.invalid">Podaj ilość!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Inne 1</mat-label>
+                <input matInput formControlName="other_1" required>
+                <mat-error *ngIf="saleForm.controls['other_1'].invalid && saleForm.controls.other_1.touched && saleForm.controls.other_1.invalid">Wypełnij pole!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Inne 2</mat-label>
+                <input matInput formControlName="other_2" required>
+                <mat-error *ngIf="saleForm.controls['other_2'].invalid && saleForm.controls.other_2.touched && saleForm.controls.other_2.invalid">Wypełnij pole!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="isPay"> 
+                    <mat-option  *ngFor="let type of isPay" [value] = type >
+                        {{ type }}
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="saleForm.controls['isPay'].invalid && saleForm.controls.isPay.touched && saleForm.controls.isPay.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="updateSale()"[disabled]="!saleForm.valid">Aktualizuj</button>
+            </div>
+        </form>
+    </div>
+</div> 
+
+<!--
 <div class="container justify-content-center">
     <p class="data-header">Edytuj sprzedaż: <strong> Produkt: </strong> {{sale?.product?.name }}  <strong> Klient: </strong> {{ sale?.client?.name }} {{ sale?.client?.surname }}</p>
     <form [formGroup] = "saleForm" > 
@@ -41,4 +80,7 @@
         </div>
     </form>  
 </div>
+-->
+ 
+
 

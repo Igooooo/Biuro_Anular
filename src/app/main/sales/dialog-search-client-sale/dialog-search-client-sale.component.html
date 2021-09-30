@@ -1,8 +1,30 @@
 <h2 mat-dialog-title>Wybierz użytkownika</h2>
-<mat-dialog-content>Czy chcesz dodoać klienta?</mat-dialog-content>
+<mat-dialog-content>
+    <mat-form-field appearance="standard" class="applyFilter">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wpisz szukane dane..." #input>
+    </mat-form-field>
+</mat-dialog-content>
 <mat-dialog-actions class="row form-group">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Imię</th>
+            <td mat-button [mat-dialog-close]=element  mat-cell *matCellDef="let element"> {{element?.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef>Nazwisko</th>
+            <td mat-button  [mat-dialog-close]=element mat-cell *matCellDef="let element" > {{element.surname}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="clients?.length" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page"></mat-paginator>
+
+<!-- 
+
+
+
         <div class="col-sm-12">
-            <table class="cs-table table table-striped" *ngIf="clients && clients.length > 0; else noClientsInfo"> <!-- *ngIF="cars.length > 0; else noCarsInfo | jak nie to pokaż blok noCarsInfo-->
+            <table class="cs-table table table-striped" *ngIf="clients && clients.length > 0; else noClientsInfo"> <
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -30,4 +52,5 @@
                 </div>
             </ng-template>
         </div> 
+        -->
 </mat-dialog-actions>
