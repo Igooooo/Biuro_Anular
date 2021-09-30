@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +7,9 @@ import { ProductService } from './product.service';
 import { productType } from 'src/app/shared/enums/productType';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogRemoveProductComponent } from './dialog-remove-product/dialog-remove-product.component';
+import { Subject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-products',
@@ -19,6 +22,24 @@ export class ProductsComponent implements OnInit {
   limit_show_product_max = 10;
   products: Product[] = [];
   productForm = new FormGroup({});
+
+  dataSource?: any;
+  displayedColumns: string[] = ['name', 'type', 'volume', 'provider', 'other', 'remove'];
+  changes = new Subject<void>();
+  // get refereence to paginator
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  // For internationalization, the `$localize` function from
+  // the `@angular/localize` package can be used.
+  /*
+  firstPageLabel = $localize`Pierwsza strona`;
+  itemsPerPageLabel = $localize`Ilość:`;
+  lastPageLabel = $localize`Last page`;
+  // You can set labels to an arbitrary string too, or dynamically compute
+  // it through other third-party internationalization libraries.
+  nextPageLabel = 'Next page';
+  previousPageLabel = 'Previous page';
+  */
+
   
   constructor(private cd: ChangeDetectorRef,
               private productsService: ProductService,
@@ -43,6 +64,8 @@ export class ProductsComponent implements OnInit {
     this.productsService.getProducts().subscribe(
       (products) => {
         this.products = products.data
+        this.dataSource = new MatTableDataSource(products.data);
+        this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true;
         console.log('błąd w productach ' + JSON.stringify(err));
@@ -77,25 +100,6 @@ export class ProductsComponent implements OnInit {
     this.productForm.reset();
   }
   
-  next() : void {
-    if (this.limit_show_product_min + 10 < this.products.length){
-      this.limit_show_product_min=this.limit_show_product_min+10
-      this.limit_show_product_max=this.limit_show_product_max+10
-    } else {
-      this.limit_show_product_min=this.limit_show_product_min
-      this.limit_show_product_max=this.limit_show_product_max
-    }
-  }
-
-  back() : void {
-    if (this.limit_show_product_min - 10 >= 0){
-      this.limit_show_product_min=this.limit_show_product_min-10
-      this.limit_show_product_max=this.limit_show_product_max-10
-    } else {
-      this.limit_show_product_min=this.limit_show_product_min
-      this.limit_show_product_max=this.limit_show_product_max
-    }
-  }  
 
   refresh() : void {
     this.getProducts();
@@ -124,6 +128,12 @@ export class ProductsComponent implements OnInit {
         this.removeProduct(product);
       }     
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue.trim().toLowerCase())
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="row form-group flex justify-content-center">
+<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" style="justify-content: center;" class="main-menu">
     <app-main-menu [routerLink]="['/users']" >
         <p title>Użytkownicy</p>
         <p class="icon_menu bi bi-people-fill" image></p>
@@ -20,4 +20,5 @@
         <p class="icon_menu bi bi-graph-up" image></p>
     </app-main-menu>
 </div>
+
 

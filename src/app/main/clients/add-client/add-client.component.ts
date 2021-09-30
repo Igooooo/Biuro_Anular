@@ -14,6 +14,7 @@ import { ClientService } from '../client.service';
 export class AddClientComponent implements OnInit {
 
   clientForm = new FormGroup({});
+
   
   // Typ klienta
   typeOfClientDefault = clientType.normalny ;

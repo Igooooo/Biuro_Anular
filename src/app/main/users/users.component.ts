@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../shared/model/user';
 import { UsersService } from './users.service';
@@ -6,6 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog} from '@angular/material/dialog';
 import { DialogRemoveUserComponent } from './dialog-remove-user/dialog-remove-user.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import {MatPaginator, MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +22,26 @@ export class UsersComponent implements OnInit {
   limit_show_user_max = 10;
   users: User[] = [];
   userForm = new FormGroup({});
+
+  dataSource?: any;
+  displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
+  changes = new Subject<void>();
+  // get refereence to paginator
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  // For internationalization, the `$localize` function from
+  // the `@angular/localize` package can be used.
+  /*
+  firstPageLabel = $localize`Pierwsza strona`;
+  itemsPerPageLabel = $localize`Ilość:`;
+  lastPageLabel = $localize`Last page`;
+  // You can set labels to an arbitrary string too, or dynamically compute
+  // it through other third-party internationalization libraries.
+  nextPageLabel = 'Next page';
+  previousPageLabel = 'Previous page';
+  */
+
   
+
   constructor(private cd: ChangeDetectorRef,
               private usersService: UsersService,
               private router: Router,
@@ -33,7 +55,7 @@ export class UsersComponent implements OnInit {
     console.log("jestem w user.componetns")
   }
 
-  createFormUser() : void {
+   createFormUser() : void {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
       surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
@@ -45,6 +67,8 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers().subscribe(
       (users) => {
         this.users = users.data
+        this.dataSource = new MatTableDataSource(users.data);
+        this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true;
         console.log('błąd w userach ' + JSON.stringify(err));
@@ -78,6 +102,7 @@ export class UsersComponent implements OnInit {
   reset() : void {
     this.userForm.reset();
   }
+  
   
   next() : void {
     if (this.limit_show_user_min + 10 < this.users.length){
@@ -127,4 +152,11 @@ export class UsersComponent implements OnInit {
       }     
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue.trim().toLowerCase())
+  }
+
 }

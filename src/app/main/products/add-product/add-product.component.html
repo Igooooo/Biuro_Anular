@@ -1,46 +1,44 @@
- 
-<div class="container justify-content-center">
+<div class="container">
     <p class="data-header">Dodaj produkt</p>
-    <form [formGroup] = "productForm" > 
-        <div class="row form-group">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Nazwa</label><br>
-                <input class="form-control" formControlName="name" type="text" placeholder="imię">
-                <p class = "alert-danger" *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].dirty && productForm.controls['name'].touched">Podaj nazwę!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Ilość</label><br>
-                <input class="form-control" formControlName="volume" type="text"  placeholder="ilość"> 
-                <p class = "alert-danger" *ngIf="productForm.controls['volume'].invalid && productForm.controls['volume'].dirty && productForm.controls['volume'].touched">Podaj ilość!</p>  
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Dostawca</label><br>
-                <input class="form-control" formControlName="provider" type="text"  placeholder="dostawca">
-                <p class = "alert-danger" *ngIf="productForm.controls['provider'].invalid && productForm.controls['provider'].dirty && productForm.controls['provider'].touched">Podaj dostawcę!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Inne</label><br>
-                <input class="form-control" formControlName="other" type="text"  placeholder="inne">
-                <p class = "alert-danger" *ngIf="productForm.controls['other'].invalid && productForm.controls['other'].dirty && productForm.controls['other'].touched">Podaj inne!</p>   
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Type</label><br>
-                <select class="form-control" formControlName="type"> 
-                    <option  *ngFor="let type of typeOfProduct" [value] = type >
+    <div class="form-container">
+        <form [formGroup]="productForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Imię</mat-label>
+                <input matInput formControlName="name" required>
+                <mat-error *ngIf="productForm.controls['name'].invalid &&  productForm.controls.name.touched && productForm.controls.name.invalid">Podaj nazwę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ilość</mat-label>
+                <input matInput formControlName="volume" required>
+                <mat-error *ngIf="productForm.controls['volume'].invalid && productForm.controls.volume.touched && productForm.controls.volume.invalid">Podaj ilość!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Dostawca</mat-label>
+                <input matInput formControlName="provider" required>
+                <mat-error *ngIf="productForm.controls['provider'].invalid && productForm.controls.provider.touched && productForm.controls.provider.invalid">Podaj dostawcę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Inne</mat-label>
+                <input matInput formControlName="other" required>
+                <mat-error *ngIf="productForm.controls['other'].invalid && productForm.controls.other.touched && productForm.controls.other.invalid">Wypełnij pole!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="type"> 
+                    <mat-option  *ngFor="let type of typeOfProduct" [value] = type >
                         {{ type }}
-                    </option> 
-                </select>
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="productForm.controls['type'].invalid && productForm.controls.type.touched && productForm.controls.type.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button type="reset">Resetuj</button>
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="addProduct()"[disabled]="!productForm.valid">Dodaj</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12"><br>
-                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="addProduct()"[disabled]="!productForm.valid">Potwierdz</button>
-                <button class="btn btn-primary float-right" value="Reset" (click)="reset()">Resetj</button>
-            </div>
-        </div>
-    </form>  
+        </form>
+    </div>
 </div>
-  
+
 
 
     

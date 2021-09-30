@@ -1,59 +1,54 @@
-<!-- <p class="data-header">Edit {{ client.name }}</p> -->
- 
-<div class="container justify-content-center">
-    <p class="data-header">Edytuj klienta: <strong>{{ clientForm.controls.name.value }}  {{ clientForm.controls.surname.value }} </strong> </p>
-    <form [formGroup] = "clientForm" > 
-        <div class="row form-group">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Telefon</label><br>
-                <input class="form-control" formControlName="phone" type="text"  placeholder="telefon"> 
-                <p class = "alert-danger" *ngIf="clientForm.controls['phone'].invalid">Podaj numer telefonu!</p>  
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>E-Mail</label><br>
-                <input class="form-control" formControlName="email" type="text"  placeholder="e-mail">
-                <p class = "alert-danger" *ngIf="clientForm.controls['email'].invalid">Podaj e-mail!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Miasto</label><br>
-                <input class="form-control" formControlName="city" type="text"  placeholder="miasto">
-                <p class = "alert-danger" *ngIf="clientForm.controls['city'].invalid ">Podaj miasto!</p>   
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Ulica</label><br>
-                <input class="form-control" formControlName="street" type="text"  placeholder="ulica">
-                <p class = "alert-danger" *ngIf="clientForm.controls['street'].invalid ">Podaj ulicę!</p>   
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>PESEl lub NIP</label><br>
-                <input class="form-control" formControlName="peselOrNIP" type="text"  placeholder="PESEL lub NIP"> 
-                <p class = "alert-danger" *ngIf="clientForm.controls['peselOrNIP'].invalid">Błędny numer PESEL lub NIP!</p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Dokument</label><br>
-                <input class="form-control" formControlName="documentID" type="text" placeholder="dokument">
-                <p class = "alert-danger" *ngIf="clientForm.controls['documentID'].invalid">Błędny dokument!</p>    
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Inne</label><br>
-                <input class="form-control" formControlName="other" type="text" placeholder="inne">
-                <p class = "alert-danger" *ngIf="clientForm.controls['other'].invalid">Uzupełnij!</p>    
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <label>Type</label><br>
-                <select class="form-control" formControlName="type"> 
-                    <option *ngFor="let type of typeOfClient" [value] = type >
+<div class="container">
+    <p class="data-header">Edytuj klienta:</p>
+    <div class="form-container">
+        <form [formGroup]="clientForm">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>PESEL</mat-label>
+                <input matInput formControlName="peselOrNIP" required>
+                <mat-error *ngIf="clientForm.controls['peselOrNIP'].invalid && clientForm.controls.peselOrNIP.touched && clientForm.controls.peselOrNIP.invalid">Podaj pesel!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Miasto</mat-label>
+                <input matInput formControlName="city" required>
+                <mat-error *ngIf="clientForm.controls['city'].invalid && clientForm.controls.city.touched && clientForm.controls.city.invalid">Podaj miasto!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="street" required>
+                <mat-error *ngIf="clientForm.controls['street'].invalid && clientForm.controls.street.touched && clientForm.controls.street.invalid">Podaj ulicę!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Numer telefonu</mat-label>
+                <input matInput formControlName="phone" required>
+                <mat-error *ngIf="clientForm.controls['phone'].invalid && clientForm.controls.phone.touched && clientForm.controls.phone.invalid">Podaj numer telefonu!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="clientForm.controls['email'].invalid && clientForm.controls.email.touched && clientForm.controls.email.invalid">Błędny e-mail!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Dokument ID</mat-label>
+                <input matInput formControlName="documentID" required>
+                <mat-error *ngIf="clientForm.controls['documentID'].invalid && clientForm.controls.documentID.touched && clientForm.controls.documentID.invalid">Podaj dokument!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Inne</mat-label>
+                <input matInput formControlName="other" required>
+                <mat-error *ngIf="clientForm.controls['other'].invalid && clientForm.controls.other.touched && clientForm.controls.other.invalid">Wypełnij pole!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Typ</mat-label>
+                <mat-select class="form-control" formControlName="type"> 
+                    <mat-option  *ngFor="let type of typeOfClient" [value] = type >
                         {{ type }}
-                    </option> 
-                </select>
-                <p class = "alert-danger" *ngIf="clientForm.controls['type'].invalid">Uzupełnij!</p>
+                    </mat-option> 
+                </mat-select>
+                <mat-error *ngIf="clientForm.controls['type'].invalid && clientForm.controls.type.touched && clientForm.controls.type.invalid">Wybierz typ!></mat-error>
+            </mat-form-field>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="updateClient()"[disabled]="!clientForm.valid">Aktualizuj</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12"><br>
-                <button class="btn btn-primary float-right" type="submit" value="Submit" (click)="updateClient()"[disabled]="!clientForm.valid">Aktualizuj</button>
-            </div>
-        </div>
-    </form>  
+        </form>
+    </div>
 </div>
-

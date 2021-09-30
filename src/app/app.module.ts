@@ -27,7 +27,7 @@ import { ClientService } from './main/clients/client.service';
     CoreModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     //ToastrModule.forRoot(),
   ],
   exports: [

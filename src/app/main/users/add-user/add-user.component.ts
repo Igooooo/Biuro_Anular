@@ -15,6 +15,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class AddUserComponent implements OnInit {
 
   userForm = new FormGroup({});
+  hide = true;
   
   // Typ klienta
   typeOfUserDefault = userType.pracownik ;
