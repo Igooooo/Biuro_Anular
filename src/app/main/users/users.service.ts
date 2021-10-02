@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/model/user';
-import { FormBuilder } from '@angular/forms';
-import { SearchUserByNameSurnameCity } from 'src/app/shared/model/searchUserByNameSurnameCity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
- 
+  userSubject$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+
   private URL: string = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) {
@@ -47,7 +47,9 @@ export class UsersService {
 
   getUser(id: number) : Observable<{success: boolean, data: User}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: User}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: User}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }).pipe(tap(user => {
+      this.userSubject$.next(user.data)
+    })) 
   }
 
   // raczej nie zadziała
