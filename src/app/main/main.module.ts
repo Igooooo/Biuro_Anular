@@ -40,6 +40,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatCardModule } from '@angular/material/card'
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatGridListModule} from '@angular/material/grid-list'
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent, AddSaleComponent, DialogRemoveSaleComponent, SaleDetailsComponent, DialogSearchClientSaleComponent, DialogSearchProductSaleComponent],
   imports: [
@@ -61,6 +62,7 @@ import {MatPaginatorModule} from '@angular/material/paginator'
     MatCardModule,
     FlexLayoutModule,
     MatPaginatorModule,
+    MatGridListModule,
     ToastrModule.forRoot(),
   ],
   exports: [

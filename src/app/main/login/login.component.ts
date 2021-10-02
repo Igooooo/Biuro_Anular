@@ -1,12 +1,7 @@
-import { HttpClient, ɵHttpInterceptingHandler } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AppService } from 'src/app/app.service';
-import { User } from 'src/app/shared/model/user';
 import { AuthService } from '../../auth.service';
 import { UsersService } from '../users/users.service';
 
@@ -20,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   userName?: string;
   userSurname?: string;
+  hide = true;
 
   constructor(private router: Router,
               private auth: AuthService,
@@ -39,9 +35,11 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(this.loginForm.getRawValue()).subscribe(
       res => {
         localStorage.setItem('token', res.accessToken)
-        localStorage.setItem('id', JSON.parse(res.id))      
+        localStorage.setItem('id', JSON.parse(res.id)) 
+        /*     
         let id: number = Number(localStorage.getItem('id'))
         this.getUserInfo(id);
+        */
         this.showToasterLogin()
         this.router.navigate(['main'])
       },
