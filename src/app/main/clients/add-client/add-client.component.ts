@@ -14,17 +14,12 @@ import { ClientService } from '../client.service';
 export class AddClientComponent implements OnInit {
 
   clientForm = new FormGroup({});
-
-  
-  // Typ klienta
   typeOfClientDefault = clientType.normalny ;
   typeOfClient = Object.values(clientType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
-
+  fieldTextType?: boolean;
 
   constructor(private cd: ChangeDetectorRef,    
               private clientService: ClientService,
@@ -37,11 +32,9 @@ export class AddClientComponent implements OnInit {
     this.createFormClient();
   }
 
-fieldTextType?: boolean;
-
-toggleFieldTextType() {
-  this.fieldTextType = !this.fieldTextType;
-}
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   createFormClient() : void {
     this.clientForm = this.formBuilder.group({

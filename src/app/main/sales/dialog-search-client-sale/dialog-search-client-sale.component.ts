@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { Client } from 'src/app/shared/model/client';
-import { ClientDialogData } from 'src/app/shared/model/ClientDialogData';
+import { ClientDialogData } from 'src/app/shared/model/ClientDialogData'; // DO weryfikacji co jest tutaj nie tak
 import { ClientService } from '../../clients/client.service';
 
 @Component({

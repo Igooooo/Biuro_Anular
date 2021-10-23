@@ -10,14 +10,13 @@ import { Client } from 'src/app/shared/model/client';
 })
 export class SalesService {
 
-  private apiURL: string = 'http://localhost:3000/api/products/';
+  private apiURL: string = 'http://localhost:3000/api/products/'; // DO ZMIANY - do wywalenia
   private URL: string = 'http://localhost:8080/api/';
-  private sale: Sale[] = [];
+  private sale: Sale[] = []; // DO ZMIANY - do wywalenia
 
   constructor(private http: HttpClient) {
   }
 
-  // Dodawanie tokena do nagłówka
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     const token :any = localStorage.getItem('token');
@@ -45,14 +44,14 @@ export class SalesService {
     return this.http.put<Sale>(this.URL+'updateSaleById', data , { headers: headers })
   }
 
-  getSale(id: number) : Observable<{success: boolean, data: Sale}> { // id - pojedyńczy samochód
+  getSale(id: number) : Observable<{success: boolean, data: Sale}> {
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: Sale}>(this.URL+'getSaleByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
   }
 
-  getSaleByFilter(clientId: number) : Observable<{success: boolean, data: Sale[]}> { // id - pojedyńczy samochód
+  getSaleByFilter(clientId: number) : Observable<{success: boolean, data: Sale[]}> {
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${clientId}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Sale[]}>(this.URL+'getSaleByClientIdParam/'+`${clientId}` , { headers: headers })
   }
 
   getClients(): Observable<{success: boolean, data: Client[]}> {

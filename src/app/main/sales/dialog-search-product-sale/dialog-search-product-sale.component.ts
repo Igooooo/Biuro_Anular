@@ -15,8 +15,7 @@ import { ProductService } from '../../products/product.service';
 export class DialogSearchProductSaleComponent implements OnInit {
 
   products: Product[] = [];
-
-  dataSource?: any;
+  dataSource?: any; // DO ZMIANY - nie moze być any
   displayedColumns: string[] = ['name', 'type'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -45,5 +44,4 @@ export class DialogSearchProductSaleComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  
 }

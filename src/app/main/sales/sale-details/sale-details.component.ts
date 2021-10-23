@@ -15,10 +15,8 @@ export class SaleDetailsComponent implements OnInit {
 
   saleForm = new FormGroup({});
   sale?: Sale;
-  isPayDefault = isPay.tak ;
+  isPayDefault = isPay.tak ; // DO ZMIANY otypować!
   isPay = Object.values(isPay);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
@@ -58,10 +56,9 @@ export class SaleDetailsComponent implements OnInit {
     );
   }
 
-  loadSale() : void {
-    // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
+  loadSale(): void {
     const id = +this.route.snapshot.params['id']; 
-    this.saleService.getSale(id).subscribe( // przekazujemy id i zostajemy subscriberami
+    this.saleService.getSale(id).subscribe(
       (sale) => {
       this.sale = sale.data;
       this.saleForm.patchValue(this.sale);
@@ -71,11 +68,11 @@ export class SaleDetailsComponent implements OnInit {
       }) 
   }
 
-  showToasterUpdateSale() : void{
+  showToasterUpdateSale(): void{
     this.toastr.success(this.saleForm.controls.id.value + " został zaktualizowany pomyślnie!");
   }
 
-  showToasterUpdateSaleError() : void{
+  showToasterUpdateSaleError(): void{
     this.toastr.error(this.saleForm.controls.id.value + " został nie został zaktualizowany pomyślnie!");
   }
 }

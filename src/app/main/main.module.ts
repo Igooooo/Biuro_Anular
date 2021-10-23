@@ -11,7 +11,7 @@ import { RaportsComponent } from './raports/raports.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUserComponent } from './users/add-user/add-user.component';
-import {A11yModule} from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { MatInputModule} from '@angular/material/input';
 import { MatToolbarModule  } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,8 +38,13 @@ import { DialogSearchClientSaleComponent } from './sales/dialog-search-client-sa
 import { DialogSearchProductSaleComponent } from './sales/dialog-search-product-sale/dialog-search-product-sale.component';
 import { MatTableModule } from '@angular/material/table' 
 import { MatCardModule } from '@angular/material/card'
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatPaginatorModule} from '@angular/material/paginator'
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule  } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [MenuComponent, UsersComponent, SalesComponent, ProductsComponent, RaportsComponent, UserDetailsComponent, AddUserComponent, DialogRemoveUserComponent, LoginComponent, AddProductComponent, DialogRemoveProductComponent, ProductDetailsComponent, ClientsComponent, ClientDetailsComponent, DialogRemoveClientComponent, AddClientComponent, UserSettingsComponent, AddSaleComponent, DialogRemoveSaleComponent, SaleDetailsComponent, DialogSearchClientSaleComponent, DialogSearchProductSaleComponent],
   imports: [
@@ -61,6 +66,10 @@ import {MatPaginatorModule} from '@angular/material/paginator'
     MatCardModule,
     FlexLayoutModule,
     MatPaginatorModule,
+    MatGridListModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
     ToastrModule.forRoot(),
   ],
   exports: [

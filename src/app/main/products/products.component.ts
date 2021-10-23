@@ -22,25 +22,11 @@ export class ProductsComponent implements OnInit {
   limit_show_product_max = 10;
   products: Product[] = [];
   productForm = new FormGroup({});
-
-  dataSource?: any;
+  dataSource?: any; // DO ZMIANY - nie moze byc any
   displayedColumns: string[] = ['name', 'type', 'volume', 'provider', 'other', 'remove'];
   changes = new Subject<void>();
-  // get refereence to paginator
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  // For internationalization, the `$localize` function from
-  // the `@angular/localize` package can be used.
-  /*
-  firstPageLabel = $localize`Pierwsza strona`;
-  itemsPerPageLabel = $localize`Ilość:`;
-  lastPageLabel = $localize`Last page`;
-  // You can set labels to an arbitrary string too, or dynamically compute
-  // it through other third-party internationalization libraries.
-  nextPageLabel = 'Next page';
-  previousPageLabel = 'Previous page';
-  */
-
-  
+   
   constructor(private cd: ChangeDetectorRef,
               private productsService: ProductService,
               private router: Router,
@@ -51,7 +37,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.createFormProduct();
-    console.log("jestem w product.componetns")
   }
 
   createFormProduct() : void {
@@ -82,7 +67,7 @@ export class ProductsComponent implements OnInit {
       }) 
   }
   
-  removeProduct(product: Product) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
+  removeProduct(product: Product) { 
     this.productsService.removeProduct(product.id).subscribe(() => {
       this.getProducts();
       this.showToasterRemoveProduct();
@@ -100,7 +85,6 @@ export class ProductsComponent implements OnInit {
     this.productForm.reset();
   }
   
-
   refresh() : void {
     this.getProducts();
     this.cd.markForCheck();
@@ -133,7 +117,6 @@ export class ProductsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue.trim().toLowerCase())
   }
 }
 

@@ -15,12 +15,8 @@ export class ProductDetailsComponent implements OnInit {
 
   productForm = new FormGroup({});
   product: Product[] = [];
-
-  // Typ klienta
   typeOfProductDefault = productType.normalny ;
   typeOfProduct = Object.values(productType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
@@ -58,14 +54,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   loadProduct() : void {
-    // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
     const id = +this.route.snapshot.params['id']; 
-    this.productsService.getProduct(id).subscribe( // przekazujemy id i zostajemy subscriberami
+    this.productsService.getProduct(id).subscribe(
       (product) => {
-      console.log('product'+ JSON.stringify(product.data));
       this.product = product.data;
       this.productForm.patchValue(this.product);
-      console.log('Odebrany JSON'+ JSON.stringify(this.product));
       }, err => {
         console.log('err' + err);
       }) 

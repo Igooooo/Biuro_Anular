@@ -1,38 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">	
-    <a class="navbar-brand icon bi bi-house-fill" routerLink="/main" routerLinkActive="active"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span class="menu-icon" routerLink="/main" routerLinkActive="active">
+      <mat-icon matTooltip="Strona główna" matTooltipPosition="below" class="menu-icon-home">home</mat-icon>
+      Biuro podróży
+    </span>
+    <span class="menu-spacer"></span>
+    <div fxShow="true" fxHide.lt-md>
+      <a mat-button routerLink="/users" routerLinkActive="active">Użytkownicy</a>
+      <a mat-button routerLink="/products" routerLinkActive="active">Produkty</a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">Klienci</a>
+      <a mat-button routerLink="/sales" routerLinkActive="active">Sprzedaż</a>
+      <a mat-button routerLink="/raports" routerLinkActive="active">Raporty</a>
+      <span *ngIf="usersService.userSubject$ | async as user">
+        <button class="menu-icon" mat-button [matMenuTriggerFor]="menu">
+          <strong>{{ user.name }} {{ user.surname }}</strong>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/userSettings" routerLinkActive="active">Ustawienia</button>
+          <button mat-menu-item (click)="logout()">Wyloguj</button>
+        </mat-menu>
+      </span>
+    </div>    
+    <button mat-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
     </button>
-    <div class="collapse navbar-collapse" id="mainmenu">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" routerLink="/main" routerLinkActive="active">Strona Główna</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/users" routerLinkActive="active">Użytkownicy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/clients" routerLinkActive="active">Klienci</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/products" routerLinkActive="active">Produkty</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/sales" routerLinkActive="active">Sprzedaż</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/raports" routerLinkActive="active">Raporty</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown"><strong> {{ userName }} {{ userSurname }} </strong></a> <!-- role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown" href="#" -->
-                <div class="col-lg-1 col-md-1 col-sm-1  dropdown-menu dropdown-menu-right" >
-                  <a class="dropdown-item" routerLink="/userSettings" routerLinkActive="active">Ustawienia</a>
-                  <a class="dropdown-item" (click)="logout()" >Wyloguj</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
- 
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #start mode="over" fixedInViewport="true" #sidenav>
+    <mat-nav-list (click)="sidenav.toggle()">
+      <button mat-button class="mat-sidenav-button">
+        <mat-icon>close</mat-icon>
+      </button>
+      <a mat-list-item routerLink="/users" routerLinkActive="active">Użytkownicy</a>
+      <a mat-list-item routerLink="/clients" routerLinkActive="active">Klienci</a>
+      <a mat-list-item routerLink="/products" routerLinkActive="active">Produkty</a>
+      <a mat-list-item routerLink="/sales" routerLinkActive="active">Sprzedaż</a>
+      <a mat-list-item routerLink="/raports" routerLinkActive="active">Raporty</a>
+      <a mat-list-item routerLink="/userSettings" routerLinkActive="active">Ustawienia</a>
+      <a mat-list-item (click)="logout()">Wyloguj</a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

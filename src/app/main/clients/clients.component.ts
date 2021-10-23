@@ -22,24 +22,10 @@ export class ClientsComponent implements OnInit {
   limit_show_client_max = 10;
   clients: Client[] = [];
   clientForm = new FormGroup({});
-
-
-  dataSource?: any;
+  dataSource?: any; // DO ZMIANY - nie może być any!!!
   displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
   changes = new Subject<void>();
-  // get refereence to paginator
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  // For internationalization, the `$localize` function from
-  // the `@angular/localize` package can be used.
-  /*
-  firstPageLabel = $localize`Pierwsza strona`;
-  itemsPerPageLabel = $localize`Ilość:`;
-  lastPageLabel = $localize`Last page`;
-  // You can set labels to an arbitrary string too, or dynamically compute
-  // it through other third-party internationalization libraries.
-  nextPageLabel = 'Next page';
-  previousPageLabel = 'Previous page';
-  */
  
   constructor(private cd: ChangeDetectorRef,
               private clientService: ClientService,
@@ -51,10 +37,9 @@ export class ClientsComponent implements OnInit {
   ngOnInit(): void {
     this.getClients();
     this.createFormClient();
-    console.log("jestem w client.componetns")
   }
 
-  createFormClient() : void {
+  createFormClient(): void {
     this.clientForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
       surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
@@ -69,13 +54,13 @@ export class ClientsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(clients.data);
         this.dataSource.paginator = this.paginator;
       }, err => {
-        this.error = true;
+        this.error = true; // DO ZMIANY - do weryfikacji co to robi
         console.log('błąd w Kliencie ' + JSON.stringify(err));
       }
     );
   }
 
-  loadClientByFilter() : void {
+  loadClientByFilter(): void {
     this.clientService.getClientByFilter(this.clientForm.controls.name.value, this.clientForm.controls.surname.value, this.clientForm.controls.city.value).subscribe(
       (clients) => {
       this.clients = clients.data;
@@ -84,7 +69,7 @@ export class ClientsComponent implements OnInit {
       }) 
   }
   
-  removeClient(client: Client) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
+  removeClient(client: Client) { 
     this.clientService.removeClient(client.id).subscribe(() => {
       this.getClients();
       this.showToasterRemoveClient();
@@ -94,33 +79,33 @@ export class ClientsComponent implements OnInit {
     }); 
   }
 
-  goToClientDetails(client: Client) : void {
+  goToClientDetails(client: Client): void {
     this.router.navigate(['/client', client.id]);
   }
 
-  reset() : void {
+  reset(): void {
     this.clientForm.reset();
   }
 
-  refresh() : void {
+  refresh(): void {
     this.getClients();
     this.cd.markForCheck();
     this.showToasterRefreshClient();
   }
 
-  showToasterRemoveClient() : void {
+  showToasterRemoveClient(): void {
     this.toastr.success("Użytkownik został pomyślnie usunięty!");
   }
 
-  showToasterRemoveClientError() : void {
+  showToasterRemoveClientError(): void {
     this.toastr.error("Użytkownik nie został usunięty!");
   }
 
-  showToasterRefreshClient() : void {
+  showToasterRefreshClient(): void {
     this.toastr.success("Lista użytkowników została odświeżona!");
   }
 
-  openDialog(client : Client, event: any) : void {
+  openDialog(client : Client, event: any): void {
     event.stopPropagation();
     this.dialog.open(DialogRemoveClientComponent, {data: {name: client.name, surname: client.surname}}).
     afterClosed().
@@ -131,7 +116,7 @@ export class ClientsComponent implements OnInit {
     });
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log(filterValue.trim().toLowerCase())
