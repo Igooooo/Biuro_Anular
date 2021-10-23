@@ -10,14 +10,12 @@ import { User } from 'src/app/shared/model/user';
 export class UsersService {
 
   userSubject$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-
   private URL: string = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) {
   }
 
 
-  // Dodawanie tokena do nagłówka
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     const token :any = localStorage.getItem('token');
@@ -31,7 +29,6 @@ export class UsersService {
   }
 
   addUser(data: User): Observable<User> {
-    console.log('data' + data)
     return this.http.post<User>(this.URL+ 'auth/signup', data) ;
   }
   
@@ -45,20 +42,18 @@ export class UsersService {
     return this.http.put<User>(this.URL+'updateUserById', data , { headers: headers })
   }
 
-  getUser(id: number) : Observable<{success: boolean, data: User}> { // id - pojedyńczy samochód
+  getUser(id: number) : Observable<{success: boolean, data: User}> {
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: User}>(this.URL+'getUserByIdParam/'+`${id}` , { headers: headers }).pipe(tap(user => {
       this.userSubject$.next(user.data)
     })) 
   }
 
-  // raczej nie zadziała
+  // DO ZMIANY - nie potrzebne chyba
   getUserByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: User[]}>(this.URL+'getUserByNameSurnameCityParam/'+`${name}`+'&'+`${surname}`+'&'+`${city}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: User[]}>(this.URL+'getUserByNameSurnameCityParam/'+`${name}`+'&'+`${surname}`+'&'+`${city}` , { headers: headers }) 
   }
-
-     
 
 }
 

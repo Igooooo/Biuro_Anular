@@ -1,29 +1,15 @@
-<!-- 
-<div class="col-sm-12">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><ng-content select="[title]"></ng-content></h5> 
-        <div class="card-text">
-            <ng-content select="[image]"></ng-content> 
-        </div> 
-      </div>
-    </div>
-</div>
--->
-
-
-<mat-card
-    fxFlex="0 1 calc(20% - 20px)"
-    fxFlex.lt-md="0 1 calc(50% - 32px)"
-    fxFlex.lt-sm="100%">
+<mat-card fxFlex="0 1 calc(20% - 20px)"
+          fxFlex.lt-md="0 1 calc(50% - 32px)"
+          fxFlex.lt-sm="100%">
   <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>
+    <div mat-card-avatar class="header-image">
+      <mat-icon class="menu-icon-title">flight_takeoff</mat-icon>
+    </div>
+    <mat-card-title>
       <ng-content select="[title]"></ng-content>
-      </mat-card-title>
-    <mat-card-subtitle>Brak</mat-card-subtitle>
+    </mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
- <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> --> 
   <mat-card-content>
     <ng-content select="[image]"></ng-content>
   </mat-card-content>

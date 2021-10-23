@@ -1,23 +1,23 @@
 <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" style="justify-content: center;" class="main-menu">
     <app-main-menu [routerLink]="['/users']" >
         <p title>Użytkownicy</p>
-        <p class="icon_menu bi bi-people-fill" image></p>
+        <p class="menu-image" image><mat-icon>person_outline</mat-icon></p>
     </app-main-menu>
     <app-main-menu [routerLink]="['/clients']" >
         <p title>Klienci</p>
-        <p class="icon_menu bi bi-person-lines-fill" image></p>
+        <p class="menu-image"image><mat-icon>person</mat-icon></p>
     </app-main-menu>
     <app-main-menu [routerLink]="['/products']">
         <p title>Produkty</p>
-        <p class="icon_menu bi bi-upc-scan" image></p>
+        <p class="menu-image" image><mat-icon>code</mat-icon></p>
     </app-main-menu>
     <app-main-menu [routerLink]="['/sales']">
         <p title>Sprzedaż</p>
-        <p class= "bi icon_menu bi bi-cart4" image></p>
+        <p class="menu-image" image><mat-icon>add_shopping_cart</mat-icon></p>
     </app-main-menu>
     <app-main-menu [routerLink]="['/raports']">
         <p title>Raport</p>
-        <p class="icon_menu bi bi-graph-up" image></p>
+        <p class="menu-image" image><mat-icon>info</mat-icon></p>
     </app-main-menu>
 </div>
 

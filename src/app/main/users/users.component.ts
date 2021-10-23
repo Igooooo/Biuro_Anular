@@ -22,26 +22,11 @@ export class UsersComponent implements OnInit {
   limit_show_user_max = 10;
   users: User[] = [];
   userForm = new FormGroup({});
-
-  dataSource?: any;
+  dataSource?: any; // DO ZMIANY
   displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
   changes = new Subject<void>();
-  // get refereence to paginator
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  // For internationalization, the `$localize` function from
-  // the `@angular/localize` package can be used.
-  /*
-  firstPageLabel = $localize`Pierwsza strona`;
-  itemsPerPageLabel = $localize`Ilość:`;
-  lastPageLabel = $localize`Last page`;
-  // You can set labels to an arbitrary string too, or dynamically compute
-  // it through other third-party internationalization libraries.
-  nextPageLabel = 'Next page';
-  previousPageLabel = 'Previous page';
-  */
-
   
-
   constructor(private cd: ChangeDetectorRef,
               private usersService: UsersService,
               private router: Router,
@@ -52,7 +37,6 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     this.createFormUser();
-    console.log("jestem w user.componetns")
   }
 
    createFormUser() : void {
@@ -85,7 +69,7 @@ export class UsersComponent implements OnInit {
       }) 
   }
   
-  removeUser(user: User) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
+  removeUser(user: User) {
     this.usersService.removeUser(user.id).subscribe(() => {
       this.getUsers();
       this.showToasterRemoveUser();
@@ -103,27 +87,6 @@ export class UsersComponent implements OnInit {
     this.userForm.reset();
   }
   
-  
-  next() : void {
-    if (this.limit_show_user_min + 10 < this.users.length){
-      this.limit_show_user_min=this.limit_show_user_min+10
-      this.limit_show_user_max=this.limit_show_user_max+10
-    } else {
-      this.limit_show_user_min=this.limit_show_user_min
-      this.limit_show_user_max=this.limit_show_user_max
-    }
-  }
-
-  back() : void {
-    if (this.limit_show_user_min - 10 >= 0){
-      this.limit_show_user_min=this.limit_show_user_min-10
-      this.limit_show_user_max=this.limit_show_user_max-10
-    } else {
-      this.limit_show_user_min=this.limit_show_user_min
-      this.limit_show_user_max=this.limit_show_user_max
-    }
-  }  
-
   refresh() : void {
     this.getUsers();
     this.cd.markForCheck();

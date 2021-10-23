@@ -15,12 +15,8 @@ export class UserDetailsComponent implements OnInit {
 
   userForm = new FormGroup({});
   user?: User;
-
-  // Typ klienta
   typeOfUserDefault = userType.pracownik ;
   typeOfUser = Object.values(userType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
@@ -62,14 +58,11 @@ export class UserDetailsComponent implements OnInit {
 
 
   loadUser() : void {
-    // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
     const id = +this.route.snapshot.params['id']; 
-    this.usersService.getUser(id).subscribe( // przekazujemy id i zostajemy subscriberami
+    this.usersService.getUser(id).subscribe(
       (user) => {
-      //console.log('user'+ JSON.stringify(user.data));
       this.user = user.data;
       this.userForm.patchValue(this.user);
-      //console.log('Odebrany JSON'+ JSON.stringify(this.user));
       }, err => {
         console.log('err' + err);
       }) 

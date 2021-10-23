@@ -1,15 +1,26 @@
-.icon_menu {
+.icon_menu{
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
     font-size: 10rem;
 }
 
+.menu-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 10rem;
+    text-align: center;   
+}
+
+.mat-icon {
+    font-size: 200px;
+    height: 200px ;
+    width: 200px;
+}
+
 app-main-menu {
     margin: 20px 5px 5px 5px;    
 }
 
-.main-menu {
-    justify-content: center;
-}
  

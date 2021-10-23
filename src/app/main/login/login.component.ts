@@ -15,20 +15,22 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   userName?: string;
   userSurname?: string;
-  hide = true;
+  hide: boolean = true;
 
   constructor(private router: Router,
               private auth: AuthService,
               private toastr: ToastrService,
-              private usersService: UsersService) {
+              private usersService: UsersService) { }
 
+  ngOnInit() {
+    this.createLoginForm();
+  }
+
+  createLoginForm(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
     });
-  }
-
-  ngOnInit() {
   }
 
   login() : void {
@@ -38,7 +40,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('id', JSON.parse(res.id)) 
         let id: number = Number(localStorage.getItem('id'))
         this.getUserInfo(id);
-        
         this.showToasterLogin()
         this.router.navigate(['main'])
       },
@@ -57,7 +58,6 @@ export class LoginComponent implements OnInit {
       let lenghtSurname = JSON.stringify(user.data.surname).length;
       this.userName = JSON.stringify(user.data.name).substr(1,lenghtName-2)  
       this.userSurname = JSON.stringify(user.data.surname).substr(1,lenghtSurname-2)  
-      
       }, err => {
         console.log('err' + err);
       }) 

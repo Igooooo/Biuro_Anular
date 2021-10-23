@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { isPay } from 'src/app/shared/enums/isPay';
 import { Client } from 'src/app/shared/model/client';
-import { Sale } from 'src/app/shared/model/sale';
 import { ClientService } from '../../clients/client.service';
 import { DialogSearchClientSaleComponent } from '../dialog-search-client-sale/dialog-search-client-sale.component';
 import { DialogSearchProductSaleComponent } from '../dialog-search-product-sale/dialog-search-product-sale.component';
@@ -24,11 +23,11 @@ export class AddSaleComponent implements OnInit {
   clientSurnameFromDiag?: string;
   productIdFromDiag?: number;
   productNameFromDiag?: string;
-  // Typ klienta
   typeOfPayDefault = isPay.tak ;
   typeOfSale = Object.values(isPay);
   clients: Client[] = [];
   error :boolean = false;
+  fieldTextType?: boolean;
 
   constructor(private cd: ChangeDetectorRef,    
               private saleService: SalesService,
@@ -43,11 +42,9 @@ export class AddSaleComponent implements OnInit {
     this.getClients();
   }
 
-fieldTextType?: boolean;
-
-toggleFieldTextType() {
-  this.fieldTextType = !this.fieldTextType;
-}
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   createFormSale() : void {
     this.saleForm = this.formBuilder.group({
@@ -112,7 +109,7 @@ toggleFieldTextType() {
     });
   }
 
-  openDialogProduct(event: any) : void {
+  openDialogProduct(event: any) : void { // DO ZMIANY - nie moze byc any
     event.stopPropagation();
     this.dialog.open(DialogSearchProductSaleComponent, {
       width: '500px',

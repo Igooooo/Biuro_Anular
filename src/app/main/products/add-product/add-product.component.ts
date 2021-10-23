@@ -16,15 +16,12 @@ export class AddProductComponent implements OnInit {
 
   productForm = new FormGroup({});
   
-  // Typ klienta
   typeOfProductDefault = productType.normalny ;
   typeOfProduct = Object.values(productType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
-
+  fieldTextType?: boolean;
 
   constructor(private cd: ChangeDetectorRef,    
               private productsService: ProductService,
@@ -37,11 +34,9 @@ export class AddProductComponent implements OnInit {
     this.createFormProduct();
   }
 
-fieldTextType?: boolean;
-
-toggleFieldTextType() {
-  this.fieldTextType = !this.fieldTextType;
-}
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   createFormProduct() : void {
     this.productForm = this.formBuilder.group({
@@ -50,7 +45,7 @@ toggleFieldTextType() {
       provider:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       other: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])],
       type: [this.typeOfProductDefault,Validators.required]
-  });
+    });
     this.cd.markForCheck();
   }
 

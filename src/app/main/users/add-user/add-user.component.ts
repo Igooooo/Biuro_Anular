@@ -15,17 +15,13 @@ import {MatDialog} from '@angular/material/dialog';
 export class AddUserComponent implements OnInit {
 
   userForm = new FormGroup({});
-  hide = true;
-  
-  // Typ klienta
+  hide: boolean = true;
   typeOfUserDefault = userType.pracownik ;
   typeOfUser = Object.values(userType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
-
+  fieldTextType?: boolean;
 
   constructor(private cd: ChangeDetectorRef,    
               private usersService: UsersService,
@@ -38,11 +34,9 @@ export class AddUserComponent implements OnInit {
     this.createFormUser();
   }
 
-fieldTextType?: boolean;
-
-toggleFieldTextType() {
-  this.fieldTextType = !this.fieldTextType;
-}
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   createFormUser() : void {
     this.userForm = this.formBuilder.group({

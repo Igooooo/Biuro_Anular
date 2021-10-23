@@ -2,58 +2,93 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 
-.icon {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    font-size: 2.5rem;
-    }
 
 .background, html { 
     //background-image: url(./assets/img/sand.jpg);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 table {
     width: 100%;
   }
   
-  .mat-form-field {
+.mat-form-field {
     font-size: 20px;
     width: 100%;
-  }
+}
   
-  .main-div {
-    justify-content: center;
-    align-items: center;
-  }
+.main-div {
+  justify-content: center;
+  align-items: center;
+}
   
-  mat-card-title, mat-card-subtitle {
+mat-card-title, mat-card-subtitle {
     text-align: center;
-  }
+}
   
-  mat-form-field {
-    width: 100px;
-  }
+mat-form-field {
+  width: 100px;
+}
   
-  .actions-button, .applyFilter {
-    justify-content: center;
-    text-align: center;
-  }
-
+.applyFilter {
+  justify-content: center;
+  text-align: center;
+}
 
 .form-field {
   margin-right: 10px;
-}
-
-.button {
-  text-align: center;
-  
-}
-
-.container .form-field {
   width: 350px;
 }
 
+.button {
+  text-align: center; 
+}
+
+.container {
+  width: 350px;
+}
+
+.mat-card-actions {
+  text-align: center;
+}
+
+
+.mat-icon-button, .mat-icon {
+  cursor: pointer;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: table-cell;
+}
+
+
+.material-icons   {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle; 
+}
+
+
+.menu-icon-action {
+  //padding: 0;
+  //min-width: 0;
+  width: auto;
+  height: auto;
+  //flex-shrink: 0;
+  //line-height: 40px;
+  //border-radius: 50%;
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+  //text-align: center;
+  vertical-align: middle; 
+}

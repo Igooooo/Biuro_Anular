@@ -16,12 +16,8 @@ export class ClientDetailsComponent implements OnInit {
 
   clientForm = new FormGroup({});
   client: Client[] = [];
-
-  // Typ klienta
   typeOfClientDefault = clientType.normalny ;
   typeOfClient = Object.values(clientType);
-
-  // Walidacja formularza
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
   phoneRegex = /^[+,\d]\d{7,12}$/;
@@ -63,11 +59,9 @@ export class ClientDetailsComponent implements OnInit {
     );
   }
 
-
   loadClient() : void {
-    // z aktualnego URLa zczytaujemy id igawka aktualnego routa. Pozwala zczytać aktualnego URLa i dobrac się do jego id | + przebaria string na number
     const id = +this.route.snapshot.params['id']; 
-    this.clientService.getClient(id).subscribe( // przekazujemy id i zostajemy subscriberami
+    this.clientService.getClient(id).subscribe(
       (client) => {
       console.log('client'+ JSON.stringify(client.data));
       this.client = client.data;

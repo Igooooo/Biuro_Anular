@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 import { UsersService } from 'src/app/main/users/users.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class HeaderComponent implements OnInit {
   userName?: string;
   userSurname?: string;
 
-  constructor(public usersService: UsersService, // dzieki temu moge w HTML użyć
+  constructor(public usersService: UsersService,
               private router: Router,
               private toastr: ToastrService) {}
 
@@ -32,7 +31,7 @@ export class HeaderComponent implements OnInit {
       }, err => {
         console.log('err' + err);
       }) 
-  }
+  } 
 
   logout() {
     localStorage.removeItem('token');

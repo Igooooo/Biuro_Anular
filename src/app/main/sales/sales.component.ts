@@ -19,28 +19,15 @@ import { SalesService } from './sales.service';
 })
 export class SalesComponent implements OnInit {
 
-  error :boolean = false;
+  error: boolean = false;
   sales: Sale[] = [];
   product: Product[] = [];
   client: Client[] = [];
   saleForm = new FormGroup({});
-
-  dataSource?: any;
+  dataSource?: any; // DO ZMIANY - nie moze byc any
   displayedColumns: string[] = ['name', 'client.name_client.surname', 'price', 'isPay', 'volumen', 'other_1', 'other_2', 'remove'];
   changes = new Subject<void>();
-  // get refereence to paginator
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  // For internationalization, the `$localize` function from
-  // the `@angular/localize` package can be used.
-  /*
-  firstPageLabel = $localize`Pierwsza strona`;
-  itemsPerPageLabel = $localize`Ilość:`;
-  lastPageLabel = $localize`Last page`;
-  // You can set labels to an arbitrary string too, or dynamically compute
-  // it through other third-party internationalization libraries.
-  nextPageLabel = 'Next page';
-  previousPageLabel = 'Previous page';
-  */
   
   constructor(private cd: ChangeDetectorRef,
               private saleService: SalesService,
@@ -64,7 +51,7 @@ export class SalesComponent implements OnInit {
     this.saleService.getSales().subscribe(
       (sales) => {
         this.sales = sales.data
-       // this.sales[0].product.name // Nie wiem po co to????
+       // this.sales[0].product.name // DO ZMIANY - Nie wiem po co to????
         this.dataSource = new MatTableDataSource(sales.data);        
         this.dataSource.paginator = this.paginator;
 
@@ -75,7 +62,7 @@ export class SalesComponent implements OnInit {
     );
   }
   
-  removeSale(sale: Sale) {  // metoda event ma zapobiec przekierowaniu do detali samochodu (guzuk remove jest na jego polu)
+  removeSale(sale: Sale) {
     this.saleService.removeSale(sale.id).subscribe(() => {
       this.getSales();
       this.showToasterRemoveSale();

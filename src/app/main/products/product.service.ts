@@ -7,14 +7,13 @@ import { Product } from 'src/app/shared/model/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiURL: string = 'http://localhost:3000/api/products/';
+  private apiURL: string = 'http://localhost:3000/api/products/'; // DO ZMIANY - chyba nie potrzebne
   private URL: string = 'http://localhost:8080/api/';
-  private products: Product[] = [];
+  private products: Product[] = [];  // DO ZMIANY - chyba nie potrzebne
 
   constructor(private http: HttpClient) {
   }
 
-  // Dodawanie tokena do nagłówka
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     const token :any = localStorage.getItem('token');
@@ -42,41 +41,16 @@ export class ProductService {
     return this.http.put<Product>(this.URL+'updateProductById', data , { headers: headers })
   }
 
-  getProduct(id: number) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
+  getProduct(id: number) : Observable<{success: boolean, data: Product[]}> { 
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByIdParam/'+`${id}` , { headers: headers }) 
   }
 
-  // raczej nie zadziała
-  getProductByFilter(name: string) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
+  // DO ZMIANY - weryfiacja czy potrzebne
+  getProductByFilter(name: string) : Observable<{success: boolean, data: Product[]}> {
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByNameParam/'+`${name}` , { headers: headers }) //samo formatuje na JSON
+    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByNameParam/'+`${name}` , { headers: headers }) 
   }
 
-  /* Stary Backend
-  getproducts(): Observable<{success: boolean, data: Product[]}> {
-    return this.http.get<{success: boolean, data: Product[]}>('http://localhost:8080/api/getproducts' , { headers: headers });
-  }
-  addProduct(data: Product): Observable<Product> {
-    console.log('data' + data)
-    return this.http.post<Product>(this.apiURL, data) ;
-  }
-  removeProduct(id: number): Observable<Product> {
-    return this.http.delete<Product>(this.apiURL+`${id}`)
-  }
-  updateCar(data: Product): Observable<Product> {
-    return this.http.patch<Product>(this.apiURL, data)
-  }
-  getProduct(id: number) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
-    return this.http.get<{success: boolean, data: Product[]}>(this.apiURL+`${id}`) //samo formatuje na JSON
-  }
-  getProductByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: Product[]}> { // id - pojedyńczy samochód
-    console.log('serwis' + name, city, surname)
-    return this.http.get<{success: boolean, data: Product[]}>(this.apiURL+'/data/'+`${name}`+'&'+`${surname}`+'&'+`${city}`) //samo formatuje na JSON
-  }
-  getProductByFilter(name: string, surname: string, city: string) : Observable<dProduct> { // id - pojedyńczy samochód
-    console.log('serwis' + name, city, surname)
-    return this.http.get<Product>(this.apiURL+`${name}`+`${surname}`+`${city}`) //samo formatuje na JSON
-  */
 }
 
