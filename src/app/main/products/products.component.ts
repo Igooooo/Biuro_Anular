@@ -17,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  error :boolean = false;
+  error: boolean = false;
   limit_show_product_min = 0;
   limit_show_product_max = 10;
   products: Product[] = [];
@@ -26,20 +26,20 @@ export class ProductsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'volume', 'provider', 'other', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-   
+
   constructor(private cd: ChangeDetectorRef,
-              private productsService: ProductService,
-              private router: Router,
-              private toastr: ToastrService,              
-              public dialog: MatDialog,
-              private formBuilder: FormBuilder,) { }
+    private productsService: ProductService,
+    private router: Router,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.getProducts();
     this.createFormProduct();
   }
 
-  createFormProduct() : void {
+  createFormProduct(): void {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
     })
@@ -58,60 +58,60 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  loadProductByFilter() : void {
+  loadProductByFilter(): void {
     this.productsService.getProductByFilter(this.productForm.controls.name.value).subscribe(
       (products) => {
-      this.products = products.data;
+        this.products = products.data;
       }, err => {
         console.log('err ' + JSON.stringify(err));
-      }) 
+      })
   }
-  
-  removeProduct(product: Product) { 
+
+  removeProduct(product: Product) {
     this.productsService.removeProduct(product.id).subscribe(() => {
       this.getProducts();
       this.showToasterRemoveProduct();
     }, err => {
       console.log('err ' + JSON.stringify(err));
       this.showToasterRemoveProductError();
-    }); 
+    });
   }
 
-  goToProductDetails(product: Product) : void {
+  goToProductDetails(product: Product): void {
     this.router.navigate(['/products', product.id]);
   }
 
-  reset() : void {
+  reset(): void {
     this.productForm.reset();
   }
-  
-  refresh() : void {
+
+  refresh(): void {
     this.getProducts();
     this.cd.markForCheck();
     this.showToasterRefreshProduct();
   }
 
-  showToasterRemoveProduct() : void {
+  showToasterRemoveProduct(): void {
     this.toastr.success("Użytkownik został pomyślnie usunięty!");
   }
 
-  showToasterRemoveProductError() : void {
+  showToasterRemoveProductError(): void {
     this.toastr.error("Użytkownik nie został usunięty!");
   }
 
-  showToasterRefreshProduct() : void {
+  showToasterRefreshProduct(): void {
     this.toastr.success("Lista użytkowników została odświeżona!");
   }
 
-  openDialog(product : Product, event: any) : void {
+  openDialog(product: Product, event: any): void {
     event.stopPropagation();
-    this.dialog.open(DialogRemoveProductComponent, {data: {name: product.name}}).
-    afterClosed().
-    subscribe(result => {
-      if(result === 'false'){
-        this.removeProduct(product);
-      }     
-    });
+    this.dialog.open(DialogRemoveProductComponent, { data: { name: product.name } }).
+      afterClosed().
+      subscribe(result => {
+        if (result === 'false') {
+          this.removeProduct(product);
+        }
+      });
   }
 
   applyFilter(event: Event) {
@@ -120,4 +120,3 @@ export class ProductsComponent implements OnInit {
   }
 }
 
- 

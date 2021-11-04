@@ -28,20 +28,20 @@ export class SalesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'client.name_client.surname', 'price', 'isPay', 'volumen', 'other_1', 'other_2', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  
+
   constructor(private cd: ChangeDetectorRef,
-              private saleService: SalesService,
-              private router: Router,
-              private toastr: ToastrService,              
-              public dialog: MatDialog,
-              private formBuilder: FormBuilder,) { }
+    private saleService: SalesService,
+    private router: Router,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.getSales();
     this.createFormSale();
   }
 
-  createFormSale() : void {
+  createFormSale(): void {
     this.saleForm = this.formBuilder.group({
       clientId: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
     })
@@ -51,8 +51,8 @@ export class SalesComponent implements OnInit {
     this.saleService.getSales().subscribe(
       (sales) => {
         this.sales = sales.data
-       // this.sales[0].product.name // DO ZMIANY - Nie wiem po co to????
-        this.dataSource = new MatTableDataSource(sales.data);        
+        // this.sales[0].product.name // DO ZMIANY - Nie wiem po co to????
+        this.dataSource = new MatTableDataSource(sales.data);
         this.dataSource.paginator = this.paginator;
 
       }, err => {
@@ -61,7 +61,7 @@ export class SalesComponent implements OnInit {
       }
     );
   }
-  
+
   removeSale(sale: Sale) {
     this.saleService.removeSale(sale.id).subscribe(() => {
       this.getSales();
@@ -69,44 +69,44 @@ export class SalesComponent implements OnInit {
     }, err => {
       console.log('err ' + JSON.stringify(err));
       this.showToasterRemoveSaleError();
-    }); 
+    });
   }
 
-  goToSaleDetails(sale: Sale) : void {
+  goToSaleDetails(sale: Sale): void {
     this.router.navigate(['/sale', sale.id]);
   }
 
-  reset() : void {
+  reset(): void {
     this.saleForm.reset();
   }
-  
-  refresh() : void {
+
+  refresh(): void {
     this.getSales();
     this.cd.markForCheck();
     this.showToasterRefreshSale();
   }
 
-  showToasterRemoveSale() : void {
+  showToasterRemoveSale(): void {
     this.toastr.success("Sprzedaż został pomyślnie usunięta!");
   }
 
-  showToasterRemoveSaleError() : void {
+  showToasterRemoveSaleError(): void {
     this.toastr.error("Sprzedaż nie została usunięta!");
   }
 
-  showToasterRefreshSale() : void {
+  showToasterRefreshSale(): void {
     this.toastr.success("Lista sprzedaży została odświeżona!");
   }
 
-  openDialog(sale : Sale, event: any) : void {
+  openDialog(sale: Sale, event: any): void {
     event.stopPropagation();
-    this.dialog.open(DialogRemoveSaleComponent, {data: {id: sale.id}}).
-    afterClosed().
-    subscribe(result => {
-      if(result === 'false'){
-        this.removeSale(sale);
-      }     
-    });
+    this.dialog.open(DialogRemoveSaleComponent, { data: { id: sale.id } }).
+      afterClosed().
+      subscribe(result => {
+        if (result === 'false') {
+          this.removeSale(sale);
+        }
+      });
   }
 
   applyFilter(event: Event) {
