@@ -1,4 +1,14 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="!isAuth">
+  <mat-toolbar-row>
+    <span class="menu-icon" routerLink="/main" routerLinkActive="active">
+      <mat-icon matTooltip="Strona główna" matTooltipPosition="below" class="menu-icon-home">home</mat-icon>
+      Biuro podróży
+    </span>
+    <span class="menu-spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="isAuth">
   <mat-toolbar-row>
     <span class="menu-icon" routerLink="/main" routerLinkActive="active">
       <mat-icon matTooltip="Strona główna" matTooltipPosition="below" class="menu-icon-home">home</mat-icon>
@@ -21,7 +31,7 @@
           <button mat-menu-item (click)="logout()">Wyloguj</button>
         </mat-menu>
       </span>
-    </div>    
+    </div>
     <button mat-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
       <mat-icon>menu</mat-icon>
     </button>

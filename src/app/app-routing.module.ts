@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './core/header/header.component';
 import { AddClientComponent } from './main/clients/add-client/add-client.component';
 import { ClientDetailsComponent } from './main/clients/client-details/client-details.component';
@@ -23,21 +24,21 @@ import { UsersComponent } from './main/users/users.component';
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'main', component: MenuComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'users/add', component: AddUserComponent},
-  {path: 'users/:id', component: UserDetailsComponent}, 
-  {path: 'userSettings', component: UserSettingsComponent},
-  {path: 'clients', component: ClientsComponent},
-  {path: 'client/add', component: AddClientComponent},
-  {path: 'client/:id', component: ClientDetailsComponent}, 
-  {path: 'products', component: ProductsComponent},
-  {path: 'products/add', component: AddProductComponent},
-  {path: 'products/:id', component: ProductDetailsComponent},
-  {path: 'raports', component: RaportsComponent},
-  {path: 'sales', component: SalesComponent},
-  {path: 'sale/add', component: AddSaleComponent},
-  {path: 'sale/:id', component: SaleDetailsComponent},
+  {path: 'main', component: MenuComponent, canActivate: [AuthGuard]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  {path: 'users/add', component: AddUserComponent, canActivate: [AuthGuard]},
+  {path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuard]}, 
+  {path: 'userSettings', component: UserSettingsComponent, canActivate: [AuthGuard]},
+  {path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
+  {path: 'client/add', component: AddClientComponent, canActivate: [AuthGuard]},
+  {path: 'client/:id', component: ClientDetailsComponent, canActivate: [AuthGuard]}, 
+  {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'products/add', component: AddProductComponent, canActivate: [AuthGuard]},
+  {path: 'products/:id', component: ProductDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'raports', component: RaportsComponent, canActivate: [AuthGuard]},
+  {path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
+  {path: 'sale/add', component: AddSaleComponent, canActivate: [AuthGuard]},
+  {path: 'sale/:id', component: SaleDetailsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
