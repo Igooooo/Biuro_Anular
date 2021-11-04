@@ -17,7 +17,7 @@ import { DialogRemoveClientComponent } from './dialog-remove-client/dialog-remov
 })
 export class ClientsComponent implements OnInit {
 
-  error :boolean = false;
+  error: boolean = false;
   limit_show_client_min = 0;
   limit_show_client_max = 10;
   clients: Client[] = [];
@@ -26,13 +26,13 @@ export class ClientsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
- 
+
   constructor(private cd: ChangeDetectorRef,
-              private clientService: ClientService,
-              private router: Router,
-              private toastr: ToastrService,              
-              public dialog: MatDialog,
-              private formBuilder: FormBuilder,) { }
+    private clientService: ClientService,
+    private router: Router,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.getClients();
@@ -43,7 +43,7 @@ export class ClientsComponent implements OnInit {
     this.clientForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
       surname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)])],
-      city:['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])]
+      city: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(40)])]
     })
   }
 
@@ -63,20 +63,20 @@ export class ClientsComponent implements OnInit {
   loadClientByFilter(): void {
     this.clientService.getClientByFilter(this.clientForm.controls.name.value, this.clientForm.controls.surname.value, this.clientForm.controls.city.value).subscribe(
       (clients) => {
-      this.clients = clients.data;
+        this.clients = clients.data;
       }, err => {
         console.log('err ' + JSON.stringify(err));
-      }) 
+      })
   }
-  
-  removeClient(client: Client) { 
+
+  removeClient(client: Client) {
     this.clientService.removeClient(client.id).subscribe(() => {
       this.getClients();
       this.showToasterRemoveClient();
     }, err => {
       console.log('err ' + JSON.stringify(err));
       this.showToasterRemoveClientError();
-    }); 
+    });
   }
 
   goToClientDetails(client: Client): void {
@@ -105,15 +105,15 @@ export class ClientsComponent implements OnInit {
     this.toastr.success("Lista użytkowników została odświeżona!");
   }
 
-  openDialog(client : Client, event: any): void {
+  openDialog(client: Client, event: any): void {
     event.stopPropagation();
-    this.dialog.open(DialogRemoveClientComponent, {data: {name: client.name, surname: client.surname}}).
-    afterClosed().
-    subscribe(result => {
-      if(result === 'false'){
-        this.removeClient(client);
-      }     
-    });
+    this.dialog.open(DialogRemoveClientComponent, { data: { name: client.name, surname: client.surname } }).
+      afterClosed().
+      subscribe(result => {
+        if (result === 'false') {
+          this.removeClient(client);
+        }
+      });
   }
 
   applyFilter(event: Event): void {

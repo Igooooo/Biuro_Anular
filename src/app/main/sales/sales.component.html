@@ -1,74 +1,76 @@
-<div class="main-div" *ngIf = !error>
-    <mat-card>
-        <mat-card-title>Akcja</mat-card-title>
-        <mat-card-actions>
-            <button mat-button matTooltip="Dodaj sprzedaż" matTooltipPosition="below" [routerLink]="['/sale/add']">
-                <mat-icon class="menu-icon-action">add_circle_outline</mat-icon>
-            </button>
-            <button mat-button matTooltip="odśwież" matTooltipPosition="below" (click)="refresh()">
-                <mat-icon class="menu-icon-action">refresh</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
-    <br>
-    <mat-card>
-        <mat-card-title>Szukaj sprzedaży:</mat-card-title>
-        <mat-card-content>
-            <mat-form-field appearance="standard" class="applyFilter">
-                <input class="applyFilter" matInput (keyup)="applyFilter($event)" placeholder="Wpisz szukane dane..." #input>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
-    <br>
-    <mat-card>
-        <mat-card-title>Sprzedaż</mat-card-title>
-        <mat-card-subtitle>Sprzedaż: {{sales?.length}}</mat-card-subtitle>
-        <mat-card-content>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="sales ; else noUsersInfo">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef>Produkt</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.product?.name}} </td>
-                </ng-container>
-                <ng-container matColumnDef="client.name_client.surname">
-                    <th mat-header-cell *matHeaderCellDef>Klient</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.client?.name}} {{element?.client?.surname}} </td>
-                </ng-container>
-                <ng-container matColumnDef="price">
-                    <th mat-header-cell *matHeaderCellDef>Cena</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.price}} </td>
-                </ng-container>
-                <ng-container matColumnDef="isPay">
-                    <th mat-header-cell *matHeaderCellDef>Czy opłacone</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.isPay}} </td>
-                </ng-container>
-                <ng-container matColumnDef="volumen">
-                    <th mat-header-cell *matHeaderCellDef>Ilość</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.volumen}} </td>
-                </ng-container>
-                <ng-container matColumnDef="other_1">
-                    <th mat-header-cell *matHeaderCellDef>Inne</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.other_1}} </td>
-                </ng-container>
-                <ng-container matColumnDef="other_2">
-                    <th mat-header-cell *matHeaderCellDef>Inne</th>
-                    <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element.other_2}} </td>
-                </ng-container>
-                <ng-container matColumnDef="remove">
-                    <th mat-header-cell *matHeaderCellDef>Usuń</th>
-                    <td mat-cell matTooltip="Usuń" matTooltipPosition="right" *matCellDef="let element" (click)="openDialog(element, $event)"><mat-icon>delete</mat-icon></td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [length]="sales?.length" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page"></mat-paginator>
-        </mat-card-content>
-        <ng-template #noUsersInfo>
-            <div class="no-cars-info">
-                <p>Brak użytkowników</p>
-            </div>
-         </ng-template>
-    </mat-card>
+<div class="main-div" *ngIf=!error>
+  <app-main-page-action>
+    <div title>Akcja</div>
+    <div button>
+      <button mat-button matTooltip="Dodaj sprzedaż" matTooltipPosition="below" [routerLink]="['/sale/add']">
+        <mat-icon class="menu-icon-action">add_circle_outline</mat-icon>
+      </button>
+      <button mat-button matTooltip="Odśwież" matTooltipPosition="below" (click)="refresh()">
+        <mat-icon class="menu-icon-action">refresh</mat-icon>
+      </button>
+    </div>
+  </app-main-page-action>
+  <app-main-page-search>
+    <div title>Szukaj sprzedaży:</div>
+    <div input>
+      <mat-form-field appearance="standard" class="applyFilter">
+        <input class="applyFilter" matInput (keyup)="applyFilter($event)" placeholder="Wpisz szukane dane..." #input>
+      </mat-form-field>
+    </div>
+  </app-main-page-search>
+  <app-main-page-table>
+    <div title>Sprzedaż</div>
+    <div subtitle>Sprzedaż: {{sales?.length}}</div>
+    <div table>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="sales ; else noUsersInfo">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Produkt</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.product?.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="client.name_client.surname">
+          <th mat-header-cell *matHeaderCellDef>Klient</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.client?.name}}
+            {{element?.client?.surname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Cena</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.price}} </td>
+        </ng-container>
+        <ng-container matColumnDef="isPay">
+          <th mat-header-cell *matHeaderCellDef>Czy opłacone</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.isPay}} </td>
+        </ng-container>
+        <ng-container matColumnDef="volumen">
+          <th mat-header-cell *matHeaderCellDef>Ilość</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.volumen}} </td>
+        </ng-container>
+        <ng-container matColumnDef="other_1">
+          <th mat-header-cell *matHeaderCellDef>Inne</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element?.other_1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="other_2">
+          <th mat-header-cell *matHeaderCellDef>Inne</th>
+          <td mat-cell *matCellDef="let element" (click)="goToSaleDetails(element)"> {{element.other_2}} </td>
+        </ng-container>
+        <ng-container matColumnDef="remove">
+          <th mat-header-cell *matHeaderCellDef>Usuń</th>
+          <td mat-cell matTooltip="Usuń" matTooltipPosition="right" *matCellDef="let element"
+            (click)="openDialog(element, $event)">
+            <mat-icon>delete</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="sales?.length" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page"></mat-paginator>
+    </div>
+    <ng-template #noUsersInfo>
+      <div class="no-cars-info">
+        <p>Brak użytkowników</p>
+      </div>
+    </ng-template>
+  </app-main-page-table>
 </div>
-<div class="container justify-content-center" *ngIf = error>
-    Zaloguj się!
+<div class="container justify-content-center" *ngIf=error>
+  Zaloguj się!
 </div>
