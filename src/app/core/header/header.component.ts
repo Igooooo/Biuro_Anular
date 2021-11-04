@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth.service';
 import { UsersService } from 'src/app/main/users/users.service';
 
 @Component({
@@ -12,14 +13,22 @@ export class HeaderComponent implements OnInit {
 
   userName?: string;
   userSurname?: string;
+  isAuth: boolean = false;
 
   constructor(public usersService: UsersService,
               private router: Router,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private auth: AuthService) {}
 
   ngOnInit(): void {
-    let id: number = Number(localStorage.getItem('id'))
-    this.getUserInfo(id);
+    this.auth.isLoggedIn.subscribe(data => {
+      this.isAuth = data;
+      if (this.isAuth) {
+        this.isAuth = true;
+        let id: number = Number(localStorage.getItem('id'))
+      this.getUserInfo(id);
+      }
+    });  
   }
 
   getUserInfo(id: number): void {
@@ -34,11 +43,17 @@ export class HeaderComponent implements OnInit {
   } 
 
   logout() {
+/*
     localStorage.removeItem('token');
     this.usersService.userSubject$.next(null);
     this.showToasterLogoutUser();
-    this.router.navigate(['/login']);
-  }
+    this.router.navigate(['/login']); */
+  
+  this.auth.logout();
+  this.usersService.userSubject$.next(null);
+  this.showToasterLogoutUser();
+  this.router.navigate(['/login']);
+} 
 
   showToasterLogoutUser() : void {
     this.toastr.success("Wylogowano!");

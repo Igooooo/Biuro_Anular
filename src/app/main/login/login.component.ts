@@ -34,18 +34,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() : void {
-    this.auth.loginUser(this.loginForm.getRawValue()).subscribe(
+    this.auth.login(this.loginForm.getRawValue()).subscribe(
       res => {
-        localStorage.setItem('token', res.accessToken)
-        localStorage.setItem('id', JSON.parse(res.id)) 
+       // localStorage.setItem('token', res.accessToken)
+        //localStorage.setItem('id', JSON.parse(res.id)) 
         let id: number = Number(localStorage.getItem('id'))
+        console.log(id);
         this.getUserInfo(id);
         this.showToasterLogin()
+        console.log('jestem zalogowany')
         this.router.navigate(['main'])
       },
       err => {
         this.showToasterLoginError();
-        console.log('err ' + JSON.stringify(err))
+        console.log('jestem')
+        console.log(err);
+        console.log('err ', err)
       }
     ); 
   }
