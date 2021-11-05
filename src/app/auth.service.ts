@@ -26,7 +26,7 @@ export class AuthService {
 
   private setLoginData(data: LoginData): boolean {
     if (data) {
-      localStorage.setItem('auth_token', JSON.stringify(data.access_token));
+      localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('id', JSON.stringify(data.id));
       this.isLogged$.next(true);
       return true;
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('id');
     this.isLogged$.next(false);
   }

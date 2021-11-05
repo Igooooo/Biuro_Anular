@@ -18,8 +18,8 @@ export class UsersService {
 
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
-    const token :any = localStorage.getItem('token');
-    headers = headers.set('x-access-token', token);
+    const accessToken: string = localStorage.getItem('accessToken');
+    headers = headers.set('x-access-token', accessToken);
     return headers
   }
 

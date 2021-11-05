@@ -14,8 +14,8 @@ export class ClientService {
 
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
-    const token :any = localStorage.getItem('token');
-    headers = headers.set('x-access-token', token);
+    const accessToken :any = localStorage.getItem('accessToken');
+    headers = headers.set('x-access-token', accessToken);
     return headers
   }
 

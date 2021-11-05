@@ -1,4 +1,4 @@
 export interface LoginData { 
-    access_token: string,
+    accessToken: string,
     id: string
 }

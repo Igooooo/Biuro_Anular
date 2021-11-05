@@ -10,6 +10,6 @@ export interface User {
     createdAt?: string;
     password?: string;
     type: string;
-    token?: string
+    accessToken?: string
 }
 
