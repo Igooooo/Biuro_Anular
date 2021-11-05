@@ -54,7 +54,6 @@ export class AddClientComponent implements OnInit {
 
   addClient() : void {
     this.clientService.addClient(this.clientForm.value).subscribe(() => {
-      console.log('formularz' + this.clientForm.value);
       this.router.navigate(['/clients']);
       this.showToasterAddClient();
     }, err => {   

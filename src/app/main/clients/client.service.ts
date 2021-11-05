@@ -7,13 +7,11 @@ import { Client } from 'src/app/shared/model/client';
 })
 export class ClientService {
 
-  private apiURL: string = 'http://localhost:3000/api/users/'; // DO ZMIANY - do usunięcia
   private URL: string = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) {
   }
 
-  // Dodawanie tokena do nagłówka
   createAuthrorizationHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     const token :any = localStorage.getItem('token');
@@ -43,13 +41,7 @@ export class ClientService {
 
   getClient(id: number) : Observable<{success: boolean, data: Client[]}> { 
     let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Client[]}>(this.URL+'getClientByIdParam/'+`${id}` , { headers: headers }) //samo formatuje na JSON
-  }
-
-  // DO ZMIANY - weryfikacja bo raczej nie zadziała
-  getClientByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: Client[]}> { // id - pojedyńczy samochód
-    let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Client[]}>(this.URL+'getClientByNameSurnameCityParam/'+`${name}`+'&'+`${surname}`+'&'+`${city}` , { headers: headers }) 
+    return this.http.get<{success: boolean, data: Client[]}>(this.URL+'getClientByIdParam/'+`${id}` , { headers: headers });
   }
 
 }

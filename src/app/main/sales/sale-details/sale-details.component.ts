@@ -15,7 +15,7 @@ export class SaleDetailsComponent implements OnInit {
 
   saleForm = new FormGroup({});
   sale?: Sale;
-  isPayDefault = isPay.tak ; // DO ZMIANY otypować!
+  isPayDefault: string = isPay.tak ;
   isPay = Object.values(isPay);
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
@@ -62,7 +62,6 @@ export class SaleDetailsComponent implements OnInit {
       (sale) => {
       this.sale = sale.data;
       this.saleForm.patchValue(this.sale);
-      console.log('Odebrany JSON'+ JSON.stringify(this.sale.id));
       }, err => {
         console.log('err' + err);
       }) 

@@ -10,9 +10,7 @@ import { Client } from 'src/app/shared/model/client';
 })
 export class SalesService {
 
-  private apiURL: string = 'http://localhost:3000/api/products/'; // DO ZMIANY - do wywalenia
   private URL: string = 'http://localhost:8080/api/';
-  private sale: Sale[] = []; // DO ZMIANY - do wywalenia
 
   constructor(private http: HttpClient) {
   }

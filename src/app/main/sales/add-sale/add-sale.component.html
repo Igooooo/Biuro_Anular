@@ -1,44 +1,59 @@
 <div class="container">
-    <p class="data-header">Dodaj sprzedaż</p>
-    <div class="form-container">
-        <form [formGroup]="saleForm">
-            <div class="form-field" appearance="outline">
-                <button type="button" class="icon bi bi-person-plus-fill" (click)="openDialogClient($event)">Klient</button> {{this?.clientIdFromDiag}} {{this?.clientNameFromDiag}} {{this?.clientSurnameFromDiag}} 
-                <button type="button" class="icon bi bi-bag-plus-fill" (click)="openDialogProduct($event)">Produkt</button> {{this?.productIdFromDiag}} {{this?.productNameFromDiag}}  
-            </div>
-            <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Cena</mat-label>
-                <input matInput formControlName="price" required>
-                <mat-error *ngIf="saleForm.controls['price'].invalid && saleForm.controls.price.touched && saleForm.controls.price.invalid">Podaj cene!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Ilość</mat-label>
-                <input matInput formControlName="volumen" required>
-                <mat-error *ngIf="saleForm.controls['volumen'].invalid && saleForm.controls.volumen.touched && saleForm.controls.volumen.invalid">Podaj ilość!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Inne 1</mat-label>
-                <input matInput formControlName="other_1" required>
-                <mat-error *ngIf="saleForm.controls['other_1'].invalid && saleForm.controls.other_1.touched && saleForm.controls.other_1.invalid">Wypełnij pole!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Inne 2</mat-label>
-                <input matInput formControlName="other_2" required>
-                <mat-error *ngIf="saleForm.controls['other_2'].invalid && saleForm.controls.other_2.touched && saleForm.controls.other_2.invalid">Wypełnij pole!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Typ</mat-label>
-                <mat-select class="form-control" formControlName="isPay"> 
-                    <mat-option  *ngFor="let type of typeOfSale" [value] = type >
-                        {{ type }}
-                    </mat-option> 
-                </mat-select>
-                <mat-error *ngIf="saleForm.controls['isPay'].invalid && saleForm.controls.isPay.touched && saleForm.controls.isPay.invalid">Wybierz typ!></mat-error>
-            </mat-form-field>
-            <div class="button">
-                <button mat-raised-button type="reset">Resetuj</button>
-                <button mat-raised-button color="primary" type="submit" value="Submit" (click)="addSale()"[disabled]="!saleForm.valid">Dodaj</button>
-            </div>
-        </form>
-    </div>
+  <p class="data-header">Dodaj sprzedaż</p>
+  <div class="form-container">
+    <form [formGroup]="saleForm">
+      <div class="button-form-field" appearance="outline">
+        <button class="button-check" type="button" mat-button matTooltip="Dodaj klienta" matTooltipPosition="below" (click)="openDialogClient($event)">
+          <mat-icon class="menu-icon-action">group_add</mat-icon> Klient
+        </button> {{this?.clientNameFromDiag}} {{this?.clientSurnameFromDiag}}
+        <button class="button-check" type="button" mat-button matTooltip="Dodaj produkt" matTooltipPosition="below" (click)="openDialogProduct($event)">
+          <mat-icon class="menu-icon-action">add_circle_outline</mat-icon> Produkt
+        </button>{{this?.productNameFromDiag}}
+      </div>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Cena</mat-label>
+        <input matInput formControlName="price" required>
+        <mat-error
+          *ngIf="saleForm.controls['price'].invalid && saleForm.controls.price.touched && saleForm.controls.price.invalid">
+          Podaj cene!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Ilość</mat-label>
+        <input matInput formControlName="volumen" required>
+        <mat-error
+          *ngIf="saleForm.controls['volumen'].invalid && saleForm.controls.volumen.touched && saleForm.controls.volumen.invalid">
+          Podaj ilość!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Inne 1</mat-label>
+        <input matInput formControlName="other_1" required>
+        <mat-error
+          *ngIf="saleForm.controls['other_1'].invalid && saleForm.controls.other_1.touched && saleForm.controls.other_1.invalid">
+          Wypełnij pole!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Inne 2</mat-label>
+        <input matInput formControlName="other_2" required>
+        <mat-error
+          *ngIf="saleForm.controls['other_2'].invalid && saleForm.controls.other_2.touched && saleForm.controls.other_2.invalid">
+          Wypełnij pole!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Typ</mat-label>
+        <mat-select class="form-control" formControlName="isPay">
+          <mat-option *ngFor="let type of typeOfSale" [value]=type>
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="saleForm.controls['isPay'].invalid && saleForm.controls.isPay.touched && saleForm.controls.isPay.invalid">
+          Wybierz typ!></mat-error>
+      </mat-form-field>
+      <div class="button">
+        <button mat-raised-button type="reset">Resetuj</button>
+        <button mat-raised-button color="primary" type="submit" value="Submit" (click)="addSale()"
+          [disabled]="!saleForm.valid">Dodaj</button>
+      </div>
+    </form>
+  </div>
 </div>

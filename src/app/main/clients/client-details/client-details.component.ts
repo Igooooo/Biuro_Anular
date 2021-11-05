@@ -63,12 +63,10 @@ export class ClientDetailsComponent implements OnInit {
     const id = +this.route.snapshot.params['id']; 
     this.clientService.getClient(id).subscribe(
       (client) => {
-      console.log('client'+ JSON.stringify(client.data));
       this.client = client.data;
       this.clientForm.patchValue(this.client);
-      console.log('Odebrany JSON'+ JSON.stringify(this.client));
       }, err => {
-        console.log('err' + err);
+        console.log('err ', err);
       }) 
   }
 

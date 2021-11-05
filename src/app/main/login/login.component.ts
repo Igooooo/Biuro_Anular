@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.userSurname = user.data.surname;
         this.showToasterLogin();
       }, err => {
-        console.log('err' + err);
+        console.log('err ', err);
       })
   }
 

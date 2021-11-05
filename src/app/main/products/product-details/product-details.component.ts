@@ -48,6 +48,7 @@ export class ProductDetailsComponent implements OnInit {
       this.router.navigate(['/products']);
       this.showToasterUpdateProduct();
     }, err => {   
+      console.log('err ', err);
       this.showToasterUpdateProductError();
       }
     );

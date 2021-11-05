@@ -15,7 +15,7 @@ export class UserDetailsComponent implements OnInit {
 
   userForm = new FormGroup({});
   user?: User;
-  typeOfUserDefault = userType.pracownik ;
+  typeOfUserDefault: string = userType.pracownik ;
   typeOfUser = Object.values(userType);
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   ageRegex = /^\d+/;
@@ -51,7 +51,8 @@ export class UserDetailsComponent implements OnInit {
       this.router.navigate(['/users']);
       this.showToasterUpdateUser();
     }, err => {   
-      this.showToasterUpdateUserError();
+        console.log('err ', err);
+        this.showToasterUpdateUserError();
       }
     );
   }

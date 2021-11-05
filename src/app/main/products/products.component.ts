@@ -18,11 +18,9 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProductsComponent implements OnInit {
   error: boolean = false;
-  limit_show_product_min = 0;
-  limit_show_product_max = 10;
   products: Product[] = [];
   productForm = new FormGroup({});
-  dataSource?: any; // DO ZMIANY - nie moze byc any
+  dataSource?: MatTableDataSource<Product>;
   displayedColumns: string[] = ['name', 'type', 'volume', 'provider', 'other', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -53,18 +51,9 @@ export class ProductsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true;
-        console.log('błąd w productach ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
-  }
-
-  loadProductByFilter(): void {
-    this.productsService.getProductByFilter(this.productForm.controls.name.value).subscribe(
-      (products) => {
-        this.products = products.data;
-      }, err => {
-        console.log('err ' + JSON.stringify(err));
-      })
   }
 
   removeProduct(product: Product) {
@@ -72,7 +61,7 @@ export class ProductsComponent implements OnInit {
       this.getProducts();
       this.showToasterRemoveProduct();
     }, err => {
-      console.log('err ' + JSON.stringify(err));
+      console.log('err ', err);
       this.showToasterRemoveProductError();
     });
   }

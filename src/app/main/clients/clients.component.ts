@@ -18,11 +18,9 @@ import { DialogRemoveClientComponent } from './dialog-remove-client/dialog-remov
 export class ClientsComponent implements OnInit {
 
   error: boolean = false;
-  limit_show_client_min = 0;
-  limit_show_client_max = 10;
   clients: Client[] = [];
   clientForm = new FormGroup({});
-  dataSource?: any; // DO ZMIANY - nie może być any!!!
+  dataSource?:  MatTableDataSource<Client>;
   displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -55,18 +53,9 @@ export class ClientsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true; // DO ZMIANY - do weryfikacji co to robi
-        console.log('błąd w Kliencie ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
-  }
-
-  loadClientByFilter(): void {
-    this.clientService.getClientByFilter(this.clientForm.controls.name.value, this.clientForm.controls.surname.value, this.clientForm.controls.city.value).subscribe(
-      (clients) => {
-        this.clients = clients.data;
-      }, err => {
-        console.log('err ' + JSON.stringify(err));
-      })
   }
 
   removeClient(client: Client) {
@@ -74,7 +63,7 @@ export class ClientsComponent implements OnInit {
       this.getClients();
       this.showToasterRemoveClient();
     }, err => {
-      console.log('err ' + JSON.stringify(err));
+      console.log('err ', err);
       this.showToasterRemoveClientError();
     });
   }
@@ -119,6 +108,5 @@ export class ClientsComponent implements OnInit {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue.trim().toLowerCase())
   }
 }
