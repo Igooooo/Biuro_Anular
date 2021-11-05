@@ -7,8 +7,9 @@ import { MainPageActionComponent } from './components/main-page-action/main-page
 import { RouterModule } from '@angular/router';
 import { MainPageSearchComponent } from './components/main-page-search/main-page-search.component';
 import { MainPageTableComponent } from './components/main-page-table/main-page-table.component';
+import { RemoveDialogComponent } from './components/remove-dialog/remove-dialog.component';
 @NgModule({
-  declarations: [MainMenuComponent, MainPageActionComponent, MainPageSearchComponent, MainPageTableComponent],
+  declarations: [MainMenuComponent, MainPageActionComponent, MainPageSearchComponent, MainPageTableComponent, RemoveDialogComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -16,6 +17,6 @@ import { MainPageTableComponent } from './components/main-page-table/main-page-t
     MatCardModule,
     RouterModule
   ],
-  exports: [MainMenuComponent,MainPageActionComponent, MainPageSearchComponent, MainPageTableComponent]
+  exports: [MainMenuComponent,MainPageActionComponent, MainPageSearchComponent, MainPageTableComponent, RemoveDialogComponent]
 })
 export class SharedModule { }
