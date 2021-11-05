@@ -17,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  error: boolean = false;
+
   products: Product[] = [];
   productForm = new FormGroup({});
   dataSource?: MatTableDataSource<Product>;
@@ -50,7 +50,6 @@ export class ProductsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(products.data);
         this.dataSource.paginator = this.paginator;
       }, err => {
-        this.error = true;
         console.log('err ', err);
       }
     );
@@ -81,15 +80,15 @@ export class ProductsComponent implements OnInit {
   }
 
   showToasterRemoveProduct(): void {
-    this.toastr.success("Użytkownik został pomyślnie usunięty!");
+    this.toastr.success("Produkt został pomyślnie usunięty!");
   }
 
   showToasterRemoveProductError(): void {
-    this.toastr.error("Użytkownik nie został usunięty!");
+    this.toastr.error("Produkt nie został usunięty!");
   }
 
   showToasterRefreshProduct(): void {
-    this.toastr.success("Lista użytkowników została odświeżona!");
+    this.toastr.success("Lista produktów została odświeżona!");
   }
 
   openDialog(product: Product, event: any): void {

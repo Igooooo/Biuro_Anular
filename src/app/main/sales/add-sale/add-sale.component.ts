@@ -89,7 +89,6 @@ export class AddSaleComponent implements OnInit {
       (clients) => {
         this.clients = clients.data
       }, err => {
-        this.error = true;
         console.log('err ', err);
       }
     );

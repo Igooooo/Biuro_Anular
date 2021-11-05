@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { concat, Subject } from 'rxjs';
 import { Client } from 'src/app/shared/model/client';
 import { Product } from 'src/app/shared/model/product';
 import { Sale } from 'src/app/shared/model/sale';
@@ -19,7 +19,7 @@ import { SalesService } from './sales.service';
 })
 export class SalesComponent implements OnInit {
 
-  error: boolean = false;
+
   sales: Sale[] = [];
   product: Product[] = [];
   client: Client[] = [];
@@ -52,9 +52,14 @@ export class SalesComponent implements OnInit {
       (sales) => {
         this.sales = sales.data
         this.dataSource = new MatTableDataSource(sales.data);
+        this.dataSource.filterPredicate = (data: Sale, filter: string) => {
+          return data.client.name.toLowerCase().includes(filter.toLowerCase()) ||
+            data.client.surname.toLowerCase().includes(filter.toLowerCase()) ||
+            data.product.name.toLowerCase().includes(filter.toLowerCase()) || 
+            data.client.name.toLowerCase().concat(' ', data.client.surname.toLowerCase()).includes(filter.toLowerCase()); 
+       };
         this.dataSource.paginator = this.paginator;
       }, err => {
-        this.error = true;
         console.log('err ', err);
       }
     );

@@ -17,7 +17,6 @@ import { DialogRemoveClientComponent } from './dialog-remove-client/dialog-remov
 })
 export class ClientsComponent implements OnInit {
 
-  error: boolean = false;
   clients: Client[] = [];
   clientForm = new FormGroup({});
   dataSource?:  MatTableDataSource<Client>;
@@ -52,7 +51,6 @@ export class ClientsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(clients.data);
         this.dataSource.paginator = this.paginator;
       }, err => {
-        this.error = true; // DO ZMIANY - do weryfikacji co to robi
         console.log('err ', err);
       }
     );
@@ -83,15 +81,15 @@ export class ClientsComponent implements OnInit {
   }
 
   showToasterRemoveClient(): void {
-    this.toastr.success("Użytkownik został pomyślnie usunięty!");
+    this.toastr.success("Klient został pomyślnie usunięty!");
   }
 
   showToasterRemoveClientError(): void {
-    this.toastr.error("Użytkownik nie został usunięty!");
+    this.toastr.error("Klient nie został usunięty!");
   }
 
   showToasterRefreshClient(): void {
-    this.toastr.success("Lista użytkowników została odświeżona!");
+    this.toastr.success("Lista klientów została odświeżona!");
   }
 
   openDialog(client: Client, event: any): void {
