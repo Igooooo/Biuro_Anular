@@ -3,7 +3,7 @@
     <div class="form-container">
         <form [formGroup]="productForm">
             <mat-form-field class="form-field" appearance="outline">
-                <mat-label>Imię</mat-label>
+                <mat-label>Nazwa</mat-label>
                 <input matInput formControlName="name" required>
                 <mat-error *ngIf="productForm.controls['name'].invalid &&  productForm.controls.name.touched && productForm.controls.name.invalid">Podaj nazwę!</mat-error>
             </mat-form-field>

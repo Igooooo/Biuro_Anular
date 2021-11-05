@@ -17,7 +17,6 @@ import { Subject } from 'rxjs';
 })
 export class UsersComponent implements OnInit {
 
-  error: boolean = false;
   users: User[] = [];
   userForm = new FormGroup({});
   dataSource?: MatTableDataSource<User>;
@@ -52,7 +51,6 @@ export class UsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(users.data);
         this.dataSource.paginator = this.paginator;
       }, err => {
-        this.error = true;
         console.log('err ', err);
       }
     );
