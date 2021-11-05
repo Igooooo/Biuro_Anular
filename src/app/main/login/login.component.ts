@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
 
   constructor(private router: Router,
-              private auth: AuthService,
-              private toastr: ToastrService,
-              private usersService: UsersService) { }
+    private auth: AuthService,
+    private toastr: ToastrService,
+    private usersService: UsersService) { }
 
   ngOnInit() {
     this.createLoginForm();
@@ -33,46 +33,38 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() : void {
+  login(): void {
     this.auth.login(this.loginForm.getRawValue()).subscribe(
       res => {
-       // localStorage.setItem('token', res.accessToken)
-        //localStorage.setItem('id', JSON.parse(res.id)) 
         let id: number = Number(localStorage.getItem('id'))
-        console.log(id);
         this.getUserInfo(id);
-        this.showToasterLogin()
-        console.log('jestem zalogowany')
         this.router.navigate(['main'])
       },
       err => {
         this.showToasterLoginError();
-        console.log('jestem')
-        console.log(err);
         console.log('err ', err)
       }
-    ); 
+    );
   }
 
   getUserInfo(id: number): void {
     let userId = id
     this.usersService.getUser(userId).subscribe(
       (user) => {
-      let lenghtName = JSON.stringify(user.data.name).length;
-      let lenghtSurname = JSON.stringify(user.data.surname).length;
-      this.userName = JSON.stringify(user.data.name).substr(1,lenghtName-2)  
-      this.userSurname = JSON.stringify(user.data.surname).substr(1,lenghtSurname-2)  
+        this.userName = user.data.name;
+        this.userSurname = user.data.surname;
+        this.showToasterLogin();
       }, err => {
         console.log('err' + err);
-      }) 
+      })
   }
 
-  showToasterLoginError() : void {
+  showToasterLoginError(): void {
     this.toastr.error("Błędny e-mail lub hasło!");
   }
 
-  showToasterLogin() : void {
-    this.toastr.success('Zalogowano pomyślnie!');
+  showToasterLogin(): void {
+    this.toastr.success('Witamy ' + this.userName + ' ' + this.userSurname);
   }
 }
 
