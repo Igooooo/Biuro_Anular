@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { Client } from 'src/app/shared/model/client';
-import { ClientDialogData } from 'src/app/shared/model/ClientDialogData'; // DO weryfikacji co jest tutaj nie tak
+import { ClientDialogData } from 'src/app/shared/model/clientDialogData';
 import { ClientService } from '../../clients/client.service';
 
 @Component({
@@ -15,10 +15,8 @@ import { ClientService } from '../../clients/client.service';
 export class DialogSearchClientSaleComponent implements OnInit {
 
   clients: Client[] = [];
-  limit_show_min = 0;
-  limit_show_max = 10;
 
-  dataSource?: any;
+  dataSource?: MatTableDataSource<Client>;
   displayedColumns: string[] = ['name', 'surname'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -37,7 +35,7 @@ export class DialogSearchClientSaleComponent implements OnInit {
         this.dataSource = new MatTableDataSource(clients.data);        
         this.dataSource.paginator = this.paginator;
       }, err => {
-        console.log('błąd w Kliencie ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
   }

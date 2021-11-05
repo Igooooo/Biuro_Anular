@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
         this.userName = user.data.name;
         this.userSurname = user.data.surname;
       }, err => {
-        console.log('err' + err);
+        console.log('err', err);
       })
   }
 

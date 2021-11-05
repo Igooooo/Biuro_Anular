@@ -55,10 +55,10 @@ export class AddUserComponent implements OnInit {
 
   addUser() : void {
     this.usersService.addUser(this.userForm.value).subscribe(() => {
-      console.log('formularz' + this.userForm.value);
       this.router.navigate(['/users']);
       this.showToasterAddUser();
-    }, err => {   
+    }, err => { 
+        console.log('err ', err);  
         this.showToasterAddUserError(err.error.message);
       }
     );

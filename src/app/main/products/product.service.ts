@@ -7,9 +7,7 @@ import { Product } from 'src/app/shared/model/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiURL: string = 'http://localhost:3000/api/products/'; // DO ZMIANY - chyba nie potrzebne
   private URL: string = 'http://localhost:8080/api/';
-  private products: Product[] = [];  // DO ZMIANY - chyba nie potrzebne
 
   constructor(private http: HttpClient) {
   }
@@ -44,12 +42,6 @@ export class ProductService {
   getProduct(id: number) : Observable<{success: boolean, data: Product[]}> { 
     let headers = this.createAuthrorizationHeader();
     return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByIdParam/'+`${id}` , { headers: headers }) 
-  }
-
-  // DO ZMIANY - weryfiacja czy potrzebne
-  getProductByFilter(name: string) : Observable<{success: boolean, data: Product[]}> {
-    let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: Product[]}>(this.URL+'getProductByNameParam/'+`${name}` , { headers: headers }) 
   }
 
 }

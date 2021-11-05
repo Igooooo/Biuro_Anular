@@ -18,11 +18,9 @@ import { Subject } from 'rxjs';
 export class UsersComponent implements OnInit {
 
   error: boolean = false;
-  limit_show_user_min = 0;
-  limit_show_user_max = 10;
   users: User[] = [];
   userForm = new FormGroup({});
-  dataSource?: any; // DO ZMIANY
+  dataSource?: MatTableDataSource<User>;
   displayedColumns: string[] = ['name', 'surname', 'city', 'street', 'phone', 'email', 'type', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -55,18 +53,9 @@ export class UsersComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }, err => {
         this.error = true;
-        console.log('błąd w userach ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
-  }
-
-  loadUserByFilter(): void {
-    this.usersService.getUserByFilter(this.userForm.controls.name.value, this.userForm.controls.surname.value, this.userForm.controls.city.value).subscribe(
-      (users) => {
-        this.users = users.data;
-      }, err => {
-        console.log('err ' + JSON.stringify(err));
-      })
   }
 
   removeUser(user: User) {
@@ -74,7 +63,7 @@ export class UsersComponent implements OnInit {
       this.getUsers();
       this.showToasterRemoveUser();
     }, err => {
-      console.log('err ' + JSON.stringify(err));
+      console.log('err ', err);
       this.showToasterRemoveUserError();
     });
   }
@@ -119,7 +108,6 @@ export class UsersComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue.trim().toLowerCase())
   }
 
 }

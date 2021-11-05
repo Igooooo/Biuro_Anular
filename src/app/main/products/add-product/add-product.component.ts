@@ -51,10 +51,10 @@ export class AddProductComponent implements OnInit {
 
   addProduct() : void {
     this.productsService.addProduct(this.productForm.value).subscribe(() => {
-      console.log('formularz' + this.productForm.value);
       this.router.navigate(['/products']);
       this.showToasterAddProduct();
     }, err => {   
+        console.log('err ', err);
         this.showToasterAddProductError(err.error.message);
       }
     );

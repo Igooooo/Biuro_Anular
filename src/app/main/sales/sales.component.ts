@@ -24,7 +24,7 @@ export class SalesComponent implements OnInit {
   product: Product[] = [];
   client: Client[] = [];
   saleForm = new FormGroup({});
-  dataSource?: any; // DO ZMIANY - nie moze byc any
+  dataSource?: MatTableDataSource<Sale>;
   displayedColumns: string[] = ['name', 'client.name_client.surname', 'price', 'isPay', 'volumen', 'other_1', 'other_2', 'remove'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -51,13 +51,11 @@ export class SalesComponent implements OnInit {
     this.saleService.getSales().subscribe(
       (sales) => {
         this.sales = sales.data
-        // this.sales[0].product.name // DO ZMIANY - Nie wiem po co to????
         this.dataSource = new MatTableDataSource(sales.data);
         this.dataSource.paginator = this.paginator;
-
       }, err => {
         this.error = true;
-        console.log('błąd w saleach ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
   }
@@ -67,7 +65,7 @@ export class SalesComponent implements OnInit {
       this.getSales();
       this.showToasterRemoveSale();
     }, err => {
-      console.log('err ' + JSON.stringify(err));
+      console.log('err ', err);
       this.showToasterRemoveSaleError();
     });
   }

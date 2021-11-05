@@ -15,7 +15,7 @@ import { ProductService } from '../../products/product.service';
 export class DialogSearchProductSaleComponent implements OnInit {
 
   products: Product[] = [];
-  dataSource?: any; // DO ZMIANY - nie moze być any
+  dataSource?: MatTableDataSource<Product>;
   displayedColumns: string[] = ['name', 'type'];
   changes = new Subject<void>();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -34,7 +34,7 @@ export class DialogSearchProductSaleComponent implements OnInit {
         this.dataSource = new MatTableDataSource(product.data);        
         this.dataSource.paginator = this.paginator;
       }, err => {
-        console.log('błąd w Procukcie ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
   }

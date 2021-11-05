@@ -8,8 +8,6 @@ import { CoreModule } from './core/core.module';
 import { MainModule } from './main/main.module';
 import { UsersService } from './main/users/users.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { ToastrModule } from 'ngx-toastr';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MainService } from './main/main.service';
 import { AppService } from './app.service';
 import { AuthService } from './auth.service';

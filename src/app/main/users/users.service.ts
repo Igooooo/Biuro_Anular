@@ -49,11 +49,5 @@ export class UsersService {
     })) 
   }
 
-  // DO ZMIANY - nie potrzebne chyba
-  getUserByFilter(name: string, surname: string, city: string) : Observable<{success: boolean, data: User[]}> { // id - pojedyńczy samochód
-    let headers = this.createAuthrorizationHeader();
-    return this.http.get<{success: boolean, data: User[]}>(this.URL+'getUserByNameSurnameCityParam/'+`${name}`+'&'+`${surname}`+'&'+`${city}` , { headers: headers }) 
-  }
-
 }
 

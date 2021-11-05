@@ -63,7 +63,8 @@ export class AddSaleComponent implements OnInit {
     this.saleService.addSale(this.saleForm.value).subscribe(() => {
       this.router.navigate(['/sales']);
       this.showToasterAddSale();
-    }, err => {   
+    }, err => { 
+        console.log('err ', err);  
         this.showToasterAddSaleError();
       }
     );
@@ -89,7 +90,7 @@ export class AddSaleComponent implements OnInit {
         this.clients = clients.data
       }, err => {
         this.error = true;
-        console.log('błąd w Kliencie ' + JSON.stringify(err));
+        console.log('err ', err);
       }
     );
   }

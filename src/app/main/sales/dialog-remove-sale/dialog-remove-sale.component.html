@@ -1,8 +1,10 @@
-<div> <!-- DO ZMIANY - mat card??-->
-    <h2 mat-dialog-title>Usuń sprzedaż</h2>
-    <mat-dialog-content>Czy chcesz usunąć sprzedaż {{ data.id }}?</mat-dialog-content>
-    <mat-dialog-actions>
-        <button mat-button mat-dialog-close mat-dialog-close="true">Anuluj</button>
-        <button mat-button mat-dialog-close="false" color="primary">Usuń</button>
-    </mat-dialog-actions>
-</div>
+<app-remove-dialog>
+  <div title>Usuń sprzedaż
+  </div>
+  <div subtitle>Czy chcesz usunąć sprzedaż {{ data.id }}?
+  </div>
+  <div button>
+    <button mat-button mat-dialog-close mat-dialog-close="true">Anuluj</button>
+    <button mat-button mat-dialog-close="false" color="primary">Usuń</button>
+  </div>
+</app-remove-dialog>
