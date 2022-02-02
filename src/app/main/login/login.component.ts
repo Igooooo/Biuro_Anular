@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       res => {
         let id: number = Number(localStorage.getItem('id'))
         this.getUserInfo(id);
-        this.router.navigate(['main'])
+        this.router.navigate([''])
       },
       err => {
         this.showToasterLoginError();
